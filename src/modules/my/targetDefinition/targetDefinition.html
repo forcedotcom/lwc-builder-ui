@@ -1,0 +1,70 @@
+<template>
+    <div class="slds-checkbox">
+        <input
+            type="checkbox"
+            name={target.value}
+            onchange={onChangeTargetCheckbox}
+            id={target.value}
+            value={enabled}
+            checked={enabled}
+        />
+        <label class="slds-checkbox__label target_label" for={target.value}>
+            <span class="slds-checkbox_faux"></span>
+            <span class="slds-form-element__label">{target.name}</span>
+        </label>
+        <template if:true={isFormFactorSupported}>
+            <template if:true={isSmallFormFactorSupported}>
+                <input
+                    type="checkbox"
+                    onchange={onChangeSmallCheckbox}
+                    id={smallFormId}
+                    value={enableSmall}
+                    checked={enableSmall}
+                    disabled={disableDeviceCheck}
+                />
+                <label class="slds-checkbox__label" for={smallFormId}>
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-form-element__label">
+                        <span
+                            class="slds-icon_container slds-icon-utility-phone_portrait slds-input__icon slds-input__icon_right"
+                        >
+                            <svg
+                                class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"
+                                aria-hidden="true"
+                            >
+                                <use
+                                    xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#phone_portrait"
+                                ></use>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+            </template>
+            <input
+                type="checkbox"
+                id={largeFormId}
+                onchange={onChangeLargeCheckbox}
+                checked={enableLarge}
+                value={enableLarge}
+                disabled={disableDeviceCheck}
+            />
+            <label class="slds-checkbox__label" for={largeFormId}>
+                <span class="slds-checkbox_faux"></span>
+                <span class="slds-form-element__label">
+                    <span
+                        class="slds-icon_container slds-icon-utility-desktop slds-input__icon slds-input__icon_right"
+                    >
+                        <svg
+                            class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"
+                            aria-hidden="true"
+                        >
+                            <use
+                                xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#desktop"
+                            ></use>
+                        </svg>
+                    </span>
+                </span>
+            </label>
+        </template>
+    </div>
+</template>

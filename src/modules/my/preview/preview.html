@@ -1,0 +1,120 @@
+<template>
+    <div class="slds-m-top_medium">
+        <div class="slds-vertical-tabs">
+            <ul
+                class="slds-vertical-tabs__nav"
+                role="tablist"
+                aria-orientation="vertical"
+            >
+                <template if:true={contents.withHtml}>
+                    <my-preview-header
+                        onclick={showHtml}
+                        filename={contents.componentName}
+                        type="html"
+                        extension="html"
+                        selected={selected}
+                    ></my-preview-header>
+                </template>
+                <my-preview-header
+                    onclick={showJs}
+                    filename={contents.componentName}
+                    type="js"
+                    extension="js"
+                    selected={selected}
+                ></my-preview-header>
+                <template if:true={contents.withCss}>
+                    <my-preview-header
+                        onclick={showCss}
+                        filename={contents.componentName}
+                        type="css"
+                        extension="css"
+                        selected={selected}
+                    ></my-preview-header>
+                </template>
+                <my-preview-header
+                    onclick={showMeta}
+                    filename={contents.componentName}
+                    type="meta"
+                    extension="js-meta.xml"
+                    selected={selected}
+                ></my-preview-header>
+                <template if:true={contents.withSvg}>
+                    <my-preview-header
+                        onclick={showSvg}
+                        filename={contents.componentName}
+                        type="svg"
+                        extension="svg"
+                        selected={selected}
+                    ></my-preview-header>
+                </template>
+                <template if:true={contents.withTest}>
+                    <my-preview-header
+                        onclick={showTest}
+                        filename={contents.componentName}
+                        type="test"
+                        extension="test.js"
+                        prefix="__tests__/"
+                        selected={selected}
+                    ></my-preview-header>
+                </template>
+            </ul>
+            <template if:true={contents.withHtml}>
+                <my-preview-content
+                    filename={contents.componentName}
+                    type="html"
+                    extension="html"
+                    selected={selected}
+                    content={contents.html}
+                    class={htmlContentClass}
+                ></my-preview-content>
+            </template>
+            <my-preview-content
+                filename={contents.componentName}
+                type="js"
+                extension="js"
+                selected={selected}
+                content={contents.js}
+                class={jsContentClass}
+            ></my-preview-content>
+            <template if:true={contents.withCss}>
+                <my-preview-content
+                    filename={contents.componentName}
+                    type="css"
+                    extension="css"
+                    selected={selected}
+                    content={contents.css}
+                    class={cssContentClass}
+                ></my-preview-content>
+            </template>
+            <my-preview-content
+                filename={contents.componentName}
+                type="meta"
+                extension="js-meta.xml"
+                selected={selected}
+                content={contents.meta}
+                class={metaContentClass}
+            ></my-preview-content>
+            <template if:true={contents.withSvg}>
+                <my-preview-content
+                    filename={contents.componentName}
+                    type="svg"
+                    extension="svg"
+                    selected={selected}
+                    content={contents.svg}
+                    class={svgContentClass}
+                ></my-preview-content>
+            </template>
+            <template if:true={contents.withTest}>
+                <my-preview-content
+                    filename={contents.componentName}
+                    type="test"
+                    extension="test.js"
+                    prefix="__tests__/"
+                    selected={selected}
+                    content={contents.test}
+                    class={testContentClass}
+                ></my-preview-content>
+            </template>
+        </div>
+    </div>
+</template>

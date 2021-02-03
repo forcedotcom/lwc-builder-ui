@@ -1,0 +1,20 @@
+.input,
+.output {
+  display: none;
+  padding: .25rem;
+}
+
+.input.show,
+.output.show {
+  display: block;
+}
+.remove-button {
+  vertical-align: top;
+  margin-right: .25rem;
+  display: inline-block;
+}
+
+.svg-filename {
+  font-style: italic;
+  color: #444;
+}

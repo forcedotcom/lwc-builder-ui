@@ -1,0 +1,18 @@
+<template>
+    <li class={className} title={fileName} role="presentation">
+        <a
+            class="slds-vertical-tabs__link"
+            href="javascript:void(0)"
+            role="tab"
+            tabindex={tabIndex}
+            aria-selected={isSelected}
+            aria-controls={fileName}
+            id={fileName}
+        >
+            <span class="slds-vertical-tabs__left-icon"></span>
+            <span class="slds-truncate preview-header-file-name" title={fileName}>{fileName}</span>
+            <span class="slds-truncate preview-header-file-type" title={fileName}>{type}</span>
+            <span class="slds-vertical-tabs__right-icon"></span>
+        </a>
+    </li>
+</template>

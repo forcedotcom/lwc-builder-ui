@@ -1,0 +1,9 @@
+.sobject-wrapper {
+    display: flex;
+}
+.sobject-input {
+    flex: 1;
+}
+.sobject-delete-button {
+    margin-left: .5rem;
+}

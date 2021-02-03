@@ -1,0 +1,13 @@
+.preview-content-wrapper {
+  height: 100%;
+  overflow: scroll;
+  padding: 0;
+}
+.slds-text-longform {
+  height: 100%;
+}
+.preview-source {
+  height: 100%;
+  margin: 0;
+  padding: 1rem;
+}

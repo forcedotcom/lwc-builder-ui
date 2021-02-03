@@ -1,0 +1,20 @@
+.preview-header.slds-text-heading--label, 
+.preview-header.slds-text-heading_label {
+  text-transform: none !important;
+}
+
+.preview-header-file-name {
+  display: none;
+}
+.preview-header-file-type {
+  display: block;
+}
+
+@media (min-width: 48rem) {
+  .preview-header-file-name {
+    display: block;
+  }
+  .preview-header-file-type {
+    display: none;
+  }
+}
