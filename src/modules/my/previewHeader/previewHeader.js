@@ -1,47 +1,53 @@
+/*
+ * Copyright (c) 2021, salesforce.com, inc.
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { LightningElement, api } from 'lwc';
 
 export default class PreviewContent extends LightningElement {
-    @api
-    filename;
+  @api
+  filename;
 
-    @api
-    extension;
+  @api
+  extension;
 
-    @api
-    prefix;
+  @api
+  prefix;
 
-    @api
-    type;
+  @api
+  type;
 
-    @api
-    selected;
+  @api
+  selected;
 
-    get className() {
-        const tagClass = 'preview-header slds-vertical-tabs__nav-item';
-        return this.selected === this.type
-            ? `${tagClass} slds-is-active`
-            : tagClass;
-    }
+  get className() {
+    const tagClass = 'preview-header slds-vertical-tabs__nav-item';
+    return this.selected === this.type
+      ? `${tagClass} slds-is-active`
+      : tagClass;
+  }
 
-    get tabIndex() {
-        return this.selected === this.type ? '0' : '-1';
-    }
+  get tabIndex() {
+    return this.selected === this.type ? '0' : '-1';
+  }
 
-    get isSelected() {
-        return this.selected === this.type ? 'true' : 'false';
-    }
+  get isSelected() {
+    return this.selected === this.type ? 'true' : 'false';
+  }
 
-    get fileName() {
-        return `${this.prefix ? this.prefix : ''}${this.filename}.${
-            this.extension
-        }`;
-    }
+  get fileName() {
+    return `${this.prefix ? this.prefix : ''}${this.filename}.${
+      this.extension
+    }`;
+  }
 
-    onclickTab() {
-        this.dispatchEvent(
-            new CustomEvent('click', {
-                detail: this.extension
-            })
-        );
-    }
+  onclickTab() {
+    this.dispatchEvent(
+      new CustomEvent('click', {
+        detail: this.extension
+      })
+    );
+  }
 }

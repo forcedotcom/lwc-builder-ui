@@ -1,399 +1,381 @@
 <template>
-    <div class="property-wrapper">
-        <div class="slds-form-element slds-m-bottom_small">
-            <label class="slds-form-element__label" for={propertyNameId}>
-                <abbr class="slds-required" title="required">* </abbr>
-                <span>Property name <i>[name]</i></span>
-            </label>
-            <div class="slds-form-element__control">
-                <input
-                    id={propertyNameId}
-                    type="text"
-                    value={property.name}
-                    name="name"
-                    onchange={onChangeInput}
-                    class="slds-input"
-                    required=""
-                    autocomplete="off"
-                />
-            </div>
-        </div>
-
-        <div class="slds-form-element slds-m-bottom_small">
-            <label class="slds-form-element__label">
-                <abbr class="slds-required" title="required">* </abbr>
-                <span>Target <i>[target]</i></span>
-            </label>
-            <ul>
-                <template for:each={enabledTargets} for:item="target">
-                    <li key={target.value}>
-                        <my-property-target-item
-                            target={target}
-                            onchange={onChangeTargetCheckbox}
-                        ></my-property-target-item>
-                    </li>
-                </template>
-            </ul>
-        </div>
-
-        <div class="slds-form-element slds-m-bottom_medium">
-            <label class="slds-form-element__label" for={typeId}>
-                <abbr class="slds-required" title="required">* </abbr>
-                <span>Type</span>
-            </label>
-            <div class="slds-form-element__control">
-                <div class="slds-select_container">
-                    <select
-                        class="slds-select"
-                        name="type"
-                        id={typeId}
-                        value={property.type}
-                        onchange={onChangeSelect}
-                    >
-                        <option value="">-- select type --</option>
-                        <option value="String">String</option>
-                        <option value="Boolean">Boolean</option>
-                        <option value="Integer">Integer</option>
-                        <template if:true={isCommunityDefaultOnly}>
-                            <option value="Color">Color</option>
-                        </template>
-                        <template if:true={isFlowOnly}>
-                            <option value="apex">Apex Class</option>
-                            <option value="sobject">sObject</option>
-                            <option value="Date">Date</option>
-                            <option value="DateTime">Datetime</option>
-                        </template>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <template if:true={isApexClassType}>
-            <div class="slds-form-element slds-m-bottom_small">
-                <label class="slds-form-element__label" for={apexClassNameId}>
-                    <span>Apex Class Name</span>
-                </label>
-                <div class="slds-form-element__control">
-                    <input
-                        id={apexClassNameId}
-                        type="text"
-                        value={property.apexClassName}
-                        placeholder="apex://namespace.Classname"
-                        name="apexClassName"
-                        onchange={onChangeInput}
-                        class="slds-input"
-                        autocomplete="off"
-                    />
-                </div>
-            </div>
-        </template>
-        <template if:true={isSObjectType}>
-            <div class="slds-form-element slds-m-bottom_small">
-                <label class="slds-form-element__label" for={sObjectNameId}>
-                    <span>sObject Name</span>
-                </label>
-                <div class="slds-form-element__control">
-                    <input
-                        id={sObjectNameId}
-                        type="text"
-                        value={property.sObjectName}
-                        placeholder="@salesforce/schema/(namespace__)Objectname"
-                        name="sObjectName"
-                        onchange={onChangeInput}
-                        class="slds-input"
-                        autocomplete="off"
-                    />
-                </div>
-            </div>
-        </template>
-
-        <div class="slds-form-element slds-m-bottom_small">
-            <div class="slds-form-element__control">
-                <div class="slds-checkbox">
-                    <input
-                        type="checkbox"
-                        name="required"
-                        id={requiredId}
-                        value={property.required}
-                        checked={property.required}
-                        onchange={onChangeCheckbox}
-                    />
-                    <label class="slds-checkbox__label" for={requiredId}>
-                        <span class="slds-checkbox_faux"></span>
-                        <span class="slds-form-element__label">Required</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="slds-form-element slds-m-bottom_small">
-            <label class="slds-form-element__label" for={labelId}>
-                <span>Label</span>
-            </label>
-            <div class="slds-form-element__control">
-                <input
-                    id={labelId}
-                    type="text"
-                    value={property.label}
-                    name="label"
-                    onchange={onChangeInput}
-                    class="slds-input"
-                    autocomplete="off"
-                />
-            </div>
-        </div>
-
-        <div class="slds-form-element slds-m-bottom_small">
-            <label class="slds-form-element__label" for={descId}>
-                <span>Description</span>
-            </label>
-            <div class="slds-form-element__control">
-                <input
-                    id={descId}
-                    type="text"
-                    value={property.description}
-                    name="description"
-                    onchange={onChangeInput}
-                    class="slds-input"
-                    autocomplete="off"
-                />
-            </div>
-        </div>
-
-        <template if:true={isDefaultEnabled}>
-            <div class="slds-form-element slds-m-bottom_small">
-                <label class="slds-form-element__label" for={defaultId}>
-                    <span>Default value</span>
-                </label>
-                <template if:true={isBoolean}>
-                    <div class="slds-form-element__control">
-                        <div class="slds-checkbox">
-                            <input
-                                type="checkbox"
-                                name="default"
-                                id={defaultId}
-                                value={property.default}
-                                checked={property.default}
-                                onchange={onChangeCheckbox}
-                            />
-                            <label class="slds-checkbox__label" for={defaultId}>
-                                <span class="slds-checkbox_faux"></span>
-                                <span class="slds-form-element__label"
-                                    >{property.default}</span
-                                >
-                            </label>
-                        </div>
-                    </div>
-                </template>
-                <template if:false={isBoolean}>
-                    <div class="slds-form-element__control">
-                        <input
-                            id={defaultId}
-                            type={defaultType}
-                            value={property.default}
-                            name="default"
-                            onchange={onChangeInput}
-                            class="slds-input"
-                            autocomplete="off"
-                        />
-                    </div>
-                </template>
-            </div>
-        </template>
-
-        <template if:true={isInteger}>
-            <template if:false={isFlowOnly}>
-                <div class="slds-m-bottom_small">
-                    <div
-                        class="slds-grid slds-gutters slds-wrap slds-grid_vertical-align-center"
-                    >
-                        <div class="slds-col">
-                            <div class="slds-form-element">
-                                <label
-                                    class="slds-form-element__label"
-                                    for={minId}
-                                >
-                                    <span>Min</span>
-                                </label>
-                                <div class="slds-form-element__control">
-                                    <input
-                                        id={minId}
-                                        type="number"
-                                        value={property.min}
-                                        name="min"
-                                        step="1"
-                                        onchange={onChangeInput}
-                                        class="slds-input"
-                                        autocomplete="off"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slds-col">
-                            <div class="slds-form-element">
-                                <label
-                                    class="slds-form-element__label"
-                                    for={maxId}
-                                >
-                                    <span>Max</span>
-                                </label>
-                                <div class="slds-form-element__control">
-                                    <input
-                                        id={maxId}
-                                        type="number"
-                                        value={property.max}
-                                        name="max"
-                                        step="1"
-                                        onchange={onChangeInput}
-                                        class="slds-input"
-                                        autocomplete="off"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <template if:true={supportsFlow}>
-                        <div class="alert-message">
-                            <span>No support for FlowScreen target.</span>
-                        </div>
-                    </template>
-                </div>
-            </template>
-        </template>
-
-        <template if:true={isString}>
-            <template if:false={isFlowOnly}>
-                <div class="slds-form-element slds-m-bottom_small">
-                    <label class="slds-form-element__label" for={placeholderId}>
-                        <span>Placeholder</span>
-                    </label>
-                    <div class="slds-form-element__control">
-                        <input
-                            id={placeholderId}
-                            type="text"
-                            value={property.placeholder}
-                            name="placeholder"
-                            onchange={onChangeInput}
-                            class="slds-input"
-                            autocomplete="off"
-                        />
-                    </div>
-                    <template if:true={supportsFlow}>
-                        <div class="alert-message">
-                            <span>No support for FlowScreen target.</span>
-                        </div>
-                    </template>
-                </div>
-            </template>
-        </template>
-
-        <template if:true={supportsFlow}>
-            <div class="slds-m-bottom_small">
-                <label class="slds-form-element__label">
-                    <span>Role</span>
-                </label>
-                <div
-                    class="slds-grid slds-gutters slds-wrap slds-grid_vertical-align-center"
-                >
-                    <div class="slds-col">
-                        <div class="slds-form-element">
-                            <div class="slds-form-element__control">
-                                <div class="slds-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        name="flowInput"
-                                        id={flowInputId}
-                                        value={property.flowInput}
-                                        checked={property.flowInput}
-                                        onchange={onChangeCheckbox}
-                                    />
-                                    <label
-                                        class="slds-checkbox__label"
-                                        for={flowInputId}
-                                    >
-                                        <span class="slds-checkbox_faux"></span>
-                                        <span class="slds-form-element__label"
-                                            >Input</span
-                                        >
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slds-col">
-                        <div class="slds-form-element">
-                            <div class="slds-form-element__control">
-                                <div class="slds-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        name="flowOutput"
-                                        id={flowOutputId}
-                                        value={property.flowOutput}
-                                        checked={property.flowOutput}
-                                        onchange={onChangeCheckbox}
-                                    />
-                                    <label
-                                        class="slds-checkbox__label"
-                                        for={flowOutputId}
-                                    >
-                                        <span class="slds-checkbox_faux"></span>
-                                        <span class="slds-form-element__label"
-                                            >Output</span
-                                        >
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="alert-message">
-                    <span>Support only for FlowScreen target.</span>
-                </div>
-            </div>
-        </template>
-
-        <template if:true={isString}>
-            <template if:false={isFlowOnly}>
-                <div class="slds-form-element slds-m-bottom_small">
-                    <label class="slds-form-element__label" for={datasourceId}>
-                        <span>Data source</span>
-                    </label>
-                    <div class="slds-form-element__control">
-                        <input
-                            id={datasourceId}
-                            type="text"
-                            value={property.datasource}
-                            name="datasource"
-                            placeholder="value1,value2,value3  or  apex://MyApexClassName"
-                            onchange={onChangeInput}
-                            class="slds-input"
-                            autocomplete="off"
-                        />
-                    </div>
-                    <template if:true={supportsFlow}>
-                        <div class="alert-message">
-                            <span>No support for FlowScreen target.</span>
-                        </div>
-                    </template>
-                </div>
-            </template>
-        </template>
-
-        <div>
-            <button
-                class="slds-button slds-button_icon slds-button_icon-border-filled"
-                aria-pressed="false"
-                title="Delete"
-                type="button"
-                onclick={deletePropertyRow}
-            >
-                <svg class="slds-button__icon" aria-hidden="true">
-                    <use
-                        xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#delete"
-                    ></use>
-                </svg>
-                <span class="slds-assistive-text">Delete</span>
-            </button>
-        </div>
+  <div class="property-wrapper">
+    <div class="slds-form-element slds-m-bottom_small">
+      <label class="slds-form-element__label" for={propertyNameId}>
+        <abbr class="slds-required" title="required">* </abbr>
+        <span>Property name <i>[name]</i></span>
+      </label>
+      <div class="slds-form-element__control">
+        <input
+          id={propertyNameId}
+          type="text"
+          value={property.name}
+          name="name"
+          onchange={onChangeInput}
+          class="slds-input"
+          required=""
+          autocomplete="off"
+        />
+      </div>
     </div>
+
+    <div class="slds-form-element slds-m-bottom_small">
+      <label class="slds-form-element__label">
+        <abbr class="slds-required" title="required">* </abbr>
+        <span>Target <i>[target]</i></span>
+      </label>
+      <ul>
+        <template for:each={enabledTargets} for:item="target">
+          <li key={target.value}>
+            <my-property-target-item
+              target={target}
+              onchange={onChangeTargetCheckbox}
+            ></my-property-target-item>
+          </li>
+        </template>
+      </ul>
+    </div>
+
+    <div class="slds-form-element slds-m-bottom_medium">
+      <label class="slds-form-element__label" for={typeId}>
+        <abbr class="slds-required" title="required">* </abbr>
+        <span>Type</span>
+      </label>
+      <div class="slds-form-element__control">
+        <div class="slds-select_container">
+          <select
+            class="slds-select"
+            name="type"
+            id={typeId}
+            value={property.type}
+            onchange={onChangeSelect}
+          >
+            <option value="">-- select type --</option>
+            <option value="String">String</option>
+            <option value="Boolean">Boolean</option>
+            <option value="Integer">Integer</option>
+            <template if:true={isCommunityDefaultOnly}>
+              <option value="Color">Color</option>
+            </template>
+            <template if:true={isFlowOnly}>
+              <option value="apex">Apex Class</option>
+              <option value="sobject">sObject</option>
+              <option value="Date">Date</option>
+              <option value="DateTime">Datetime</option>
+            </template>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <template if:true={isApexClassType}>
+      <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label" for={apexClassNameId}>
+          <span>Apex Class Name</span>
+        </label>
+        <div class="slds-form-element__control">
+          <input
+            id={apexClassNameId}
+            type="text"
+            value={property.apexClassName}
+            placeholder="apex://namespace.Classname"
+            name="apexClassName"
+            onchange={onChangeInput}
+            class="slds-input"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+    </template>
+    <template if:true={isSObjectType}>
+      <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label" for={sObjectNameId}>
+          <span>sObject Name</span>
+        </label>
+        <div class="slds-form-element__control">
+          <input
+            id={sObjectNameId}
+            type="text"
+            value={property.sObjectName}
+            placeholder="@salesforce/schema/(namespace__)Objectname"
+            name="sObjectName"
+            onchange={onChangeInput}
+            class="slds-input"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+    </template>
+
+    <div class="slds-form-element slds-m-bottom_small">
+      <div class="slds-form-element__control">
+        <div class="slds-checkbox">
+          <input
+            type="checkbox"
+            name="required"
+            id={requiredId}
+            value={property.required}
+            checked={property.required}
+            onchange={onChangeCheckbox}
+          />
+          <label class="slds-checkbox__label" for={requiredId}>
+            <span class="slds-checkbox_faux"></span>
+            <span class="slds-form-element__label">Required</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="slds-form-element slds-m-bottom_small">
+      <label class="slds-form-element__label" for={labelId}>
+        <span>Label</span>
+      </label>
+      <div class="slds-form-element__control">
+        <input
+          id={labelId}
+          type="text"
+          value={property.label}
+          name="label"
+          onchange={onChangeInput}
+          class="slds-input"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <div class="slds-form-element slds-m-bottom_small">
+      <label class="slds-form-element__label" for={descId}>
+        <span>Description</span>
+      </label>
+      <div class="slds-form-element__control">
+        <input
+          id={descId}
+          type="text"
+          value={property.description}
+          name="description"
+          onchange={onChangeInput}
+          class="slds-input"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <template if:true={isDefaultEnabled}>
+      <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label" for={defaultId}>
+          <span>Default value</span>
+        </label>
+        <template if:true={isBoolean}>
+          <div class="slds-form-element__control">
+            <div class="slds-checkbox">
+              <input
+                type="checkbox"
+                name="default"
+                id={defaultId}
+                value={property.default}
+                checked={property.default}
+                onchange={onChangeCheckbox}
+              />
+              <label class="slds-checkbox__label" for={defaultId}>
+                <span class="slds-checkbox_faux"></span>
+                <span class="slds-form-element__label">{property.default}</span>
+              </label>
+            </div>
+          </div>
+        </template>
+        <template if:false={isBoolean}>
+          <div class="slds-form-element__control">
+            <input
+              id={defaultId}
+              type={defaultType}
+              value={property.default}
+              name="default"
+              onchange={onChangeInput}
+              class="slds-input"
+              autocomplete="off"
+            />
+          </div>
+        </template>
+      </div>
+    </template>
+
+    <template if:true={isInteger}>
+      <template if:false={isFlowOnly}>
+        <div class="slds-m-bottom_small">
+          <div
+            class="slds-grid slds-gutters slds-wrap slds-grid_vertical-align-center"
+          >
+            <div class="slds-col">
+              <div class="slds-form-element">
+                <label class="slds-form-element__label" for={minId}>
+                  <span>Min</span>
+                </label>
+                <div class="slds-form-element__control">
+                  <input
+                    id={minId}
+                    type="number"
+                    value={property.min}
+                    name="min"
+                    step="1"
+                    onchange={onChangeInput}
+                    class="slds-input"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="slds-col">
+              <div class="slds-form-element">
+                <label class="slds-form-element__label" for={maxId}>
+                  <span>Max</span>
+                </label>
+                <div class="slds-form-element__control">
+                  <input
+                    id={maxId}
+                    type="number"
+                    value={property.max}
+                    name="max"
+                    step="1"
+                    onchange={onChangeInput}
+                    class="slds-input"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <template if:true={supportsFlow}>
+            <div class="alert-message">
+              <span>No support for FlowScreen target.</span>
+            </div>
+          </template>
+        </div>
+      </template>
+    </template>
+
+    <template if:true={isString}>
+      <template if:false={isFlowOnly}>
+        <div class="slds-form-element slds-m-bottom_small">
+          <label class="slds-form-element__label" for={placeholderId}>
+            <span>Placeholder</span>
+          </label>
+          <div class="slds-form-element__control">
+            <input
+              id={placeholderId}
+              type="text"
+              value={property.placeholder}
+              name="placeholder"
+              onchange={onChangeInput}
+              class="slds-input"
+              autocomplete="off"
+            />
+          </div>
+          <template if:true={supportsFlow}>
+            <div class="alert-message">
+              <span>No support for FlowScreen target.</span>
+            </div>
+          </template>
+        </div>
+      </template>
+    </template>
+
+    <template if:true={supportsFlow}>
+      <div class="slds-m-bottom_small">
+        <label class="slds-form-element__label">
+          <span>Role</span>
+        </label>
+        <div
+          class="slds-grid slds-gutters slds-wrap slds-grid_vertical-align-center"
+        >
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <div class="slds-checkbox">
+                  <input
+                    type="checkbox"
+                    name="flowInput"
+                    id={flowInputId}
+                    value={property.flowInput}
+                    checked={property.flowInput}
+                    onchange={onChangeCheckbox}
+                  />
+                  <label class="slds-checkbox__label" for={flowInputId}>
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-form-element__label">Input</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <div class="slds-checkbox">
+                  <input
+                    type="checkbox"
+                    name="flowOutput"
+                    id={flowOutputId}
+                    value={property.flowOutput}
+                    checked={property.flowOutput}
+                    onchange={onChangeCheckbox}
+                  />
+                  <label class="slds-checkbox__label" for={flowOutputId}>
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-form-element__label">Output</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="alert-message">
+          <span>Support only for FlowScreen target.</span>
+        </div>
+      </div>
+    </template>
+
+    <template if:true={isString}>
+      <template if:false={isFlowOnly}>
+        <div class="slds-form-element slds-m-bottom_small">
+          <label class="slds-form-element__label" for={datasourceId}>
+            <span>Data source</span>
+          </label>
+          <div class="slds-form-element__control">
+            <input
+              id={datasourceId}
+              type="text"
+              value={property.datasource}
+              name="datasource"
+              placeholder="value1,value2,value3  or  apex://MyApexClassName"
+              onchange={onChangeInput}
+              class="slds-input"
+              autocomplete="off"
+            />
+          </div>
+          <template if:true={supportsFlow}>
+            <div class="alert-message">
+              <span>No support for FlowScreen target.</span>
+            </div>
+          </template>
+        </div>
+      </template>
+    </template>
+
+    <div>
+      <button
+        class="slds-button slds-button_icon slds-button_icon-border-filled"
+        aria-pressed="false"
+        title="Delete"
+        type="button"
+        onclick={deletePropertyRow}
+      >
+        <svg class="slds-button__icon" aria-hidden="true">
+          <use
+            xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#delete"
+          ></use>
+        </svg>
+        <span class="slds-assistive-text">Delete</span>
+      </button>
+    </div>
+  </div>
 </template>

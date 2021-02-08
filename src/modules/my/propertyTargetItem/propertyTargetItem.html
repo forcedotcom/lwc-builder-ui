@@ -1,16 +1,16 @@
 <template>
-    <div class="slds-checkbox">
-        <input
-            type="checkbox"
-            name={targetId}
-            onchange={onChangeTargetCheckbox}
-            id={targetId}
-            value={isChecked}
-            checked={isChecked}
-        />
-        <label class="slds-checkbox__label target_label" for={targetId}>
-            <span class="slds-checkbox_faux"></span>
-            <span class="slds-form-element__label">{target.name}</span>
-        </label>
-    </div>
+  <div class="slds-checkbox">
+    <input
+      type="checkbox"
+      name={targetId}
+      onchange={onChangeTargetCheckbox}
+      id={targetId}
+      value={isChecked}
+      checked={isChecked}
+    />
+    <label class="slds-checkbox__label target_label" for={targetId}>
+      <span class="slds-checkbox_faux"></span>
+      <span class="slds-form-element__label">{target.name}</span>
+    </label>
+  </div>
 </template>
