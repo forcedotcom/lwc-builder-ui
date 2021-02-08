@@ -5,7 +5,7 @@
     "author": "ninoish",
     "bugs": "https://github.com/developerforce/lwc-builder/issues",
     "dependencies": {
-        "@salesforce-ux/design-system": "^2.14.1",
+        "@salesforce-ux/design-system": "^2.14.2",
         "change-case": "^4.1.2",
         "compression": "^1.7.4",
         "express": "^4.17.1",
