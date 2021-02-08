@@ -1,0 +1,52 @@
+# Unique name for this workflow
+name: CI
+
+# Definition when the workflow should run
+on:
+  push:
+    branches:
+      - main
+
+# Jobs to be executed
+jobs:
+  format-lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code in the pull request
+      - name: 'Checkout source code'
+        uses: actions/checkout@v2
+
+      # Cache node_modules to speed up the process
+      - name: Determine npm cache directory
+        id: cache-dir
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - name: Restore npm cache
+        id: npm-cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Install npm dependencies
+      - name: 'Install dependencies if needed'
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      # Prettier formatting
+      - name: 'Code formatting verification with Prettier'
+        run: npm run prettier:verify
+
+      # ESlint
+      - name: 'Lint JavaScript'
+        run: npm run lint
+
+      # Unit tests
+      - name: 'Run unit tests'
+        run: npm run test:unit:coverage
+
+      # Upload code coverage data
+        - name: 'Upload code coverage for LWC to Codecov.io'
+          uses: codecov/codecov-action@v1

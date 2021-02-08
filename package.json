@@ -25,13 +25,12 @@
   },
   "engines": {
     "node": ">=10.13.0",
-    "npm": ">=6.4.1",
-    "yarn": ">=1.9.4"
+    "npm": ">=6.4.1"
   },
   "homepage": "https://github.com/developerforce/lwc-builder",
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint && npm run prettier:verify"
+      "pre-push": "npm run lint && npm run prettier"
     }
   },
   "keywords": [
