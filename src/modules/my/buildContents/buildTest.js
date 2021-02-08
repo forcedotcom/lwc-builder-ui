@@ -1,10 +1,16 @@
+/*
+ * Copyright (c) 2021, salesforce.com, inc.
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { pascalCase, camelCase, paramCase } from 'change-case';
 const buildTest = (contents) => {
-    const {componentName} = contents;
-    const pascal = pascalCase(componentName);
-    const param = paramCase(componentName);
-    const camel = camelCase(componentName)
-    return `import { createElement } from "lwc";
+  const { componentName } = contents;
+  const pascal = pascalCase(componentName);
+  const param = paramCase(componentName);
+  const camel = camelCase(componentName);
+  return `import { createElement } from "lwc";
 import ${pascal} from "c/${camel}";
 
 // import { registerLdsTestWireAdapter } from '@salesforce/sfdx-lwc-jest';

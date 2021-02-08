@@ -1,51 +1,51 @@
 <template>
-    <div class={showInputClass}>
-        <div class="slds-form-element">
-            <div class="slds-form-element__control">
-                <div class="slds-file-selector slds-file-selector_files">
-                    <input
-                        type="file"
-                        class="slds-file-selector__input slds-assistive-text"
-                        accept="image/svg+xml,.svg"
-                        id="svg-file"
-                        onchange={loadSvgFile}
-                        aria-labelledby="file-selector-primary-label file-selector-secondary-label"
-                    />
-                    <label
-                        class="slds-file-selector__body"
-                        for="svg-file"
-                        id="file-selector-secondary-label"
-                    >
-                        <span
-                            class="slds-file-selector__button slds-button slds-button_neutral"
-                        >
-                            <svg
-                                class="slds-button__icon slds-button__icon_left"
-                                aria-hidden="true"
-                            >
-                                <use
-                                    xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#upload"
-                                ></use>
-                            </svg>
-                            <span>Upload SVG</span>
-                        </span>
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class={showOutputClass}>
-        <button
-            class="slds-button slds-button_icon remove-button"
-            title="Remove uploaded svg icon"
-            onclick={discardSvg}
-        >
-            <svg class="slds-button__icon" aria-hidden="true">
+  <div class={showInputClass}>
+    <div class="slds-form-element">
+      <div class="slds-form-element__control">
+        <div class="slds-file-selector slds-file-selector_files">
+          <input
+            type="file"
+            class="slds-file-selector__input slds-assistive-text"
+            accept="image/svg+xml,.svg"
+            id="svg-file"
+            onchange={loadSvgFile}
+            aria-labelledby="file-selector-primary-label file-selector-secondary-label"
+          />
+          <label
+            class="slds-file-selector__body"
+            for="svg-file"
+            id="file-selector-secondary-label"
+          >
+            <span
+              class="slds-file-selector__button slds-button slds-button_neutral"
+            >
+              <svg
+                class="slds-button__icon slds-button__icon_left"
+                aria-hidden="true"
+              >
                 <use
-                    xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#delete"
+                  xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#upload"
                 ></use>
-            </svg>
-        </button>
-        <span class="svg-filename">{fileName}</span>
+              </svg>
+              <span>Upload SVG</span>
+            </span>
+          </label>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class={showOutputClass}>
+    <button
+      class="slds-button slds-button_icon remove-button"
+      title="Remove uploaded svg icon"
+      onclick={discardSvg}
+    >
+      <svg class="slds-button__icon" aria-hidden="true">
+        <use
+          xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#delete"
+        ></use>
+      </svg>
+    </button>
+    <span class="svg-filename">{fileName}</span>
+  </div>
 </template>

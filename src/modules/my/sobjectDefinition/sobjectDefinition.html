@@ -1,33 +1,33 @@
 <template>
-    <div class="sobject-wrapper">
-        <div class="slds-form-element slds-m-bottom_x-small sobject-input">
-            <div class="slds-form-element__control">
-                <input
-                    type="text"
-                    value={name}
-                    name="name"
-                    onchange={onChangeInput}
-                    class="slds-input"
-                    placeholder="Account, Opportunity, CustomObject__c etc.."
-                    autocomplete="off"
-                />
-            </div>
-        </div>
-        <div class="sobject-delete-button">
-            <button
-                class="slds-button slds-button_icon slds-button_icon-border-filled"
-                aria-pressed="false"
-                title="Delete"
-                type="button"
-                onclick={deleteRow}
-            >
-                <svg class="slds-button__icon" aria-hidden="true">
-                    <use
-                        xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#delete"
-                    ></use>
-                </svg>
-                <span class="slds-assistive-text">Delete</span>
-            </button>
-        </div>
+  <div class="sobject-wrapper">
+    <div class="slds-form-element slds-m-bottom_x-small sobject-input">
+      <div class="slds-form-element__control">
+        <input
+          type="text"
+          value={name}
+          name="name"
+          onchange={onChangeInput}
+          class="slds-input"
+          placeholder="Account, Opportunity, CustomObject__c etc.."
+          autocomplete="off"
+        />
+      </div>
     </div>
+    <div class="sobject-delete-button">
+      <button
+        class="slds-button slds-button_icon slds-button_icon-border-filled"
+        aria-pressed="false"
+        title="Delete"
+        type="button"
+        onclick={deleteRow}
+      >
+        <svg class="slds-button__icon" aria-hidden="true">
+          <use
+            xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#delete"
+          ></use>
+        </svg>
+        <span class="slds-assistive-text">Delete</span>
+      </button>
+    </div>
+  </div>
 </template>

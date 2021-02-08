@@ -1,15 +1,15 @@
 .property-wrapper {
-    display: flex;
-    flex-direction: column;
-    padding: 0.75rem;
-    border: 1px solid #dddbda;
-    border-radius: 0.25rem;
-    background-clip: padding-box;
-    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-    margin-bottom: .75rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  border: 1px solid #dddbda;
+  border-radius: 0.25rem;
+  background-clip: padding-box;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.75rem;
 }
 .alert-message {
-    color: #f86363;
-    font-style: italic;
+  color: #f86363;
+  font-style: italic;
 }

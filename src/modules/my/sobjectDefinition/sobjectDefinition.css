@@ -1,9 +1,9 @@
 .sobject-wrapper {
-    display: flex;
+  display: flex;
 }
 .sobject-input {
-    flex: 1;
+  flex: 1;
 }
 .sobject-delete-button {
-    margin-left: .5rem;
+  margin-left: 0.5rem;
 }

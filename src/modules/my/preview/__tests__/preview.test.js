@@ -1,19 +1,15 @@
-// These tests are examples to get you started on how how to test
-// Lightning Web Components using the Jest testing framework.
-//
-// See the LWC Recipes Open Source sample application for many other
-// test scenarios and best practices.
-//
-// https://github.com/trailheadapps/lwc-recipes-oss
-
-import { createElement } from 'lwc';
-import MyPreview from 'my/form';
+/*
+ * Copyright (c) 2021, salesforce.com, inc.
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 
 describe('my-preview', () => {
-    afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
-        while (document.body.firstChild) {
-            document.body.removeChild(document.body.firstChild);
-        }
-    });
+  afterEach(() => {
+    // The jsdom instance is shared across test cases in a single file so reset the DOM
+    while (document.body.firstChild) {
+      document.body.removeChild(document.body.firstChild);
+    }
+  });
 });

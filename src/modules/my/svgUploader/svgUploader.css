@@ -1,7 +1,7 @@
 .input,
 .output {
   display: none;
-  padding: .25rem;
+  padding: 0.25rem;
 }
 
 .input.show,
@@ -10,7 +10,7 @@
 }
 .remove-button {
   vertical-align: top;
-  margin-right: .25rem;
+  margin-right: 0.25rem;
   display: inline-block;
 }
 

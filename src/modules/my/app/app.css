@@ -1,22 +1,22 @@
 .wrapper {
-    max-width: 1080px;
-    width: 96%;
-    margin: 1rem auto;
+  max-width: 1080px;
+  width: 96%;
+  margin: 1rem auto;
 }
 .bottom-nav {
-    z-index: 100;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    padding: .75rem;
-    background-color: rgba(255,255, 255, 0.98);
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    border-top: 1px solid #cacaca;
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.98);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px solid #cacaca;
 }
 .bottom-nav > * {
-    margin: 0 .5rem;
+  margin: 0 0.5rem;
 }
