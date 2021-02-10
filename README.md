@@ -1,6 +1,6 @@
-# lwc-builder
+# lwc-builder-ui
 
-LWC Builder is a tool to generate Lightning Web Component (LWC) template for Salesforce Lightning Platform.
+LWC Builder is a tool to build Lightning Web Component (LWC) template for Salesforce Lightning Platform.
 Configure your lwc component settings with inputs and clicks, then press "Download" button to get lwc out of the box component files.
 
 # Live App
