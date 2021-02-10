@@ -1,9 +1,9 @@
 {
-  "name": "lwc-builder",
-  "description": "A tool to generate Lightning Web Component (LWC) files",
+  "name": "lwc-builder-ui",
+  "description": "A tool to build Lightning Web Component (LWC) files",
   "version": "0.1.0",
   "author": "ninoish",
-  "bugs": "https://github.com/developerforce/lwc-builder/issues",
+  "bugs": "https://github.com/developerforce/lwc-builder-ui/issues",
   "dependencies": {
     "@salesforce-ux/design-system": "^2.14.2",
     "change-case": "^4.1.2",
@@ -28,7 +28,7 @@
     "node": ">=10.13.0",
     "npm": ">=6.4.1"
   },
-  "homepage": "https://github.com/developerforce/lwc-builder",
+  "homepage": "https://github.com/developerforce/lwc-builder-ui",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -46,7 +46,7 @@
       "eslint --cache --fix"
     ]
   },
-  "repository": "https://github.com/developerforce/lwc-builder",
+  "repository": "https://github.com/developerforce/lwc-builder-ui",
   "scripts": {
     "build": "lwc-services build -m production",
     "build:development": "lwc-services build",
