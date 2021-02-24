@@ -48,7 +48,7 @@
   },
   "repository": "https://github.com/developerforce/lwc-builder-ui",
   "scripts": {
-    "build": "lwc-services build -m production",
+    "build": "lwc-services build",
     "build:development": "lwc-services build",
     "lint": "eslint src --ext js",
     "lint:fix": "eslint src --ext js --fix",
