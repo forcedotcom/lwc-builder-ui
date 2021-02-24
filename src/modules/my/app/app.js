@@ -6,16 +6,25 @@
  */
 import '@lwc/synthetic-shadow';
 import { LightningElement, track } from 'lwc';
+import LWCBuilderEvent from '../../domain/LWCBuilderEvent';
 
 export default class App extends LightningElement {
-  @track
-  contents;
+  @track contents;
+  vscode;
+
+  connectedCallback() {
+    this.vscode = acquireVsCodeApi(); // eslint-disable-line
+  }
 
   onUpdateForm = (e) => {
     this.contents = e.detail;
   };
 
   generate = () => {
+    // Send message to server
+    const message = new LWCBuilderEvent('create_button_clicked', this.contents);
+
+    this.vscode.postMessage(message);
     console.log(this.contents);
     const {
       withCss,
