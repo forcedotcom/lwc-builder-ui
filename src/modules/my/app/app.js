@@ -4,7 +4,6 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import '@lwc/synthetic-shadow';
 import { LightningElement, track } from 'lwc';
 import LWCBuilderEvent from '../../domain/LWCBuilderEvent';
 
@@ -13,53 +12,27 @@ export default class App extends LightningElement {
   vscode;
 
   connectedCallback() {
-    this.vscode = acquireVsCodeApi(); // eslint-disable-line
+    if (typeof acquireVsCodeApi === 'function') {
+      this.vscode = acquireVsCodeApi(); // eslint-disable-line
+    }
   }
 
-  onUpdateForm = (e) => {
-    this.contents = e.detail;
-  };
+  onUpdateForm(event) {
+    this.contents = event.detail;
+  }
 
-  generate = () => {
-    // Send message to server
-    const message = new LWCBuilderEvent('create_button_clicked', this.contents);
-
-    this.vscode.postMessage(message);
-    console.log(this.contents);
-    const {
-      withCss,
-      withHtml,
-      withSvg,
-      withTest,
-      html,
-      js,
-      meta,
-      css,
-      svg,
-      test,
-      componentName
-    } = this.contents;
-
-    console.log(
-      withCss,
-      withHtml,
-      withSvg,
-      withTest,
-      html,
-      js,
-      meta,
-      css,
-      svg,
-      test,
-      componentName
-    );
-
-    // TODO: Bundle files here
-  };
-
-  showPreview = () => {};
+  handleButtonClick() {
+    // Send message to vscode extension
+    if (this.vscode) {
+      const message = new LWCBuilderEvent(
+        'create_button_clicked',
+        this.contents
+      );
+      this.vscode.postMessage(message);
+    }
+  }
 
   get hasContents() {
-    return !!this.contents && !!this.contents.componentName;
+    return this.contents && this.contents.componentName;
   }
 }

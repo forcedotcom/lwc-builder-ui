@@ -6,40 +6,22 @@
     </template>
     <div class="bottom-nav">
       <template if:true={hasContents}>
-        <!--
-                <button
-                    type="button"
-                    onclick={showPreview}
-                    class="slds-button slds-button_neutral"
-                >
-                    Preview
-                </button>
-                -->
         <button
           type="button"
-          onclick={generate}
+          onclick={handleButtonClick}
           class="slds-button slds-button_brand"
         >
-          Download
+          Create
         </button>
       </template>
       <template if:false={hasContents}>
         <span>Set the component name first.</span>
-        <!--
-                <button
-                    type="button"
-                    disabled="disabled"
-                    class="slds-button slds-button_neutral"
-                >
-                    Preview
-                </button>
-            -->
         <button
           type="button"
           disabled="disabled"
           class="slds-button slds-button_brand"
         >
-          Download
+          Create
         </button>
       </template>
     </div>
