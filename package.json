@@ -1,7 +1,7 @@
 {
   "name": "lwc-builder-ui-dev",
   "description": "A tool to build Lightning Web Component (LWC) files",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "ninoish",
   "bugs": "https://github.com/developerforce/lwc-builder-ui/issues",
   "dependencies": {
@@ -47,7 +47,6 @@
     "build:development": "lwc-services build",
     "lint": "eslint src --ext js",
     "lint:fix": "eslint src --ext js --fix",
-    "postinstall": "husky install",
     "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
     "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
     "serve": "node scripts/server.js",
