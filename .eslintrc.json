@@ -2,7 +2,6 @@
   "plugins": ["inclusive-language", "jsdoc", "eslint-plugin-header"],
   "extends": [
     "@salesforce/eslint-config-lwc/recommended",
-    "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
   "rules": {
