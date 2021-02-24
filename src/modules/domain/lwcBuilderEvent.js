@@ -19,7 +19,7 @@ class Payload {
     if (component.withCss) this.css = component.css;
     if (component.withHtml) this.css = component.html;
     if (component.withSvg) this.css = component.js;
-    if (component.withTes) this.css = component.meta;
+    if (component.withTest) this.css = component.meta;
   }
 }
 
