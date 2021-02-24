@@ -29,3 +29,5 @@ ehthumbs.db
 $RECYCLE.BIN/
 
 .sfdx/*
+
+.eslintcache
