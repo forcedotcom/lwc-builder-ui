@@ -6,6 +6,7 @@
  */
 
 class Payload {
+  componentName;
   css;
   html;
   js;
@@ -14,6 +15,7 @@ class Payload {
   test;
 
   constructor(component) {
+    this.componentName = component.componentName;
     this.js = component.js;
     this.meta = component.meta;
     if (component.withCss) this.css = component.css;
