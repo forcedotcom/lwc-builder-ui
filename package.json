@@ -1,7 +1,7 @@
 {
-  "name": "lwc-builder-ui",
+  "name": "lwc-builder-ui-dev",
   "description": "A tool to build Lightning Web Component (LWC) files",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "ninoish",
   "bugs": "https://github.com/developerforce/lwc-builder-ui/issues",
   "dependencies": {
@@ -29,11 +29,6 @@
     "npm": ">=6.4.1"
   },
   "homepage": "https://github.com/developerforce/lwc-builder-ui",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "keywords": [
     "lwc"
   ],
