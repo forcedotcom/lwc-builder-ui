@@ -8,10 +8,10 @@
       <template if:true={hasContents}>
         <button
           type="button"
-          onclick={generate}
+          onclick={handleButtonClick}
           class="slds-button slds-button_brand"
         >
-          Download
+          Create
         </button>
       </template>
       <template if:false={hasContents}>
@@ -21,7 +21,7 @@
           disabled="disabled"
           class="slds-button slds-button_brand"
         >
-          Download
+          Create
         </button>
       </template>
     </div>

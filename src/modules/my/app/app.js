@@ -4,25 +4,22 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import '@lwc/synthetic-shadow';
 import { LightningElement, track } from 'lwc';
-import LWCBuilderEvent from '../../domain/LWCBuilderEvent';
+import LWCBuilderEvent from 'domain/lwcBuilderEvent';
 
 export default class App extends LightningElement {
   @track contents;
   vscode;
 
   connectedCallback() {
-    /* eslint-disable */
-    if (typeof acquireVsCodeApi !== 'undefined') {
-      this.vscode = acquireVsCodeApi();
+    if (typeof acquireVsCodeApi === 'function') {
+      this.vscode = acquireVsCodeApi(); // eslint-disable-line
     }
-    /* eslint-enable */
   }
 
-  onUpdateForm = (e) => {
-    this.contents = e.detail;
-  };
+  onUpdateForm(event) {
+    this.contents = event.detail;
+  }
 
   generate = () => {
     // Send message to server
@@ -31,9 +28,7 @@ export default class App extends LightningElement {
     this.vscode?.postMessage(message);
   };
 
-  showPreview = () => {};
-
   get hasContents() {
-    return !!this.contents && !!this.contents.componentName;
+    return this.contents && this.contents.componentName;
   }
 }
