@@ -25,7 +25,6 @@ export default class LanguageSelector extends LightningElement {
     }`;
   }
   onSelectOption = (e) => {
-    console.log(e);
     this.selected = e.detail;
     this.isFocused = false;
   };

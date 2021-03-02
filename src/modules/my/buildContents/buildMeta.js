@@ -15,8 +15,6 @@ const buildMeta = (contents) => {
     objects
   } = contents;
 
-  console.log(properties);
-
   const enabledTargetArray = Object.values(targets).filter((t) => t.enabled);
   enabledTargetArray.forEach((t) => {
     t.properties = [];

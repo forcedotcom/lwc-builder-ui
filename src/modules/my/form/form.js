@@ -90,6 +90,9 @@ export default class Form extends LightningElement {
   }
 
   onChangeTargetValue(e) {
+    if (!e.detail) {
+      return;
+    }
     const { target, enabled, small, large } = e.detail;
     this.inputs.targets[target.value].enabled = enabled;
     if (enabled) {

@@ -13,7 +13,11 @@ export default class App extends LightningElement {
   vscode;
 
   connectedCallback() {
-    this.vscode = acquireVsCodeApi(); // eslint-disable-line
+    /* eslint-disable */
+    if (typeof acquireVsCodeApi !== 'undefined') {
+      this.vscode = acquireVsCodeApi();
+    }
+    /* eslint-enable */
   }
 
   onUpdateForm = (e) => {
@@ -23,38 +27,8 @@ export default class App extends LightningElement {
   generate = () => {
     // Send message to server
     const message = new LWCBuilderEvent('create_button_clicked', this.contents);
-
-    this.vscode.postMessage(message);
     console.log(this.contents);
-    const {
-      withCss,
-      withHtml,
-      withSvg,
-      withTest,
-      html,
-      js,
-      meta,
-      css,
-      svg,
-      test,
-      componentName
-    } = this.contents;
-
-    console.log(
-      withCss,
-      withHtml,
-      withSvg,
-      withTest,
-      html,
-      js,
-      meta,
-      css,
-      svg,
-      test,
-      componentName
-    );
-
-    // TODO: Bundle files here
+    this.vscode?.postMessage(message);
   };
 
   showPreview = () => {};
