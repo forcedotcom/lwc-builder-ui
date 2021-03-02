@@ -26,7 +26,9 @@ describe('my-app', () => {
     // WHEN
     const form = element.shadowRoot.querySelector('my-form');
     form.dispatchEvent(
-      new CustomEvent('updatecontent', { detail: { componentName: 'MyNewCmp' } })
+      new CustomEvent('updatecontent', {
+        detail: { componentName: 'MyNewCmp' }
+      })
     );
 
     // THEN
