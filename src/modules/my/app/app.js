@@ -21,16 +21,12 @@ export default class App extends LightningElement {
     this.contents = event.detail;
   }
 
-  handleButtonClick() {
-    // Send message to vscode extension
-    if (this.vscode) {
-      const message = new LWCBuilderEvent(
-        'create_button_clicked',
-        this.contents
-      );
-      this.vscode.postMessage(message);
-    }
-  }
+  generate = () => {
+    // Send message to server
+    const message = new LWCBuilderEvent('create_button_clicked', this.contents);
+    console.log(this.contents);
+    this.vscode?.postMessage(message);
+  };
 
   get hasContents() {
     return this.contents && this.contents.componentName;

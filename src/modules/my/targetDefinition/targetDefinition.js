@@ -45,7 +45,7 @@ export default class TargetDefinition extends LightningElement {
 
   onChange = () => {
     this.dispatchEvent(
-      new CustomEvent('change', {
+      new CustomEvent('changetarget', {
         detail: {
           target: this.target,
           enabled: this.enabled,

@@ -19,9 +19,9 @@ class Payload {
     this.js = component.js;
     this.meta = component.meta;
     if (component.withCss) this.css = component.css;
-    if (component.withHtml) this.css = component.html;
-    if (component.withSvg) this.css = component.js;
-    if (component.withTest) this.css = component.meta;
+    if (component.withHtml) this.html = component.html;
+    if (component.withSvg) this.svg = component.svg;
+    if (component.withTest) this.test = component.test;
   }
 }
 

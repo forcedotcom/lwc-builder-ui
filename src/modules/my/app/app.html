@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <my-form onupdate={onUpdateForm}></my-form>
+    <my-form onupdatecontent={onUpdateForm}></my-form>
     <template if:true={hasContents}>
       <my-preview contents={contents}></my-preview>
     </template>

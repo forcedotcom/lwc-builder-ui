@@ -247,7 +247,7 @@
                     <div class="slds-form-element__control">
                       <my-target-definition
                         target={target}
-                        onchange={onChangeTargetValue}
+                        onchangetarget={onChangeTargetValue}
                       ></my-target-definition>
                     </div>
                   </div>
@@ -272,8 +272,8 @@
                   <my-property-definition
                     pid={pId}
                     targets={inputs.targets}
-                    onchange={onChangePropertyRow}
-                    ondelete={deletePropertyRow}
+                    onchangepropdef={onChangePropertyRow}
+                    ondeletepropdef={deletePropertyRow}
                   ></my-property-definition>
                 </li>
               </template>
@@ -312,8 +312,8 @@
                 <li key={oId}>
                   <my-sobject-definition
                     oid={oId}
-                    onchange={onChangeObjectRow}
-                    ondelete={deleteObjectRow}
+                    onchangesobj={onChangeObjectRow}
+                    ondeletesobj={deleteObjectRow}
                   ></my-sobject-definition>
                 </li>
               </template>

@@ -15,7 +15,7 @@ export default class SobjectDefinition extends LightningElement {
   onChangeInput = (e) => {
     this.name = e.target.value;
     this.dispatchEvent(
-      new CustomEvent('change', {
+      new CustomEvent('changesobj', {
         detail: {
           id: this.oid,
           name: this.name
@@ -26,7 +26,7 @@ export default class SobjectDefinition extends LightningElement {
 
   deleteRow = () => {
     this.dispatchEvent(
-      new CustomEvent('delete', {
+      new CustomEvent('deletesobj', {
         detail: this.oid
       })
     );
