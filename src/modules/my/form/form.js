@@ -90,6 +90,9 @@ export default class Form extends LightningElement {
   }
 
   onChangeTargetValue(e) {
+    if (!e.detail) {
+      return;
+    }
     const { target, enabled, small, large } = e.detail;
     this.inputs.targets[target.value].enabled = enabled;
     if (enabled) {
@@ -165,7 +168,7 @@ export default class Form extends LightningElement {
 
   updateContent() {
     const formatted = buildContents(this.inputs);
-    const e = new CustomEvent('update', {
+    const e = new CustomEvent('updatecontent', {
       detail: formatted
     });
     this.dispatchEvent(e);

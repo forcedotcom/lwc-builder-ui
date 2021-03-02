@@ -25,7 +25,7 @@ export default class LanguageSelectorOption extends LightningElement {
 
   onClickOption = () => {
     this.dispatchEvent(
-      new CustomEvent('select', {
+      new CustomEvent('selectlang', {
         detail: this.language
       })
     );

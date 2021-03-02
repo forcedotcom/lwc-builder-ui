@@ -1,20 +1,11 @@
 <template>
   <div class="wrapper">
-    <my-form onupdate={onUpdateForm}></my-form>
+    <my-form onupdatecontent={onUpdateForm}></my-form>
     <template if:true={hasContents}>
       <my-preview contents={contents}></my-preview>
     </template>
     <div class="bottom-nav">
       <template if:true={hasContents}>
-        <!--
-                <button
-                    type="button"
-                    onclick={showPreview}
-                    class="slds-button slds-button_neutral"
-                >
-                    Preview
-                </button>
-                -->
         <button
           type="button"
           onclick={generate}
@@ -25,15 +16,6 @@
       </template>
       <template if:false={hasContents}>
         <span>Set the component name first.</span>
-        <!--
-                <button
-                    type="button"
-                    disabled="disabled"
-                    class="slds-button slds-button_neutral"
-                >
-                    Preview
-                </button>
-            -->
         <button
           type="button"
           disabled="disabled"

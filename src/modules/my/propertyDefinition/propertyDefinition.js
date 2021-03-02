@@ -215,7 +215,7 @@ export default class PropertyDefinition extends LightningElement {
 
   updateProperty = () => {
     this.dispatchEvent(
-      new CustomEvent('change', {
+      new CustomEvent('changepropdef', {
         detail: {
           ...this.property,
           id: this.pid
@@ -226,7 +226,7 @@ export default class PropertyDefinition extends LightningElement {
 
   deletePropertyRow = () => {
     this.dispatchEvent(
-      new CustomEvent('delete', {
+      new CustomEvent('deletepropdef', {
         detail: this.pid
       })
     );

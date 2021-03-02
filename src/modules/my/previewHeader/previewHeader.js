@@ -6,7 +6,7 @@
  */
 import { LightningElement, api } from 'lwc';
 
-export default class PreviewContent extends LightningElement {
+export default class PreviewHeader extends LightningElement {
   @api
   filename;
 
@@ -45,7 +45,7 @@ export default class PreviewContent extends LightningElement {
 
   onclickTab() {
     this.dispatchEvent(
-      new CustomEvent('click', {
+      new CustomEvent('clicktab', {
         detail: this.extension
       })
     );

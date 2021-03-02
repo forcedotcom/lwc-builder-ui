@@ -8,7 +8,7 @@
       >
         <template if:true={contents.withHtml}>
           <my-preview-header
-            onclick={showHtml}
+            onclicktab={showHtml}
             filename={contents.componentName}
             type="html"
             extension="html"
@@ -16,7 +16,7 @@
           ></my-preview-header>
         </template>
         <my-preview-header
-          onclick={showJs}
+          onclicktab={showJs}
           filename={contents.componentName}
           type="js"
           extension="js"
@@ -24,7 +24,7 @@
         ></my-preview-header>
         <template if:true={contents.withCss}>
           <my-preview-header
-            onclick={showCss}
+            onclicktab={showCss}
             filename={contents.componentName}
             type="css"
             extension="css"
@@ -32,7 +32,7 @@
           ></my-preview-header>
         </template>
         <my-preview-header
-          onclick={showMeta}
+          onclicktab={showMeta}
           filename={contents.componentName}
           type="meta"
           extension="js-meta.xml"
@@ -40,7 +40,7 @@
         ></my-preview-header>
         <template if:true={contents.withSvg}>
           <my-preview-header
-            onclick={showSvg}
+            onclicktab={showSvg}
             filename={contents.componentName}
             type="svg"
             extension="svg"
@@ -49,7 +49,7 @@
         </template>
         <template if:true={contents.withTest}>
           <my-preview-header
-            onclick={showTest}
+            onclicktab={showTest}
             filename={contents.componentName}
             type="test"
             extension="test.js"
