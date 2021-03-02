@@ -15,7 +15,7 @@ export default class PropertyTargetItem extends LightningElement {
   onChangeTargetCheckbox = (e) => {
     this.isChecked = e.currentTarget.checked;
     this.dispatchEvent(
-      new CustomEvent('change', {
+      new CustomEvent('changepropitem', {
         detail: {
           target: this.target,
           isChecked: this.isChecked

@@ -165,7 +165,7 @@ export default class Form extends LightningElement {
 
   updateContent() {
     const formatted = buildContents(this.inputs);
-    const e = new CustomEvent('update', {
+    const e = new CustomEvent('updatecontent', {
       detail: formatted
     });
     this.dispatchEvent(e);
