@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { LightningElement, track } from 'lwc';
-import LWCBuilderEvent from '../../domain/LWCBuilderEvent';
+import LWCBuilderEvent from 'domain/LWCBuilderEvent';
 
 export default class App extends LightningElement {
   @track contents;
