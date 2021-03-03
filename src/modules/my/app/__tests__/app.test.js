@@ -7,6 +7,15 @@
 
 import { createElement } from 'lwc';
 import MyApp from 'my/app';
+import LWCBuilderEvent from 'domain/lwcBuilderEvent';
+
+// Mock vscode API
+const mockPostMessage = jest.fn();
+window.acquireVsCodeApi = jest.fn(() => {
+  return {
+    postMessage: mockPostMessage
+  };
+});
 
 describe('my-app', () => {
   afterEach(() => {
@@ -63,6 +72,34 @@ describe('my-app', () => {
       const button = element.shadowRoot.querySelector('button[disabled]');
       expect(preview).toBeNull();
       expect(button).not.toBeNull();
+    });
+  });
+
+  it('sends message to server when button clicked', () => {
+    // GIVEN
+    const element = createElement('my-app', {
+      is: MyApp
+    });
+
+    document.body.appendChild(element);
+    const form = element.shadowRoot.querySelector('my-form');
+    form.dispatchEvent(
+      new CustomEvent('updatecontent', {
+        detail: { componentName: 'MyNewCmp' }
+      })
+    );
+
+    // WHEN
+    return Promise.resolve().then(() => {
+      const button = element.shadowRoot.querySelector('button:not([disabled])');
+      button.click();
+
+      // THEN
+      expect(mockPostMessage).toBeCalledWith(
+        new LWCBuilderEvent('create_button_clicked', {
+          componentName: 'MyNewCmp'
+        })
+      );
     });
   });
 });
