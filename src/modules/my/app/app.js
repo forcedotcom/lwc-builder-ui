@@ -21,12 +21,12 @@ export default class App extends LightningElement {
     this.contents = event.detail;
   }
 
-  generate = () => {
+  onButtonClick() {
     // Send message to server
     const message = new LWCBuilderEvent('create_button_clicked', this.contents);
     console.log(this.contents);
     this.vscode?.postMessage(message);
-  };
+  }
 
   get hasContents() {
     return this.contents && this.contents.componentName;
