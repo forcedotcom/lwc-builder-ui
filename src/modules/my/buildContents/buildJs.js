@@ -6,7 +6,7 @@
  */
 import { pascalCase } from 'change-case';
 
-const buildJs = (contents) => {
+export const buildJs = (contents) => {
   const { properties, targets, componentName } = contents;
 
   const propNames = properties.map((p) => p.name);
@@ -65,4 +65,3 @@ const buildJs = (contents) => {
 
   return js;
 };
-export default buildJs;

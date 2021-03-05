@@ -4,7 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-const buildSvg = (contents) => {
+export const buildSvg = (contents) => {
   if (contents.svgFileContent) {
     return contents.svgFileContent;
   }
@@ -14,4 +14,3 @@ const buildSvg = (contents) => {
   <path fill="#fff" d="M26 26a2 2 0 0 1-1.93-2.53l3-11a2 2 0 1 1 3.86 1.05l-3 11A2 2 0 0 1 26 26z"></path>
 </svg>`;
 };
-export default buildSvg;

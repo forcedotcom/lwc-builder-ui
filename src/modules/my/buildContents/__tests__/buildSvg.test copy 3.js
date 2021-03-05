@@ -5,40 +5,14 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import buildCss from '../buildCss';
-import buildHtml from '../buildHtml';
-import buildSvg from '../buildSvg';
+import { buildSvg } from '../buildSvg';
 
-describe('my-build-contents', () => {
+describe('my-build-svg', () => {
   afterEach(() => {
     // The jsdom instance is shared across test cases in a single file so reset the DOM
     while (document.body.firstChild) {
       document.body.removeChild(document.body.firstChild);
     }
-  });
-
-  it('css returns default css', () => {
-    // GIVEN
-    const contents = {};
-
-    // WHEN
-    const css = buildCss(contents);
-
-    // THEN
-    expect(css).toBe(`h1 {}`);
-  });
-
-  it('html includes component name', () => {
-    // GIVEN
-    const contents = { componentName: 'MyLWC' };
-
-    // WHEN
-    const html = buildHtml(contents);
-
-    // THEN
-    expect(html).toBe(`<template>
-    <h1>${contents.componentName}</h1>
-</template>`);
   });
 
   it('svg returns passed in svg when indicated', () => {

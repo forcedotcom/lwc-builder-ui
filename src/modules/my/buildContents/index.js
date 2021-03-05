@@ -4,12 +4,12 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import buildHtml from './buildHtml';
-import buildJs from './buildJs';
-import buildMeta from './buildMeta';
-import buildCss from './buildCss';
-import buildSvg from './buildSvg';
-import buildTest from './buildTest';
+import { buildHtml } from './buildHtml';
+import { buildJs } from './buildJs';
+import { buildMeta } from './buildMeta';
+import { buildCss } from './buildCss';
+import { buildSvg } from './buildSvg';
+import { buildTest } from './buildTest';
 
 const build = (contents) => {
   const html = buildHtml(contents);
