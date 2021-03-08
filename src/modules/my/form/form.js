@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { LightningElement, track } from 'lwc';
-import buildContents from '../buildContents';
+import { buildContents } from 'my/buildContents';
 import { sentenceCase, camelCase } from 'change-case';
 
 export default class Form extends LightningElement {
@@ -94,6 +94,7 @@ export default class Form extends LightningElement {
       return;
     }
     const { target, enabled, small, large } = e.detail;
+
     this.inputs.targets[target.value].enabled = enabled;
     if (enabled) {
       this.inputs.targets[target.value].small = small;
@@ -116,7 +117,6 @@ export default class Form extends LightningElement {
   addPropertyRow = () => {
     const pId = `propertyId_${this.pDefCount}`;
     this.inputs.propertyIds.push(pId);
-    // this.inputs.properties.push({ id: pId, property: null });
     this.pDefCount++;
   };
 
@@ -136,6 +136,7 @@ export default class Form extends LightningElement {
     // this.inputs.objects.push({ id: oId });
     this.oDefCount++;
   };
+
   deleteObjectRow = (e) => {
     const targetId = e.detail;
     this.inputs.objectIds = this.inputs.objectIds.filter(

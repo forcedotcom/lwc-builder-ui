@@ -11,7 +11,7 @@ import { buildCss } from './buildCss';
 import { buildSvg } from './buildSvg';
 import { buildTest } from './buildTest';
 
-const build = (contents) => {
+export const buildContents = (contents) => {
   const html = buildHtml(contents);
   const js = buildJs(contents);
   const css = buildCss(contents);
@@ -20,4 +20,3 @@ const build = (contents) => {
   const test = buildTest(contents);
   return { ...contents, html, js, css, meta, svg, test };
 };
-export default build;

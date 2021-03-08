@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import build from '../index';
+import { buildContents } from '../buildContents';
 
 jest.mock('../buildCss', () => ({ buildCss: jest.fn(() => 'css') }));
 jest.mock('../buildHtml', () => ({ buildHtml: jest.fn(() => 'html') }));
@@ -27,7 +27,7 @@ describe('my-build-contents', () => {
     const contents = {};
 
     // WHEN
-    const result = build(contents);
+    const result = buildContents(contents);
 
     // THEN
     expect(result).toMatchObject({
