@@ -4,7 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-const buildMeta = (contents) => {
+export const buildMeta = (contents) => {
   const {
     apiVersion,
     isExposed,
@@ -76,7 +76,7 @@ const buildMeta = (contents) => {
         meta += `\t\t<targetConfig targets="${t.value}">\n`;
         meta += t.properties
           .map((p) => {
-            let propAttributes = ` name="${p.name}" `;
+            let propAttributes = ` name="${p.name}"`;
 
             if (p.type === 'apex') {
               propAttributes += ` type="${p.apexClassName}"`;
@@ -89,13 +89,13 @@ const buildMeta = (contents) => {
             if (p.datasource && t.value !== 'lightning__FlowScreen') {
               propAttributes += ` datasource="${p.datasource}"`;
             }
-            if (p.default) {
+            if (p.default !== undefined) {
               propAttributes += ` default="${p.default}"`;
             }
             if (p.description) {
               propAttributes += ` description="${p.description}"`;
             }
-            if (p.min && t.value !== 'lightning__FlowScreen') {
+            if (p.min !== undefined && t.value !== 'lightning__FlowScreen') {
               propAttributes += ` min="${p.min}"`;
             }
             if (p.max && t.value !== 'lightning__FlowScreen') {
@@ -119,7 +119,7 @@ const buildMeta = (contents) => {
               }"`;
             }
 
-            return `\t\t\t<property ${propAttributes} />`;
+            return `\t\t\t<property${propAttributes} />`;
           })
           .join('\n');
         if (t.properties.length > 0) {
@@ -137,9 +137,10 @@ const buildMeta = (contents) => {
         }
 
         if (
-          t.value === 'lightning__AppPage' ||
-          t.value === 'lightning__HomePage' ||
-          t.value === 'lightning__RecordPage'
+          (t.value === 'lightning__AppPage' ||
+            t.value === 'lightning__HomePage' ||
+            t.value === 'lightning__RecordPage') &&
+          (t.small || t.large)
         ) {
           meta += `\t\t\t<supportedFormFactors>\n`;
           if (t.small) {
@@ -158,5 +159,3 @@ const buildMeta = (contents) => {
   meta += `</LightningComponentBundle>`;
   return meta;
 };
-
-export default buildMeta;

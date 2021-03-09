@@ -5,9 +5,14 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import buildCss from '../buildCss';
-import buildHtml from '../buildHtml';
-import buildSvg from '../buildSvg';
+import { buildContents } from '../buildContents';
+
+jest.mock('../buildCss', () => ({ buildCss: jest.fn(() => 'css') }));
+jest.mock('../buildHtml', () => ({ buildHtml: jest.fn(() => 'html') }));
+jest.mock('../buildJs', () => ({ buildJs: jest.fn(() => 'js') }));
+jest.mock('../buildMeta', () => ({ buildMeta: jest.fn(() => 'meta') }));
+jest.mock('../buildSvg', () => ({ buildSvg: jest.fn(() => 'svg') }));
+jest.mock('../buildTest', () => ({ buildTest: jest.fn(() => 'test') }));
 
 describe('my-build-contents', () => {
   afterEach(() => {
@@ -17,53 +22,22 @@ describe('my-build-contents', () => {
     }
   });
 
-  it('css returns default css', () => {
+  it('build calls all build functions', () => {
     // GIVEN
     const contents = {};
 
     // WHEN
-    const css = buildCss(contents);
+    const result = buildContents(contents);
 
     // THEN
-    expect(css).toBe(`h1 {}`);
-  });
-
-  it('html includes component name', () => {
-    // GIVEN
-    const contents = { componentName: 'MyLWC' };
-
-    // WHEN
-    const html = buildHtml(contents);
-
-    // THEN
-    expect(html).toBe(`<template>
-    <h1>${contents.componentName}</h1>
-</template>`);
-  });
-
-  it('svg returns passed in svg when indicated', () => {
-    // GIVEN
-    const contents = { svgFileContent: 'IAmAnSvg' };
-
-    // WHEN
-    const svg = buildSvg(contents);
-
-    // THEN
-    expect(svg).toBe(contents.svgFileContent);
-  });
-
-  it('svg returns default svg when svg not passed in', () => {
-    // GIVEN
-    const contents = {};
-
-    // WHEN
-    const svg = buildSvg(contents);
-
-    // THEN
-    expect(svg).toBe(`<svg viewBox="0 0 64 64">
-  <path fill="#00a1e0" d="M23 6h22l-8 18h11L20 58l6-26H16l7-26z"></path>
-  <path fill="#032e61" d="M20 60a2 2 0 0 1-1.95-2.45L23.5 34H16a2 2 0 0 1-1.93-2.52l7-26A2 2 0 0 1 23 4h22a2 2 0 0 1 1.83 2.81L40.08 22H48a2 2 0 0 1 1.54 3.27l-28 34A2 2 0 0 1 20 60zm-1.4-30H26a2 2 0 0 1 1.95 2.45l-4.1 17.72L43.76 26H37a2 2 0 0 1-1.83-2.81L41.92 8h-17.4z"></path>
-  <path fill="#fff" d="M26 26a2 2 0 0 1-1.93-2.53l3-11a2 2 0 1 1 3.86 1.05l-3 11A2 2 0 0 1 26 26z"></path>
-</svg>`);
+    expect(result).toMatchObject({
+      ...contents,
+      html: 'html',
+      js: 'js',
+      css: 'css',
+      meta: 'meta',
+      svg: 'svg',
+      test: 'test'
+    });
   });
 });
