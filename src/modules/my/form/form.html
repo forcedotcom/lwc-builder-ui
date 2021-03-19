@@ -3,7 +3,7 @@
     <div class="slds-card__body slds-card__body_inner">
       <header class="slds-m-vertical_medium">
         <div class="header-row">
-          <h1 class="slds-text-heading_large">LWC Generator</h1>
+          <h1 class="slds-text-heading_large">LWC Builder</h1>
           <a
             href="https://github.com/developerforce/lwc-builder"
             target="_blank"
@@ -11,14 +11,14 @@
             <img src="/resources/gh-icon.png" class="gh-icon" />
           </a>
         </div>
-        <h2>Configure and build LWC (Lightning Web Component) files</h2>
+        <h2>Configure and build Lightning Web Component files</h2>
       </header>
       <main>
         <div class="form-wrapper">
           <div class="slds-form-element slds-m-bottom_small">
             <label class="slds-form-element__label" for="component-name">
               <abbr class="slds-required" title="required">* </abbr>
-              <span>Component Name <i>[name for folder/files]</i></span>
+              <span>Component Name</span>
             </label>
             <div class="slds-form-element__control">
               <input
@@ -36,7 +36,7 @@
           <div class="slds-form-element slds-m-bottom_small">
             <label class="slds-form-element__label" for="api-version">
               <abbr class="slds-required" title="required">* </abbr>
-              <span>API Version [apiVersion]</span>
+              <span>API Version</span>
             </label>
             <div class="slds-form-element__control">
               <div class="slds-select_container">
@@ -48,9 +48,10 @@
                   name="apiVersion"
                   onchange={onChangeSelect}
                 >
+                  <option value="51.0">51.0 (Spring '21)</option>  
                   <option value="50.0">50.0 (Winter '21)</option>
-                  <option value="49.0">49.0 (Summer '21)</option>
-                  <option value="48.0">48.0 (Spring '21)</option>
+                  <option value="49.0">49.0 (Summer '20)</option>
+                  <option value="48.0">48.0 (Spring '20)</option>
                   <option value="47.0">47.0 (Winter '20)</option>
                 </select>
               </div>
@@ -71,7 +72,7 @@
                 <label class="slds-checkbox__label" for="is-exposed">
                   <span class="slds-checkbox_faux"></span>
                   <span class="slds-form-element__label"
-                    >Exposed to Builders [isExposed]</span
+                    >Exposed</span
                   >
                 </label>
               </div>
@@ -80,7 +81,7 @@
 
           <div class="slds-form-element slds-m-bottom_small">
             <label class="slds-form-element__label" for="master-label">
-              <span>Master Label <i>[primaryLabel]</i></span>
+              <span>Master Label</span>
             </label>
             <div class="slds-form-element__control">
               <input
@@ -96,7 +97,7 @@
           </div>
           <div class="slds-form-element slds-m-bottom_small">
             <label class="slds-form-element__label" for="description">
-              <span>Description <i>[description]</i></span>
+              <span>Description</span>
             </label>
             <div class="slds-form-element__control">
               <input
@@ -138,7 +139,7 @@
                       <label class="slds-checkbox__label" for="with-html">
                         <span class="slds-checkbox_faux"></span>
                         <span class="slds-form-element__label">
-                          HTML File [.html]
+                          HTML File
                         </span>
                       </label>
                     </div>
@@ -162,7 +163,7 @@
                       <label class="slds-checkbox__label" for="with-css">
                         <span class="slds-checkbox_faux"></span>
                         <span class="slds-form-element__label">
-                          CSS File [.css]
+                          CSS File
                         </span>
                       </label>
                     </div>
@@ -189,7 +190,7 @@
                         <label class="slds-checkbox__label" for="with-svg">
                           <span class="slds-checkbox_faux"></span>
                           <span class="slds-form-element__label">
-                            SVG Icon [.svg]
+                            SVG File
                           </span>
                         </label>
                       </div>
@@ -222,7 +223,7 @@
                       <label class="slds-checkbox__label" for="with-test">
                         <span class="slds-checkbox_faux"></span>
                         <span class="slds-form-element__label">
-                          Jest Test [__test__]
+                          Test File
                         </span>
                       </label>
                     </div>
@@ -235,7 +236,7 @@
           <div class="slds-p-bottom_small target-section">
             <label class="slds-form-element__label">
               <span
-                >Where to use the Component? [targets &amp; formFactor]</span
+                >Where to use the Component?</span
               >
             </label>
 
@@ -266,7 +267,7 @@
     <article class="slds-card">
       <div class="slds-card__body slds-card__body_inner">
         <div>
-          <h4>Properties <i>[targetConfig.property]</i></h4>
+          <h4>Properties</h4>
           <div>
             <ul>
               <template for:each={inputs.propertyIds} for:item="pId">
@@ -307,8 +308,7 @@
         <div class="slds-card__body slds-card__body_inner">
           <div>
             <h4>
-              API Names of sObject of which this component is placed on record
-              page (RecordPage only)
+              sObject API Names (RecordPage only)
             </h4>
             <ul>
               <template for:each={inputs.objectIds} for:item="oId">
@@ -350,8 +350,7 @@
           <div class="slds-form-element slds-m-bottom_small">
             <label class="slds-form-element__label" for="configuration-editor">
               <span
-                >Configuration editor component name
-                <i>[Custom Property Editors for Flow Builder]</i></span
+                >Custom Property Editor Name (Flow Builder)</span
               >
               <!-- https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.use_flow_custom_property_editor -->
             </label>
