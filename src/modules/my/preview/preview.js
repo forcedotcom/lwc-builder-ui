@@ -7,7 +7,8 @@
 import { LightningElement, api } from 'lwc';
 
 export default class Preview extends LightningElement {
-  @api contents;
+  @api
+  contents;
 
   selected = 'meta';
 
