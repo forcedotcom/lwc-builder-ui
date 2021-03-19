@@ -123,6 +123,38 @@ describe('my-preview-header', () => {
     expect(a.tabIndex).toBe(-1);
   });
 
+  it('computes correct isSelected when selected', () => {
+    // GIVEN
+    const element = createElement('my-preview-header', {
+      is: MyPreviewHeader
+    });
+
+    // WHEN
+    element.type = 'html';
+    element.selected = 'html';
+    document.body.appendChild(element);
+
+    // THEN
+    const a = element.shadowRoot.querySelector('a');
+    expect(a.ariaSelected).toBe('true');
+  });
+
+  it('computes correct isSelected when not selected', () => {
+    // GIVEN
+    const element = createElement('my-preview-header', {
+      is: MyPreviewHeader
+    });
+
+    // WHEN
+    element.type = 'html';
+    element.selected = 'js';
+    document.body.appendChild(element);
+
+    // THEN
+    const a = element.shadowRoot.querySelector('a');
+    expect(a.ariaSelected).toBe('false');
+  });
+
   it('fires click tab event when a clicked', () => {
     // GIVEN
     const element = createElement('my-preview-header', {
