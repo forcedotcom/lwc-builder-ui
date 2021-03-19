@@ -13,6 +13,7 @@
             type="html"
             extension="html"
             selected={selected}
+            class="html-header"
           ></my-preview-header>
         </template>
         <my-preview-header
@@ -21,6 +22,7 @@
           type="js"
           extension="js"
           selected={selected}
+          class="js-header"
         ></my-preview-header>
         <template if:true={contents.withCss}>
           <my-preview-header
@@ -29,6 +31,7 @@
             type="css"
             extension="css"
             selected={selected}
+            class="css-header"
           ></my-preview-header>
         </template>
         <my-preview-header
@@ -37,6 +40,7 @@
           type="meta"
           extension="js-meta.xml"
           selected={selected}
+          class="meta-header"
         ></my-preview-header>
         <template if:true={contents.withSvg}>
           <my-preview-header
@@ -45,6 +49,7 @@
             type="svg"
             extension="svg"
             selected={selected}
+            class="svg-header"
           ></my-preview-header>
         </template>
         <template if:true={contents.withTest}>
@@ -55,6 +60,7 @@
             extension="test.js"
             prefix="__tests__/"
             selected={selected}
+            class="test-header"
           ></my-preview-header>
         </template>
       </ul>

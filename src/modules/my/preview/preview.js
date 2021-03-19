@@ -7,8 +7,7 @@
 import { LightningElement, api } from 'lwc';
 
 export default class Preview extends LightningElement {
-  @api
-  contents;
+  @api contents;
 
   selected = 'meta';
 
@@ -51,6 +50,8 @@ export default class Preview extends LightningElement {
   }
 
   contentClass(contentType) {
-    return this.selected === contentType ? 'preview-content selected' : '';
+    return this.selected === contentType
+      ? `preview-content selected ${contentType}`
+      : contentType;
   }
 }
