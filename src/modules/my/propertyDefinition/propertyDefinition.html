@@ -3,7 +3,7 @@
     <div class="slds-form-element slds-m-bottom_small">
       <label class="slds-form-element__label" for={propertyNameId}>
         <abbr class="slds-required" title="required">* </abbr>
-        <span>Property name <i>[name]</i></span>
+        <span>Property Name</span>
       </label>
       <div class="slds-form-element__control">
         <input
@@ -22,7 +22,7 @@
     <div class="slds-form-element slds-m-bottom_small">
       <label class="slds-form-element__label">
         <abbr class="slds-required" title="required">* </abbr>
-        <span>Target <i>[target]</i></span>
+        <span>Target</span>
       </label>
       <ul>
         <template for:each={enabledTargets} for:item="target">
@@ -163,7 +163,7 @@
     <template if:true={isDefaultEnabled}>
       <div class="slds-form-element slds-m-bottom_small">
         <label class="slds-form-element__label" for={defaultId}>
-          <span>Default value</span>
+          <span>Default Value</span>
         </label>
         <template if:true={isBoolean}>
           <div class="slds-form-element__control">

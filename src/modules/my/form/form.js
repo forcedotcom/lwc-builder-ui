@@ -14,7 +14,7 @@ export default class Form extends LightningElement {
   @track
   inputs = {
     componentName: '',
-    apiVersion: '50.0', // TODO: fetch from SFDC API
+    apiVersion: '51.0', // TODO: fetch from SFDC API
     withHtml: true,
     withCss: true,
     withSvg: false,
