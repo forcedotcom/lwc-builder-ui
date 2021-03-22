@@ -12,11 +12,6 @@
 hr {
   margin: 1rem 0;
 }
-.gh-icon {
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-}
 .header-row {
   display: flex;
   align-items: center;

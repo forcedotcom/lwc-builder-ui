@@ -20,13 +20,21 @@
               class="slds-file-selector__button slds-button slds-button_neutral"
             >
               <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 52 52"
                 class="slds-button__icon slds-button__icon_left"
                 aria-hidden="true"
               >
-                <use
-                  xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#upload"
-                ></use>
+                <g>
+                  <path
+                    d="M48.5 31h-3c-.8 0-1.5.8-1.5 1.5v10c0 .8-.7 1.5-1.5 1.5h-33c-.8 0-1.5-.7-1.5-1.5v-10c0-.7-.7-1.5-1.5-1.5h-3c-.8 0-1.5.8-1.5 1.5V46c0 2.2 1.8 4 4 4h40c2.2 0 4-1.8 4-4V32.5c0-.7-.7-1.5-1.5-1.5z"
+                  ></path>
+                  <path
+                    d="M27 2.4c-.6-.6-1.5-.6-2.1 0L11.4 15.9c-.6.6-.6 1.5 0 2.1l2.1 2.1c.6.6 1.5.6 2.1 0l5.6-5.6c.6-.6 1.8-.2 1.8.7v21.2c0 .8.6 1.5 1.4 1.5h3c.8 0 1.6-.8 1.6-1.5V15.3c0-.9 1-1.3 1.7-.7l5.6 5.6c.6.6 1.5.6 2.1 0l2.1-2.1c.6-.6.6-1.5 0-2.1L27 2.4z"
+                  ></path>
+                </g>
               </svg>
+
               <span>Upload SVG</span>
             </span>
           </label>
@@ -40,10 +48,17 @@
       title="Remove uploaded svg icon"
       onclick={discardSvg}
     >
-      <svg class="slds-button__icon" aria-hidden="true">
-        <use
-          xlink:href="/resources/slds/icons/utility-sprite/svg/symbols.svg#delete"
-        ></use>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 52 52"
+        class="slds-button__icon"
+        aria-hidden="true"
+      >
+        <g>
+          <path
+            d="M45.5 10H33V6c0-2.2-1.8-4-4-4h-6c-2.2 0-4 1.8-4 4v4H6.5c-.8 0-1.5.7-1.5 1.5v3c0 .8.7 1.5 1.5 1.5h39c.8 0 1.5-.7 1.5-1.5v-3c0-.8-.7-1.5-1.5-1.5zM23 7c0-.6.4-1 1-1h4c.6 0 1 .4 1 1v3h-6V7zM41.5 20h-31c-.8 0-1.5.7-1.5 1.5V45c0 2.8 2.2 5 5 5h24c2.8 0 5-2.2 5-5V21.5c0-.8-.7-1.5-1.5-1.5zM23 42c0 .6-.4 1-1 1h-2c-.6 0-1-.4-1-1V28c0-.6.4-1 1-1h2c.6 0 1 .4 1 1v14zm10 0c0 .6-.4 1-1 1h-2c-.6 0-1-.4-1-1V28c0-.6.4-1 1-1h2c.6 0 1 .4 1 1v14z"
+          ></path>
+        </g>
       </svg>
     </button>
     <span class="svg-filename">{fileName}</span>
