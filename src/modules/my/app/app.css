@@ -2,6 +2,7 @@
   max-width: 1080px;
   width: 96%;
   margin: 1rem auto;
+  color: #333;
 }
 .bottom-nav {
   z-index: 100;
