@@ -51,12 +51,13 @@ export const buildMeta = (contents) => {
       .map((t) => `\t\t<target>${t.value}</target>`)
       .join('\n');
     meta += `\n\t</targets>\n`;
+
+    let targetConfigs = '';
     if (
       properties.length > 0 ||
       objects.length > 0 ||
       enabledTargetArray.find((t) => t.small || t.large)
     ) {
-      meta += `\t<targetConfigs>\n`;
       for (let t of enabledTargetArray) {
         if (t.value === 'lightningCommunity__Page') {
           continue;
@@ -73,8 +74,8 @@ export const buildMeta = (contents) => {
         ) {
           continue;
         }
-        meta += `\t\t<targetConfig targets="${t.value}">\n`;
-        meta += t.properties
+        targetConfigs += `\t\t<targetConfig targets="${t.value}">\n`;
+        targetConfigs += t.properties
           .map((p) => {
             let propAttributes = ` name="${p.name}"`;
 
@@ -89,7 +90,14 @@ export const buildMeta = (contents) => {
             if (p.datasource && t.value !== 'lightning__FlowScreen') {
               propAttributes += ` datasource="${p.datasource}"`;
             }
-            if (p.default !== undefined) {
+            if (
+              p.default !== undefined &&
+              !(
+                t.value === 'lightning__FlowScreen' &&
+                p.flowInput ^ p.flowOutput &&
+                p.flowOutput
+              ) // No support for Flow outputOnly
+            ) {
               propAttributes += ` default="${p.default}"`;
             }
             if (p.description) {
@@ -107,7 +115,14 @@ export const buildMeta = (contents) => {
             if (p.placeholder && t.value !== 'lightning__FlowScreen') {
               propAttributes += ` placeholder="${p.placeholder}"`;
             }
-            if (p.required) {
+            if (
+              p.required &&
+              !(
+                t.value === 'lightning__FlowScreen' &&
+                p.flowInput ^ p.flowOutput &&
+                p.flowOutput
+              ) // No support for Flow outputOnly
+            ) {
               propAttributes += ` required="true"`;
             }
             if (
@@ -123,17 +138,17 @@ export const buildMeta = (contents) => {
           })
           .join('\n');
         if (t.properties.length > 0) {
-          meta += '\n';
+          targetConfigs += '\n';
         }
 
         if (t.value === 'lightning__RecordPage' && t.objects.length > 0) {
-          meta += `\t\t\t<objects>\n`;
-          meta += t.objects
+          targetConfigs += `\t\t\t<objects>\n`;
+          targetConfigs += t.objects
             .map((o) => {
               return `\t\t\t\t<object>${o.name}</object>`;
             })
             .join('\n');
-          meta += `\n\t\t\t</objects>\n`;
+          targetConfigs += `\n\t\t\t</objects>\n`;
         }
 
         if (
@@ -142,18 +157,20 @@ export const buildMeta = (contents) => {
             t.value === 'lightning__RecordPage') &&
           (t.small || t.large)
         ) {
-          meta += `\t\t\t<supportedFormFactors>\n`;
+          targetConfigs += `\t\t\t<supportedFormFactors>\n`;
           if (t.small) {
-            meta += `\t\t\t\t<supportedFormFactor type="Small"/>\n`;
+            targetConfigs += `\t\t\t\t<supportedFormFactor type="Small"/>\n`;
           }
           if (t.large) {
-            meta += `\t\t\t\t<supportedFormFactor type="Large"/>\n`;
+            targetConfigs += `\t\t\t\t<supportedFormFactor type="Large"/>\n`;
           }
-          meta += `\t\t\t</supportedFormFactors>\n`;
+          targetConfigs += `\t\t\t</supportedFormFactors>\n`;
         }
-        meta += `\t\t</targetConfig>\n`;
+        targetConfigs += `\t\t</targetConfig>\n`;
       }
-      meta += `\t</targetConfigs>\n`;
+    }
+    if (targetConfigs) {
+      meta += `\t<targetConfigs>\n${targetConfigs}\t</targetConfigs>\n`;
     }
   }
   meta += `</LightningComponentBundle>`;
