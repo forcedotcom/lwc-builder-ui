@@ -799,4 +799,116 @@ describe('my-build-meta', () => {
 
     expect(meta).toBe(expectedMeta);
   });
+
+  it('outputOnly Flow property ignores default and required attributes', () => {
+    // GIVEN
+    const contents = {
+      apiVersion: '51.0',
+      isExposed: true,
+      targets: {
+        lightning__FlowScreen: {
+          enabled: true,
+          value: 'lightning__FlowScreen'
+        }
+      },
+      properties: [
+        {
+          name: 'MyProp',
+          selectedTargets: ['lightning__FlowScreen'],
+          type: 'String',
+          flowOutput: true,
+          default: 'defaultValue',
+          required: true
+        }
+      ],
+      objects: []
+    };
+
+    // WHEN
+    const meta = buildMeta(contents);
+
+    // THEN
+    let expectedMeta = ``;
+    expectedMeta += `<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">\n`;
+    expectedMeta += `\t<apiVersion>${contents.apiVersion}</apiVersion>\n`;
+    expectedMeta += `\t<isExposed>${contents.isExposed}</isExposed>\n`;
+    expectedMeta += `\t<targets>\n`;
+    expectedMeta += `\t\t<target>lightning__FlowScreen</target>\n`;
+    expectedMeta += `\t</targets>\n`;
+    expectedMeta += `\t<targetConfigs>\n`;
+    expectedMeta += `\t\t<targetConfig targets="lightning__FlowScreen">\n`;
+    expectedMeta += `\t\t\t<property name="MyProp" type="String" role="outputOnly" />\n`;
+    expectedMeta += `\t\t</targetConfig>\n`;
+    expectedMeta += `\t</targetConfigs>\n`;
+    expectedMeta += `</LightningComponentBundle>`;
+
+    expect(meta).toBe(expectedMeta);
+  });
+
+  it('omit lightningCommunity__Page from targetConfigs', () => {
+    // GIVEN
+    const contents = {
+      apiVersion: '51.0',
+      isExposed: true,
+      targets: {
+        lightningCommunity__Page: {
+          enabled: true,
+          value: 'lightningCommunity__Page'
+        }
+      },
+      properties: [
+        {
+          name: 'MyProp',
+          selectedTargets: ['lightningCommunity__Page'],
+          type: 'String'
+        }
+      ],
+      objects: []
+    };
+
+    // WHEN
+    const meta = buildMeta(contents);
+
+    // THEN
+    let expectedMeta = ``;
+    expectedMeta += `<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">\n`;
+    expectedMeta += `\t<apiVersion>${contents.apiVersion}</apiVersion>\n`;
+    expectedMeta += `\t<isExposed>${contents.isExposed}</isExposed>\n`;
+    expectedMeta += `\t<targets>\n`;
+    expectedMeta += `\t\t<target>lightningCommunity__Page</target>\n`;
+    expectedMeta += `\t</targets>\n`;
+    expectedMeta += `</LightningComponentBundle>`;
+    expect(meta).toBe(expectedMeta);
+  });
+
+  it('supportedFormFactors support is limited to some targets', () => {
+    // GIVEN
+    const contents = {
+      apiVersion: '51.0',
+      isExposed: true,
+      targets: {
+        lightning__UtilityBar: {
+          enabled: true,
+          value: 'lightning__UtilityBar',
+          small: true
+        }
+      },
+      properties: [],
+      objects: []
+    };
+
+    // WHEN
+    const meta = buildMeta(contents);
+
+    // THEN
+    let expectedMeta = ``;
+    expectedMeta += `<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">\n`;
+    expectedMeta += `\t<apiVersion>${contents.apiVersion}</apiVersion>\n`;
+    expectedMeta += `\t<isExposed>${contents.isExposed}</isExposed>\n`;
+    expectedMeta += `\t<targets>\n`;
+    expectedMeta += `\t\t<target>lightning__UtilityBar</target>\n`;
+    expectedMeta += `\t</targets>\n`;
+    expectedMeta += `</LightningComponentBundle>`;
+    expect(meta).toBe(expectedMeta);
+  });
 });
