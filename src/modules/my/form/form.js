@@ -20,7 +20,7 @@ export default class Form extends LightningElement {
     withSvg: false,
     withTest: false,
     isExposed: true,
-    primaryLabel: '',
+    masterLabel: '',
     description: '',
     configurationEditor: '',
     svgFileName: '',
@@ -73,8 +73,8 @@ export default class Form extends LightningElement {
       e.currentTarget.value
     );
     this.inputs[e.currentTarget.name] = formattedValue;
-    if (e.currentTarget.name === 'componentName' && !this.inputs.primaryLabel) {
-      this.inputs.primaryLabel = sentenceCase(formattedValue);
+    if (e.currentTarget.name === 'componentName' && !this.inputs.masterLabel) {
+      this.inputs.masterLabel = sentenceCase(formattedValue);
     }
     this.updateContent();
   }
