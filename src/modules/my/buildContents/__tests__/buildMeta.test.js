@@ -401,7 +401,7 @@ describe('my-build-meta', () => {
     expectedMeta += `\t</targets>\n`;
     expectedMeta += `\t<targetConfigs>\n`;
     expectedMeta += `\t\t<targetConfig targets="lightning__HomePage">\n`;
-    expectedMeta += `\t\t\t<property name="MyProp" type="Picklist" datasource="MyDatasource" />\n`;
+    expectedMeta += `\t\t\t<property name="MyProp" type="Picklist" />\n`;
     expectedMeta += `\t\t</targetConfig>\n`;
     expectedMeta += `\t</targetConfigs>\n`;
     expectedMeta += `</LightningComponentBundle>`;
@@ -617,7 +617,7 @@ describe('my-build-meta', () => {
     expectedMeta += `\t</targets>\n`;
     expectedMeta += `\t<targetConfigs>\n`;
     expectedMeta += `\t\t<targetConfig targets="lightning__HomePage">\n`;
-    expectedMeta += `\t\t\t<property name="MyProp" type="Picklist" placeholder="MyPlaceholder" />\n`;
+    expectedMeta += `\t\t\t<property name="MyProp" type="Picklist" />\n`;
     expectedMeta += `\t\t</targetConfig>\n`;
     expectedMeta += `\t</targetConfigs>\n`;
     expectedMeta += `</LightningComponentBundle>`;
