@@ -208,7 +208,8 @@ export default class PropertyDefinition extends LightningElement {
 
   formatInputValue = (key, value) => {
     if (key === 'name') {
-      return camelCase(value);
+      // restrict starting from digits
+      return camelCase(value.replace(/^\d+/, ''));
     }
     return value;
   };
