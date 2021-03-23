@@ -36,7 +36,7 @@ const EXPECTED_INPUTS = {
   withSvg: false,
   withTest: false,
   isExposed: true,
-  primaryLabel: '',
+  masterLabel: '',
   description: '',
   configurationEditor: '',
   svgFileName: '',
@@ -195,11 +195,11 @@ describe('my-form', () => {
     // THEN
     const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
     expectedInputs.componentName = camelCase(input.value);
-    expectedInputs.primaryLabel = sentenceCase(input.value);
+    expectedInputs.masterLabel = sentenceCase(input.value);
     expect(buildContents).toHaveBeenCalledWith(expectedInputs);
   });
 
-  it('updates content when primary label input changed', () => {
+  it('updates content when master label input changed', () => {
     // GIVEN
     const element = createElement('my-form', {
       is: MyForm
@@ -207,15 +207,13 @@ describe('my-form', () => {
     document.body.appendChild(element);
 
     // WHEN
-    const input = element.shadowRoot.querySelector(
-      'input[name="primaryLabel"]'
-    );
+    const input = element.shadowRoot.querySelector('input[name="masterLabel"]');
     input.value = 'My Primary Label';
     input.dispatchEvent(new CustomEvent('change'));
 
     // THEN
     const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
-    expectedInputs.primaryLabel = input.value;
+    expectedInputs.masterLabel = input.value;
     expect(buildContents).toHaveBeenCalledWith(expectedInputs);
   });
 

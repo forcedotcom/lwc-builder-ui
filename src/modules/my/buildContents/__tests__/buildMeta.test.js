@@ -15,12 +15,12 @@ describe('my-build-meta', () => {
     }
   });
 
-  it('returns correct meta when primaryLabel specified', () => {
+  it('returns correct meta when masterLabel specified', () => {
     // GIVEN
     const contents = {
       apiVersion: '50.0',
       isExposed: true,
-      primaryLabel: 'Mylabel',
+      masterLabel: 'Mylabel',
       targets: {},
       properties: [],
       objects: []
@@ -34,7 +34,7 @@ describe('my-build-meta', () => {
     expectedMeta += `<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">\n`;
     expectedMeta += `\t<apiVersion>${contents.apiVersion}</apiVersion>\n`;
     expectedMeta += `\t<isExposed>${contents.isExposed}</isExposed>\n`;
-    expectedMeta += `\t<primaryLabel>${contents.primaryLabel}</primaryLabel>\n`;
+    expectedMeta += `\t<masterLabel>${contents.masterLabel}</masterLabel>\n`;
     expectedMeta += `</LightningComponentBundle>`;
 
     expect(meta).toBe(expectedMeta);
@@ -401,7 +401,7 @@ describe('my-build-meta', () => {
     expectedMeta += `\t</targets>\n`;
     expectedMeta += `\t<targetConfigs>\n`;
     expectedMeta += `\t\t<targetConfig targets="lightning__HomePage">\n`;
-    expectedMeta += `\t\t\t<property name="MyProp" type="Picklist" datasource="MyDatasource" />\n`;
+    expectedMeta += `\t\t\t<property name="MyProp" type="Picklist" />\n`;
     expectedMeta += `\t\t</targetConfig>\n`;
     expectedMeta += `\t</targetConfigs>\n`;
     expectedMeta += `</LightningComponentBundle>`;
@@ -617,7 +617,7 @@ describe('my-build-meta', () => {
     expectedMeta += `\t</targets>\n`;
     expectedMeta += `\t<targetConfigs>\n`;
     expectedMeta += `\t\t<targetConfig targets="lightning__HomePage">\n`;
-    expectedMeta += `\t\t\t<property name="MyProp" type="Picklist" placeholder="MyPlaceholder" />\n`;
+    expectedMeta += `\t\t\t<property name="MyProp" type="Picklist" />\n`;
     expectedMeta += `\t\t</targetConfig>\n`;
     expectedMeta += `\t</targetConfigs>\n`;
     expectedMeta += `</LightningComponentBundle>`;

@@ -8,7 +8,7 @@ export const buildMeta = (contents) => {
   const {
     apiVersion,
     isExposed,
-    primaryLabel,
+    masterLabel,
     description,
     targets,
     properties,
@@ -39,8 +39,8 @@ export const buildMeta = (contents) => {
   meta += `<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">\n`;
   meta += `\t<apiVersion>${apiVersion}</apiVersion>\n`;
   meta += `\t<isExposed>${isExposed}</isExposed>\n`;
-  if (primaryLabel) {
-    meta += `\t<primaryLabel>${primaryLabel}</primaryLabel>\n`;
+  if (masterLabel) {
+    meta += `\t<masterLabel>${masterLabel}</masterLabel>\n`;
   }
   if (description) {
     meta += `\t<description>${description}</description>\n`;
@@ -86,7 +86,11 @@ export const buildMeta = (contents) => {
               propAttributes += ` type="${p.type}"`;
             }
 
-            if (p.datasource && t.value !== 'lightning__FlowScreen') {
+            if (
+              p.type === 'String' &&
+              p.datasource &&
+              t.value !== 'lightning__FlowScreen'
+            ) {
               propAttributes += ` datasource="${p.datasource}"`;
             }
             if (p.default !== undefined) {
@@ -95,16 +99,28 @@ export const buildMeta = (contents) => {
             if (p.description) {
               propAttributes += ` description="${p.description}"`;
             }
-            if (p.min !== undefined && t.value !== 'lightning__FlowScreen') {
+            if (
+              p.type === 'Integer' &&
+              p.min !== undefined &&
+              t.value !== 'lightning__FlowScreen'
+            ) {
               propAttributes += ` min="${p.min}"`;
             }
-            if (p.max && t.value !== 'lightning__FlowScreen') {
+            if (
+              p.type === 'Integer' &&
+              p.max &&
+              t.value !== 'lightning__FlowScreen'
+            ) {
               propAttributes += ` max="${p.max}"`;
             }
             if (p.label) {
               propAttributes += ` label="${p.label}"`;
             }
-            if (p.placeholder && t.value !== 'lightning__FlowScreen') {
+            if (
+              p.type === 'String' &&
+              p.placeholder &&
+              t.value !== 'lightning__FlowScreen'
+            ) {
               propAttributes += ` placeholder="${p.placeholder}"`;
             }
             if (p.required) {

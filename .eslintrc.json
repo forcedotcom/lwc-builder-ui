@@ -8,7 +8,15 @@
     "@lwc/lwc/no-async-operation": "off",
     "@lwc/lwc/no-inner-html": "warn",
     "@lwc/lwc/no-document-query": "warn",
-    "inclusive-language/use-inclusive-words": "error",
+    "inclusive-language/use-inclusive-words": [
+      "error",
+      {
+        "allowedTerms": [
+          { "term": "masterlabel", "allowPartialMatches": true },
+          { "term": "master-label", "allowPartialMatches": true }
+        ]
+      }
+    ],
     "header/header": [
       2,
       "block",
