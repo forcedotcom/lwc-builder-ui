@@ -9,11 +9,7 @@ Currently not available until it has Terms of Use ready. Please deploy this repo
 
 ## How to start?
 
-Start the project by running:
-
-- `npm run build && npm run serve` for production
-- `npm run build:development && npm run serve` for development
-- `npm run build:watch` and on a different terminal `npm run serve` so that the files compile automatically (this is different from hot reloading, you'll have to refresh the browser).
+Start simple by running `yarn watch` (or `npm run watch`, if you set up the project with npm). This will start the project with a local development server.
 
 The source files are located in the [`src`](./src) folder. All web components are within the [`src/modules`](./src/modules) folder. The folder hierarchy also represents the naming structure of the web components.
 
