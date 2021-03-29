@@ -1,7 +1,7 @@
 # lwc-builder-ui
 
 LWC Builder is a tool to build, preview and configure Lightning Web Component (LWC) files to be used on the Salesforce Platform.
-Configure yourcomponent settings with clicks, then press "Create" button to create component files.
+Configure your component settings with clicks, then press "Create" button to create component files.
 
 # Live App
 
