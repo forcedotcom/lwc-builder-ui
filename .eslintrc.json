@@ -1,4 +1,10 @@
 {
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "browser": true,
+    "es6": true
+  },
   "plugins": ["inclusive-language", "jsdoc", "eslint-plugin-header"],
   "extends": [
     "@salesforce/eslint-config-lwc/recommended",

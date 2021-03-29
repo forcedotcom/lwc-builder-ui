@@ -8,7 +8,6 @@ node_modules
 .prettierignore
 .prettierrc
 jest.config.js
-lwc-services.config.js
 lwc.config.json
 
 # MacOS system files
