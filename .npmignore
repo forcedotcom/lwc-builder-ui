@@ -7,7 +7,6 @@ node_modules
 .eslintrc.json
 .prettierignore
 .prettierrc
-jest.config.js
 lwc.config.json
 
 # MacOS system files
