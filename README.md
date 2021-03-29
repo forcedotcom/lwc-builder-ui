@@ -27,4 +27,4 @@ It doesn't ensure code integrity. Please confirm the code before you deploy.
 
 # License
 
-The code is available under the [MIT license](https://github.com/developerforce/lwc-builder/blob/main/LICENSE).
+The code is available under the [BSD 3-Clause license](https://github.com/developerforce/lwc-builder/blob/main/LICENSE).
