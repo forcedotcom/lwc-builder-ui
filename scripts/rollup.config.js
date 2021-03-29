@@ -17,7 +17,7 @@ import livereload from 'rollup-plugin-livereload';
 
 const input = path.resolve(process.cwd(), 'src', 'index.js');
 const outputDir = path.resolve(process.cwd(), 'dist');
-const ASSETS = [{ files: 'src/resources/', dest: 'dist/resources/' }];
+const ASSETS = [{ files: 'src/resources/**', dest: 'dist/resources/' }];
 
 module.exports = () => {
   const isProduction = process.env.NODE_ENV === 'production';
@@ -38,11 +38,11 @@ module.exports = () => {
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }),
+      copy(ASSETS, { watch: false }),
       isProduction && terser(),
-      copy(ASSETS, { watch: isWatch }),
       isWatch && serve('dist'),
       isWatch && livereload('dist')
-    ].filter(Boolean),
+    ],
     watch: {
       exclude: ['node_modules/**']
     }
