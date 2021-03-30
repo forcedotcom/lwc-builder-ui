@@ -105,7 +105,7 @@ export default class Form extends LightningElement {
 
   formatInputValue = (key, value) => {
     if (key === 'componentName') {
-      return camelCase(value);
+      return camelCase(value.replace(/^\d+/, ''));
     }
     return value;
   };
