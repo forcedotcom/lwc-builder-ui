@@ -2,7 +2,7 @@
   "name": "lwc-builder-ui",
   "description": "This package is a UI part of LWC Builder that enables you to configure Lightning Web Component (LWC) Bundle on VSCode",
   "version": "0.1.20",
-  "author": "ninoish",
+  "author": "@ninoish",
   "bugs": "https://github.com/developerforce/lwc-builder-ui/issues",
   "main": "dist/",
   "dependencies": {
