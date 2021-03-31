@@ -3,10 +3,6 @@
 LWC Builder is a tool to build, preview and configure Lightning Web Component (LWC) files to be used on the Salesforce Platform.
 Configure your component settings with clicks, then press "Create" button to create component files.
 
-# Live App
-
-Currently not available until it has Terms of Use ready. Please deploy this repo to your own environment and use with your resonsibility.
-
 ## How to start?
 
 Start simple by running `yarn watch` (or `npm run watch`, if you set up the project with `npm`). This will start the project with a local development server.
