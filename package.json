@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
-    "@lwc/eslint-plugin-lwc": "^0.12.2",
+    "@lwc/eslint-plugin-lwc": "^1.0.0",
     "@lwc/jest-preset": "^7.0.0",
     "@lwc/rollup-plugin": "^1.17.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
