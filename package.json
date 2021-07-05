@@ -28,7 +28,7 @@
     "fs-extra": "^10.0.0",
     "husky": "^7.0.0",
     "jest": "^26.6.3",
-    "lwc": "^1.17.6",
+    "lwc": "^2.2.5",
     "prettier": "^2.2.1",
     "rollup": "^2.46.0",
     "rollup-plugin-copy-glob": "^0.3.1",
