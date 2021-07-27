@@ -7,6 +7,8 @@
 
 import { buildMeta } from '../buildMeta';
 
+const LATEST_API_VERSION = '52.0';
+
 describe('my-build-meta', () => {
   afterEach(() => {
     // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -803,7 +805,7 @@ describe('my-build-meta', () => {
   it('outputOnly Flow property ignores default and required attributes', () => {
     // GIVEN
     const contents = {
-      apiVersion: '51.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__FlowScreen: {
@@ -848,7 +850,7 @@ describe('my-build-meta', () => {
   it('omit lightningCommunity__Page from targetConfigs', () => {
     // GIVEN
     const contents = {
-      apiVersion: '51.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightningCommunity__Page: {
@@ -884,7 +886,7 @@ describe('my-build-meta', () => {
   it('supportedFormFactors support is limited to some targets', () => {
     // GIVEN
     const contents = {
-      apiVersion: '51.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__UtilityBar: {

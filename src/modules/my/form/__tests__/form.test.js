@@ -16,12 +16,15 @@ const EXPECTED_TARGETS = [
   { name: 'AppPage', value: 'lightning__AppPage' },
   { name: 'HomePage', value: 'lightning__HomePage' },
   { name: 'RecordPage', value: 'lightning__RecordPage' },
+  { name: 'RecordAction', value: 'lightning__RecordAction' },
   { name: 'UtilityBar', value: 'lightning__UtilityBar' },
   { name: 'FlowScreen', value: 'lightning__FlowScreen' },
   { name: 'Tab', value: 'lightning__Tab' },
   { name: 'Inbox', value: 'lightning__Inbox' },
   { name: 'CommunityPage', value: 'lightningCommunity__Page' },
   { name: 'CommunityDefault', value: 'lightningCommunity__Default' },
+  { name: 'CommunityPageLayout', value: 'lightningCommunity__Page_Layout' },
+  { name: 'CommunityThemeLayout', value: 'lightningCommunity__Theme_Layout' },
   { name: 'SnapinChatMessage', value: 'lightningSnapin__ChatMessage' },
   { name: 'SnapinMinimized', value: 'lightningSnapin__Minimized' },
   { name: 'SnapinPreChat', value: 'lightningSnapin__PreChat' },
@@ -30,7 +33,7 @@ const EXPECTED_TARGETS = [
 
 const EXPECTED_INPUTS = {
   componentName: '',
-  apiVersion: '51.0',
+  apiVersion: '52.0',
   withHtml: true,
   withCss: true,
   withSvg: false,
@@ -55,6 +58,7 @@ EXPECTED_TARGETS.forEach((t) => {
     enabled: false,
     small: false,
     large: false,
+    headlessAction: false,
     properties: [],
     objects: []
   };
@@ -86,7 +90,7 @@ describe('my-form', () => {
       // THEN
       const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
       expectedInputs.isExposed = true;
-      expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+      expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
     });
   });
 
@@ -108,7 +112,7 @@ describe('my-form', () => {
       // THEN
       const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
       expectedInputs.withHtml = true;
-      expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+      expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
     });
   });
 
@@ -130,7 +134,7 @@ describe('my-form', () => {
       // THEN
       const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
       expectedInputs.withCss = true;
-      expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+      expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
     });
   });
 
@@ -152,7 +156,7 @@ describe('my-form', () => {
       // THEN
       const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
       expectedInputs.withSvg = true;
-      expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+      expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
     });
   });
 
@@ -174,7 +178,7 @@ describe('my-form', () => {
       // THEN
       const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
       expectedInputs.withTest = true;
-      expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+      expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
     });
   });
 
@@ -196,7 +200,7 @@ describe('my-form', () => {
     const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
     expectedInputs.componentName = camelCase(input.value);
     expectedInputs.masterLabel = sentenceCase(input.value);
-    expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+    expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
   });
 
   it('updates content when master label input changed', () => {
@@ -214,7 +218,7 @@ describe('my-form', () => {
     // THEN
     const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
     expectedInputs.masterLabel = input.value;
-    expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+    expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
   });
 
   it('updates content when description input changed', () => {
@@ -232,7 +236,7 @@ describe('my-form', () => {
     // THEN
     const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
     expectedInputs.description = input.value;
-    expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+    expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
   });
 
   it('updates content when config editor input changed', () => {
@@ -242,34 +246,51 @@ describe('my-form', () => {
     });
     document.body.appendChild(element);
 
+    const COMP_NAME = 'MyFlowCmp';
+
+    // WHEN
+    const cmpName = element.shadowRoot.querySelector(
+      'input[name="componentName"]'
+    );
+    cmpName.value = COMP_NAME;
+    cmpName.dispatchEvent(new CustomEvent('change'));
+
     const target = element.shadowRoot.querySelector('my-target-definition');
     const event = new CustomEvent('changetarget', {
       detail: {
         target: { value: 'lightning__FlowScreen' },
         enabled: true,
         small: false,
-        large: false
+        large: false,
+        headlessAction: false
       }
     });
     target.dispatchEvent(event);
 
+    const CONFIG_EDITOR_NAME = 'My Name in Flow';
+
     // Return a promise to wait for any asynchronous DOM updates. Jest
     // will automatically wait for the Promise chain to complete before
     // ending the test and fail the test if the promise rejects.
-    return Promise.resolve().then(() => {
-      // WHEN
-      const input = element.shadowRoot.querySelector(
-        'input[name="configurationEditor"]'
-      );
-      input.value = 'My Name in Flow';
-      input.dispatchEvent(new CustomEvent('change'));
-
-      // THEN
-      const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
-      expectedInputs.configurationEditor = input.value;
-      expectedInputs.targets.lightning__FlowScreen.enabled = true;
-      expect(buildContents).toHaveBeenCalledWith(expectedInputs);
-    });
+    return Promise.resolve()
+      .then(() => {
+        // WHEN
+        const configEditorInput = element.shadowRoot.querySelector(
+          'input[name="configurationEditor"]'
+        );
+        configEditorInput.value = CONFIG_EDITOR_NAME;
+        configEditorInput.dispatchEvent(new CustomEvent('change'));
+      })
+      .then(() => {
+        // THEN
+        const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
+        expectedInputs.componentName = camelCase(cmpName.value);
+        expectedInputs.masterLabel = sentenceCase(cmpName.value);
+        expectedInputs.configurationEditor = CONFIG_EDITOR_NAME;
+        expectedInputs.targets.lightning__FlowScreen.enabled = true;
+        expectedInputs.targets.lightning__FlowScreen.enabled = true;
+        expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
+      });
   });
 
   it('updates content when svg input changed', () => {
@@ -300,7 +321,7 @@ describe('my-form', () => {
       expectedInputs.svgFileName = 'myFileName';
       expectedInputs.svgFileContent = 'myFileContent';
       expectedInputs.withSvg = true;
-      expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+      expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
     });
   });
 
@@ -460,8 +481,9 @@ describe('my-form', () => {
       detail: {
         target: { value: 'lightning__RecordPage' },
         enabled: true,
-        small: false,
-        large: false
+        small: true,
+        large: false,
+        headlessAction: false
       }
     });
     target.dispatchEvent(event);
@@ -482,8 +504,9 @@ describe('my-form', () => {
 
       const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
       expectedInputs.properties.push({ id: 'propertyId_0' });
+      expectedInputs.targets.lightning__RecordPage.small = true;
       expectedInputs.targets.lightning__RecordPage.enabled = true;
-      expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+      expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
     });
   });
 
@@ -566,7 +589,8 @@ describe('my-form', () => {
         target: { value: 'lightning__RecordPage' },
         enabled: true,
         small: false,
-        large: false
+        large: false,
+        headlessAction: false
       }
     });
     target.dispatchEvent(event);
@@ -586,7 +610,7 @@ describe('my-form', () => {
       const expectedInputs = JSON.parse(JSON.stringify(EXPECTED_INPUTS));
       expectedInputs.objects.push({ id: 'objectId_0' });
       expectedInputs.targets.lightning__RecordPage.enabled = true;
-      expect(buildContents).toHaveBeenCalledWith(expectedInputs);
+      expect(buildContents).toHaveBeenLastCalledWith(expectedInputs);
     });
   });
 });

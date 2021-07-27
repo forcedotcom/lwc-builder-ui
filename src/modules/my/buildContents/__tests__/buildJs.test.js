@@ -8,6 +8,48 @@
 import { buildJs } from '../buildJs';
 import { pascalCase } from 'change-case';
 
+const buildTargets = (option) => {
+  const targetsArr = [
+    { name: 'AppPage', value: 'lightning__AppPage' },
+    { name: 'HomePage', value: 'lightning__HomePage' },
+    { name: 'RecordPage', value: 'lightning__RecordPage' },
+    { name: 'RecordAction', value: 'lightning__RecordAction' },
+    { name: 'UtilityBar', value: 'lightning__UtilityBar' },
+    { name: 'FlowScreen', value: 'lightning__FlowScreen' },
+    { name: 'Tab', value: 'lightning__Tab' },
+    { name: 'Inbox', value: 'lightning__Inbox' },
+    { name: 'CommunityPage', value: 'lightningCommunity__Page' },
+    { name: 'CommunityDefault', value: 'lightningCommunity__Default' },
+    { name: 'CommunityPageLayout', value: 'lightningCommunity__Page_Layout' },
+    { name: 'CommunityThemeLayout', value: 'lightningCommunity__Theme_Layout' },
+    { name: 'SnapinChatMessage', value: 'lightningSnapin__ChatMessage' },
+    { name: 'SnapinMinimized', value: 'lightningSnapin__Minimized' },
+    { name: 'SnapinPreChat', value: 'lightningSnapin__PreChat' },
+    { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' }
+  ];
+  const targets = {};
+  targetsArr.forEach((t) => {
+    targets[t.value] = {
+      name: t.name,
+      value: t.value,
+      enabled: false,
+      small: false,
+      large: false,
+      headlessAction: false,
+      properties: [],
+      objects: []
+    };
+    if (option) {
+      for (const v in option) {
+        if (Object.prototype.hasOwnProperty.call(option, v)) {
+          targets[v] = { ...targets[v], ...option[v] };
+        }
+      }
+    }
+  });
+  return targets;
+};
+
 describe('my-build-js', () => {
   afterEach(() => {
     // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -20,13 +62,13 @@ describe('my-build-js', () => {
     // GIVEN
     const contents = {
       properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
-      targets: {
+      targets: buildTargets({
         lightning__Inbox: { enabled: false },
         lightningSnapin__ChatMessage: { enabled: false },
         lightningSnapin__Minimized: { enabled: false },
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: false }
-      },
+      }),
       componentName: 'MyLWC'
     };
 
@@ -49,13 +91,13 @@ describe('my-build-js', () => {
     // GIVEN
     const contents = {
       properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
-      targets: {
+      targets: buildTargets({
         lightning__Inbox: { enabled: true },
         lightningSnapin__ChatMessage: { enabled: false },
         lightningSnapin__Minimized: { enabled: false },
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: false }
-      },
+      }),
       componentName: 'MyLWC'
     };
 
@@ -86,13 +128,13 @@ describe('my-build-js', () => {
     // GIVEN
     const contents = {
       properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
-      targets: {
+      targets: buildTargets({
         lightning__Inbox: { enabled: false },
         lightningSnapin__ChatMessage: { enabled: true },
         lightningSnapin__Minimized: { enabled: false },
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: false }
-      },
+      }),
       componentName: 'MyLWC'
     };
 
@@ -116,13 +158,13 @@ describe('my-build-js', () => {
     // GIVEN
     const contents = {
       properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
-      targets: {
+      targets: buildTargets({
         lightning__Inbox: { enabled: false },
         lightningSnapin__ChatMessage: { enabled: false },
         lightningSnapin__Minimized: { enabled: true },
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: false }
-      },
+      }),
       componentName: 'MyLWC'
     };
 
@@ -146,13 +188,13 @@ describe('my-build-js', () => {
     // GIVEN
     const contents = {
       properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
-      targets: {
+      targets: buildTargets({
         lightning__Inbox: { enabled: false },
         lightningSnapin__ChatMessage: { enabled: false },
         lightningSnapin__Minimized: { enabled: false },
         lightningSnapin__PreChat: { enabled: true },
         lightningSnapin__ChatHeader: { enabled: false }
-      },
+      }),
       componentName: 'MyLWC'
     };
 
@@ -175,13 +217,13 @@ describe('my-build-js', () => {
     // GIVEN
     const contents = {
       properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
-      targets: {
+      targets: buildTargets({
         lightning__Inbox: { enabled: false },
         lightningSnapin__ChatMessage: { enabled: false },
         lightningSnapin__Minimized: { enabled: false },
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: true }
-      },
+      }),
       componentName: 'MyLWC'
     };
 

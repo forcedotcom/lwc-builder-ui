@@ -22,12 +22,24 @@ export const buildJs = (contents) => {
     'source',
     'subject'
   ];
-  // merge @api properties for Inbox target.
+
+  const recordRelatedProps = ['recordId', 'objectApiName'];
+
   const apis = targets.lightning__Inbox.enabled
     ? [
+        // merge @api properties for Inbox target.
         ...propNames,
         ...inboxProps.filter((ip) => {
           return !propNames.includes(ip);
+        })
+      ]
+    : targets.lightning__RecordPage.enabled ||
+      targets.lightning__RecordAction.enabled
+    ? [
+        // merge @api properties for Record related target.
+        ...propNames,
+        ...recordRelatedProps.filter((rrp) => {
+          return !propNames.includes(rrp);
         })
       ]
     : propNames;
@@ -55,12 +67,28 @@ export const buildJs = (contents) => {
     js += `import BaseChatHeader from 'lightningsnapin/baseChatHeader';\n`;
   }
 
+  if (
+    targets.lightning__RecordAction.enabled &&
+    !targets.lightning__RecordAction.headlessAction
+  ) {
+    js += `import { CloseActionScreenEvent } from 'lightning/actions';\n`;
+  }
+
   js += `export default class ${pascal} extends LightningElement {\n`;
   js += apis
     .map((p) => {
       return p ? `\t@api\n\t${p};\n` : null;
     })
     .join('');
+
+  if (targets.lightning__RecordAction.enabled) {
+    if (targets.lightning__RecordAction.headlessAction) {
+      js += `\t@api\n\tinvoke() {\n\t\tconsole.log('headless quick action called');\n\t}\n`;
+    } else {
+      js += `\tcloseModal() {\n\t\tthis.dispatchEvent(new CloseActionScreenEvent());\n\t}\n`;
+    }
+  }
+
   js += `}`;
 
   return js;

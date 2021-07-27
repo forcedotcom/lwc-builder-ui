@@ -20,7 +20,7 @@
           id={smallFormId}
           value={enableSmall}
           checked={enableSmall}
-          disabled={disableDeviceCheck}
+          disabled={disabledCheck}
         />
         <label class="slds-checkbox__label" for={smallFormId}>
           <span class="slds-checkbox_faux"></span>
@@ -54,7 +54,7 @@
         onchange={onChangeLargeCheckbox}
         checked={enableLarge}
         value={enableLarge}
-        disabled={disableDeviceCheck}
+        disabled={disabledCheck}
       />
       <label class="slds-checkbox__label" for={largeFormId}>
         <span class="slds-checkbox_faux"></span>
@@ -82,6 +82,23 @@
               </g>
             </svg>
           </span>
+        </span>
+      </label>
+    </template>
+
+    <template if:true={isActionTypeSupported}>
+      <input
+        type="checkbox"
+        onchange={onChangeActionTypeCheckbox}
+        id={actionTypeFormId}
+        value={enableHeadless}
+        checked={enableHeadless}
+        disabled={disabledCheck}
+      />
+      <label class="slds-checkbox__label" for={actionTypeFormId}>
+        <span class="slds-checkbox_faux"></span>
+        <span class="slds-form-element__label">
+          <span>Headless Action</span>
         </span>
       </label>
     </template>

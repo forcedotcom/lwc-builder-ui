@@ -12,7 +12,8 @@ export const buildMeta = (contents) => {
     description,
     targets,
     properties,
-    objects
+    objects,
+    configurationEditor
   } = contents;
 
   const enabledTargetArray = Object.values(targets).filter((t) => t.enabled);
@@ -56,10 +57,19 @@ export const buildMeta = (contents) => {
     if (
       properties.length > 0 ||
       objects.length > 0 ||
-      enabledTargetArray.find((t) => t.small || t.large)
+      enabledTargetArray.find((t) => t.small || t.large) ||
+      enabledTargetArray.find((t) => t.value === 'lightning__RecordAction') ||
+      (enabledTargetArray.length === 1 &&
+        enabledTargetArray[0].value === 'lightning__FlowScreen' &&
+        configurationEditor)
     ) {
       for (let t of enabledTargetArray) {
-        if (t.value === 'lightningCommunity__Page') {
+        // No targetConfig, property support
+        if (
+          t.value === 'lightningCommunity__Page' ||
+          t.value === 'lightningCommunity__Page_Layout' ||
+          t.value === 'lightningCommunity__Theme_Layout'
+        ) {
           continue;
         }
         if (
@@ -70,11 +80,28 @@ export const buildMeta = (contents) => {
               t.value === 'lightning__HomePage' ||
               t.value === 'lightning__RecordPage') &&
             (t.small || t.large)
+          ) &&
+          t.value !== 'lightning__RecordAction' &&
+          !(
+            enabledTargetArray.length === 1 &&
+            enabledTargetArray[0].value === 'lightning__FlowScreen' &&
+            configurationEditor
           )
         ) {
           continue;
         }
-        targetConfigs += `\t\t<targetConfig targets="${t.value}">\n`;
+
+        // custom property editor for Flow
+        if (
+          enabledTargetArray.length === 1 &&
+          t.value === 'lightning__FlowScreen' &&
+          configurationEditor
+        ) {
+          targetConfigs += `\t\t<targetConfig targets="${t.value}" configurationEditor="${configurationEditor}">\n`;
+        } else {
+          targetConfigs += `\t\t<targetConfig targets="${t.value}">\n`;
+        }
+
         targetConfigs += t.properties
           .map((p) => {
             let propAttributes = ` name="${p.name}"`;
@@ -157,6 +184,7 @@ export const buildMeta = (contents) => {
           targetConfigs += '\n';
         }
 
+        // Specific sObject targeting
         if (t.value === 'lightning__RecordPage' && t.objects.length > 0) {
           targetConfigs += `\t\t\t<objects>\n`;
           targetConfigs += t.objects
@@ -167,6 +195,14 @@ export const buildMeta = (contents) => {
           targetConfigs += `\n\t\t\t</objects>\n`;
         }
 
+        // Action Type
+        if (t.value === 'lightning__RecordAction') {
+          targetConfigs += `\t\t\t<actionType>${
+            t.headlessAction ? 'Action' : 'ScreenAction'
+          }</actionType>\n`;
+        }
+
+        // Form Factor
         if (
           (t.value === 'lightning__AppPage' ||
             t.value === 'lightning__HomePage' ||
