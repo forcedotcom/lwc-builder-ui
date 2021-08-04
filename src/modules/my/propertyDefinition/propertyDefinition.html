@@ -56,6 +56,7 @@
             <option value="Integer">Integer</option>
             <template if:true={isCommunityDefaultOnly}>
               <option value="Color">Color</option>
+              <option value="ContentReference">ContentReference</option>
             </template>
             <template if:true={isFlowOnly}>
               <option value="apex">Apex Class</option>
@@ -365,6 +366,58 @@
           </template>
         </div>
       </template>
+    </template>
+
+    <template if:true={isContentReferenceEnabled}>
+      <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label">
+          <abbr class="slds-required" title="required">* </abbr>
+          <span>Filter CMS content types</span>
+        </label>
+        <ul>
+          <template for:each={filters} for:item="filter">
+            <li key={filter.value}>
+              <my-property-cms-filter-item
+                filter={filter}
+                onchangefilteritem={onChangeFilterCheckbox}
+              ></my-property-cms-filter-item>
+            </li>
+          </template>
+          <template for:each={customFilters} for:item="filter">
+            <li key={filter.id}>
+              <my-property-cms-filter-item
+                filter={filter}
+                is-custom="true"
+                onchangefilteritem={onChangeFilterCheckbox}
+                ondeletefilteritem={onDeleteCustomFilterItem}
+              ></my-property-cms-filter-item>
+            </li>
+          </template>
+        </ul>
+        <template if:true={hasCustomCmsContentTypeFilter}>
+          <div class="slds-m-top_x-small">
+            <button
+              name="addCustomFilterRow"
+              class="slds-button slds-button_neutral slds-button_stretch"
+              onclick={addCustomFilterRow}
+              type="button"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 52 52"
+                class="slds-button__icon slds-button__icon_left"
+                aria-hidden="true"
+              >
+                <path
+                  d="M30 29h16.5c.8 0 1.5-.7 1.5-1.5v-3c0-.8-.7-1.5-1.5-1.5H30c-.6 0-1-.4-1-1V5.5c0-.8-.7-1.5-1.5-1.5h-3c-.8 0-1.5.7-1.5 1.5V22c0 .6-.4 1-1 1H5.5c-.8 0-1.5.7-1.5 1.5v3c0 .8.7 1.5 1.5 1.5H22c.6 0 1 .4 1 1v16.5c0 .8.7 1.5 1.5 1.5h3c.8 0 1.5-.7 1.5-1.5V30c0-.6.4-1 1-1z"
+                ></path>
+              </svg>
+
+              <span>Add Custom Filter</span>
+            </button>
+          </div>
+        </template>
+      </div>
     </template>
 
     <div>

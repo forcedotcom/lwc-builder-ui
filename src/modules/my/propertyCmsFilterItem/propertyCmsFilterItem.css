@@ -1,0 +1,6 @@
+.custom-filter-item {
+  display: flex;
+}
+.custom-filter-item > input[type='text'] {
+  flex: 1;
+}

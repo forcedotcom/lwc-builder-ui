@@ -177,6 +177,18 @@ export const buildMeta = (contents) => {
               }"`;
             }
 
+            if (
+              p.type === 'ContentReference' &&
+              t.value === 'lightningCommunity__Default' &&
+              p.cmsFilters.length > 0 &&
+              p.cmsFilters.find((f) => !!f.value)
+            ) {
+              propAttributes += ` filter="${p.cmsFilters
+                .filter((f) => !!f.value)
+                .map((f) => f.value)
+                .join(',')}"`;
+            }
+
             return `\t\t\t<property${propAttributes} />`;
           })
           .join('\n');
