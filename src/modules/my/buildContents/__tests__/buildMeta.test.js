@@ -913,4 +913,120 @@ describe('my-build-meta', () => {
     expectedMeta += `</LightningComponentBundle>`;
     expect(meta).toBe(expectedMeta);
   });
+
+  it('supports QuickAction target', () => {
+    // GIVEN
+    const contents = {
+      apiVersion: LATEST_API_VERSION,
+      isExposed: true,
+      targets: {
+        lightning__RecordAction: {
+          enabled: true,
+          value: 'lightning__RecordAction'
+        }
+      },
+      properties: [],
+      objects: []
+    };
+
+    // WHEN
+    const meta = buildMeta(contents);
+
+    // THEN
+    let expectedMeta = ``;
+    expectedMeta += `<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">\n`;
+    expectedMeta += `\t<apiVersion>${contents.apiVersion}</apiVersion>\n`;
+    expectedMeta += `\t<isExposed>${contents.isExposed}</isExposed>\n`;
+    expectedMeta += `\t<targets>\n`;
+    expectedMeta += `\t\t<target>lightning__RecordAction</target>\n`;
+    expectedMeta += `\t</targets>\n`;
+    expectedMeta += `\t<targetConfigs>\n`;
+    expectedMeta += `\t\t<targetConfig targets="lightning__RecordAction">\n`;
+    expectedMeta += `\t\t\t<actionType>ScreenAction</actionType>\n`;
+    expectedMeta += `\t\t</targetConfig>\n`;
+    expectedMeta += `\t</targetConfigs>\n`;
+    expectedMeta += `</LightningComponentBundle>`;
+    expect(meta).toBe(expectedMeta);
+  });
+
+  it('supports Headless QuickAction target', () => {
+    // GIVEN
+    const contents = {
+      apiVersion: LATEST_API_VERSION,
+      isExposed: true,
+      targets: {
+        lightning__RecordAction: {
+          enabled: true,
+          value: 'lightning__RecordAction',
+          headlessAction: true
+        }
+      },
+      properties: [],
+      objects: []
+    };
+
+    // WHEN
+    const meta = buildMeta(contents);
+
+    // THEN
+    let expectedMeta = ``;
+    expectedMeta += `<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">\n`;
+    expectedMeta += `\t<apiVersion>${contents.apiVersion}</apiVersion>\n`;
+    expectedMeta += `\t<isExposed>${contents.isExposed}</isExposed>\n`;
+    expectedMeta += `\t<targets>\n`;
+    expectedMeta += `\t\t<target>lightning__RecordAction</target>\n`;
+    expectedMeta += `\t</targets>\n`;
+    expectedMeta += `\t<targetConfigs>\n`;
+    expectedMeta += `\t\t<targetConfig targets="lightning__RecordAction">\n`;
+    expectedMeta += `\t\t\t<actionType>Action</actionType>\n`;
+    expectedMeta += `\t\t</targetConfig>\n`;
+    expectedMeta += `\t</targetConfigs>\n`;
+    expectedMeta += `</LightningComponentBundle>`;
+    expect(meta).toBe(expectedMeta);
+  });
+
+  it('supports CMS Content Type filter props when aiming only lightningCommunity__Default target', () => {
+    // GIVEN
+    const contents = {
+      apiVersion: LATEST_API_VERSION,
+      isExposed: true,
+      targets: {
+        lightningCommunity__Default: {
+          enabled: true,
+          value: 'lightningCommunity__Default'
+        }
+      },
+      properties: [
+        {
+          name: 'MyProp',
+          selectedTargets: ['lightningCommunity__Default'],
+          type: 'ContentReference',
+          cmsFilters: [
+            { id: 'cms_document', name: 'CMS Document', value: 'cms_document' },
+            { id: 'news', name: 'News', value: 'news' }
+          ]
+        }
+      ],
+      objects: []
+    };
+
+    // WHEN
+    const meta = buildMeta(contents);
+
+    // THEN
+    let expectedMeta = ``;
+    expectedMeta += `<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">\n`;
+    expectedMeta += `\t<apiVersion>${contents.apiVersion}</apiVersion>\n`;
+    expectedMeta += `\t<isExposed>${contents.isExposed}</isExposed>\n`;
+    expectedMeta += `\t<targets>\n`;
+    expectedMeta += `\t\t<target>lightningCommunity__Default</target>\n`;
+    expectedMeta += `\t</targets>\n`;
+    expectedMeta += `\t<targetConfigs>\n`;
+    expectedMeta += `\t\t<targetConfig targets="lightningCommunity__Default">\n`;
+    expectedMeta += `\t\t\t<property name="MyProp" type="ContentReference" filter="cms_document,news" />\n`;
+    expectedMeta += `\t\t</targetConfig>\n`;
+    expectedMeta += `\t</targetConfigs>\n`;
+    expectedMeta += `</LightningComponentBundle>`;
+    expect(meta).toBe(expectedMeta);
+  });
 });
