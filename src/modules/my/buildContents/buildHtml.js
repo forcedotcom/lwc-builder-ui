@@ -10,13 +10,15 @@ export const buildHtml = (contents) => {
     targets?.lightning__RecordAction?.enabled &&
     !targets?.lightning__RecordAction?.headlessAction
   ) {
-    return `<lightning-quick-action-panel header="${componentName}">
-  <div>Modal Content</div>
-  <div slot="footer">
-    <lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>
-    <lightning-button variant="brand" label="Action" class="slds-m-left_x-small"></lightning-button>
-  </div>
-</lightning-quick-action-panel>`;
+    return `<template>
+  <lightning-quick-action-panel header="${componentName}">
+    <div>Modal Content</div>
+    <div slot="footer">
+      <lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>
+      <lightning-button variant="brand" label="Action" class="slds-m-left_x-small"></lightning-button>
+    </div>
+  </lightning-quick-action-panel>
+</template>`;
   }
 
   if (
