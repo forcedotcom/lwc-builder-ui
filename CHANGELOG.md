@@ -1,14 +1,14 @@
 # Change Log
 
-All notable changes to the "lwc-builder" extension will be documented in this file.
+All notable changes to the "lwc-builder-ui" package will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
 
-- Initial release
+## [0.1.22] - 2021-08-21
 
-## [0.1.21] - 2021-08-10
+Salesforce Summer'21 v52.0 support.
 
 ### Added
 
