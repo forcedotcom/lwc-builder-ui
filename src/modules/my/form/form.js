@@ -14,7 +14,7 @@ export default class Form extends LightningElement {
   @track
   inputs = {
     componentName: '',
-    apiVersion: '51.0', // TODO: fetch from SFDC API
+    apiVersion: '52.0', // TODO: fetch from SFDC API
     withHtml: true,
     withCss: true,
     withSvg: false,
@@ -36,12 +36,15 @@ export default class Form extends LightningElement {
     { name: 'AppPage', value: 'lightning__AppPage' },
     { name: 'HomePage', value: 'lightning__HomePage' },
     { name: 'RecordPage', value: 'lightning__RecordPage' },
+    { name: 'RecordAction', value: 'lightning__RecordAction' },
     { name: 'UtilityBar', value: 'lightning__UtilityBar' },
     { name: 'FlowScreen', value: 'lightning__FlowScreen' },
     { name: 'Tab', value: 'lightning__Tab' },
     { name: 'Inbox', value: 'lightning__Inbox' },
     { name: 'CommunityPage', value: 'lightningCommunity__Page' },
     { name: 'CommunityDefault', value: 'lightningCommunity__Default' },
+    { name: 'CommunityPageLayout', value: 'lightningCommunity__Page_Layout' },
+    { name: 'CommunityThemeLayout', value: 'lightningCommunity__Theme_Layout' },
     { name: 'SnapinChatMessage', value: 'lightningSnapin__ChatMessage' },
     { name: 'SnapinMinimized', value: 'lightningSnapin__Minimized' },
     { name: 'SnapinPreChat', value: 'lightningSnapin__PreChat' },
@@ -58,6 +61,7 @@ export default class Form extends LightningElement {
         enabled: false,
         small: false,
         large: false,
+        headlessAction: false,
         properties: [],
         objects: []
       };
@@ -93,12 +97,13 @@ export default class Form extends LightningElement {
     if (!e.detail) {
       return;
     }
-    const { target, enabled, small, large } = e.detail;
+    const { target, enabled, small, large, headlessAction } = e.detail;
 
     this.inputs.targets[target.value].enabled = enabled;
     if (enabled) {
       this.inputs.targets[target.value].small = small;
       this.inputs.targets[target.value].large = large;
+      this.inputs.targets[target.value].headlessAction = headlessAction;
     }
     this.updateContent();
   }

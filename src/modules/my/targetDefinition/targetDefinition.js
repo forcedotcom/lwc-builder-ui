@@ -14,6 +14,7 @@ export default class TargetDefinition extends LightningElement {
   connectedCallback() {
     this.enableSmall = this.isSmallFormFactorSupported;
     this.enableLarge = this.isFormFactorSupported;
+    this.enableHeadless = false;
     this.enabled = false;
   }
 
@@ -26,12 +27,17 @@ export default class TargetDefinition extends LightningElement {
     this.onChange();
   };
 
+  onChangeActionTypeCheckbox = (e) => {
+    this.enableHeadless = e.target.checked;
+    this.onChange();
+  };
+
   onChangeTargetCheckbox = (e) => {
     this.enabled = e.target.checked;
     this.onChange();
   };
 
-  get disableDeviceCheck() {
+  get disabledCheck() {
     return !this.enabled;
   }
 
@@ -50,12 +56,14 @@ export default class TargetDefinition extends LightningElement {
           target: this.target,
           enabled: this.enabled,
           small: this.enableSmall,
-          large: this.enableLarge
+          large: this.enableLarge,
+          headlessAction: this.enableHeadless
         }
       })
     );
   };
 
+  /* Form Factor */
   get isFormFactorSupported() {
     return (
       this.target.value === 'lightning__AppPage' ||
@@ -68,5 +76,14 @@ export default class TargetDefinition extends LightningElement {
       this.target.value === 'lightning__AppPage' ||
       this.target.value === 'lightning__RecordPage'
     );
+  }
+
+  /* Quick Action */
+  get isActionTypeSupported() {
+    return this.target.value === 'lightning__RecordAction';
+  }
+
+  get actionTypeFormId() {
+    return `${this.target.value}-action-type`;
   }
 }

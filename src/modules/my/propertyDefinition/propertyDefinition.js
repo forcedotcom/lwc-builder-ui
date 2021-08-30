@@ -31,8 +31,20 @@ export default class PropertyDefinition extends LightningElement {
     required: false,
     flowInput: true,
     flowOutput: true,
-    datasource: ''
+    datasource: '',
+    cmsFilters: []
   };
+
+  filters = [
+    { id: 'cms_document', name: 'CMS Document', value: 'cms_document' },
+    { id: 'cms_image', name: 'CMS Image', value: 'cms_image' },
+    { id: 'cms_video', name: 'CMS Video', value: 'cms_video' },
+    { id: 'news', name: 'News', value: 'news' }
+  ];
+
+  @track
+  customFilters = [{ id: 1, value: '' }];
+  nextCustomFilterId = 2;
 
   nonPropertyTargets = [
     'lightning__Tab',
@@ -147,6 +159,10 @@ export default class PropertyDefinition extends LightningElement {
     return this.property.type !== 'apex' && this.property.type !== 'sobject';
   }
 
+  get isContentReferenceEnabled() {
+    return this.property.type === 'ContentReference';
+  }
+
   get defaultType() {
     switch (this.property.type) {
       case 'Integer':
@@ -158,6 +174,10 @@ export default class PropertyDefinition extends LightningElement {
       default:
         return 'text';
     }
+  }
+
+  get hasCustomCmsContentTypeFilter() {
+    return this.customFilters.find((f) => !!f.value);
   }
 
   onChangeInput = (e) => {
@@ -206,6 +226,30 @@ export default class PropertyDefinition extends LightningElement {
     this.updateProperty();
   };
 
+  onChangeFilterCheckbox = (e) => {
+    const { filter, isCustom, isChecked } = e.detail;
+
+    if (isCustom) {
+      const cfId = this.customFilters.findIndex((f) => f.id === filter.id);
+      if (cfId > -1) {
+        this.customFilters[cfId] = filter;
+      }
+    }
+
+    const fId = this.property.cmsFilters.findIndex((f) => f.id === filter.id);
+
+    if (isChecked) {
+      if (isCustom && fId > -1) {
+        this.property.cmsFilters[fId] = filter;
+      } else {
+        this.property.cmsFilters.push(filter);
+      }
+    } else if (fId > -1) {
+      this.property.cmsFilters.splice(fId, 1);
+    }
+    this.updateProperty();
+  };
+
   formatInputValue = (key, value) => {
     if (key === 'name') {
       // restrict starting from digits
@@ -231,5 +275,26 @@ export default class PropertyDefinition extends LightningElement {
         detail: this.pid
       })
     );
+  };
+
+  addCustomFilterRow = () => {
+    this.customFilters.push({ id: this.nextCustomFilterId, value: '' });
+    this.nextCustomFilterId++;
+  };
+
+  onDeleteCustomFilterItem = (e) => {
+    const cfIndex = this.customFilters.findIndex(
+      (f) => f.id === e.detail.filterId
+    );
+    if (cfIndex > -1) {
+      this.customFilters.splice(cfIndex, 1);
+    }
+    const fIndex = this.property.cmsFilters.findIndex(
+      (f) => f.id === e.detail.filterId
+    );
+    if (fIndex > -1) {
+      this.property.cmsFilters.splice(fIndex, 1);
+    }
+    this.updateProperty();
   };
 }
