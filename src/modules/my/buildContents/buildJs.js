@@ -16,7 +16,13 @@ import {
 import { buildImportsForJs } from './buildModuleImports';
 
 export const buildJs = (contents) => {
-  const { properties, targets, componentName, modules: rawModules } = contents;
+  const {
+    properties,
+    targets,
+    componentName,
+    modules: rawModules,
+    lifecycleHooks
+  } = contents;
   const propNames = properties.map((p) => p.name);
 
   // https://developer.salesforce.com/docs/component-library/documentation/en/lwc/use_config_for_app_builder_email_app_pane
@@ -113,6 +119,32 @@ export const buildJs = (contents) => {
       return p ? `\t@api\n\t${p};\n` : null;
     })
     .join('');
+
+  if (lifecycleHooks && lifecycleHooks.length > 0) {
+    js += lifecycleHooks
+      .filter((h) => !!h.checked)
+      .map((h) => {
+        switch (h.value) {
+          case 'constructor':
+            return `\tconstructor(){\n\t\tsuper();\n\t}\n`;
+          case 'connectedCallback':
+            return `\tconnectedCallback(){}\n`;
+          case 'disconnectedCallback':
+            return `\tdisconnectedCallback(){}\n`;
+          case 'renderedCallback':
+            if (h.options[0]?.checked) {
+              return `\thasRendered = false;\n\trenderedCallback(){\n\t\tif(!this.hasRendered) {\n\t\t\tthis.hasRendered = true;\n\t\t\tconsole.log('First render');\n\t\t}\n\t}\n`;
+            }
+            return `\trenderedCallback(){}\n`;
+          case 'errorCallback':
+            return `\terrorCallback(error, stack){\n\t\tconsole.error(error, stack);\n\t}\n`;
+          default:
+            return null;
+        }
+      })
+      .filter((h) => !!h)
+      .join('\n');
+  }
 
   if (targets.lightning__RecordAction.enabled) {
     if (targets.lightning__RecordAction.headlessAction) {

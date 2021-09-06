@@ -1,82 +1,78 @@
 <template>
-  <div class="form-wrapper">
-    <ul>
-      <template for:each={modules} for:item="c">
-        <li key={c.category.id} class="slds-m-bottom_small">
-          <template if:true={c.category.label}>
-            <h1
-              class="slds-m-top_small slds-m-bottom_xx-small"
-              style="font-size: 1rem; font-weight: bold"
-            >
-              {c.category.label}
-            </h1>
-          </template>
-          <ul>
-            <template for:each={c.modules} for:item="m">
-              <li key={m.value}>
-                <div class="slds-form-element slds-m-bottom_x-small">
-                  <div class="slds-form-element__control">
-                    <div class="slds-checkbox">
-                      <input
-                        type="checkbox"
-                        name={m.value}
-                        id={m.value}
-                        value={m.value}
-                        checked={m.checked}
-                        onchange={onChangeCheckbox}
-                      />
-                      <label class="slds-checkbox__label" for={m.value}>
-                        <span class="slds-checkbox_faux"></span>
-                        <span class="slds-form-element__label">
-                          {m.label}
-                        </span>
-                      </label>
-                    </div>
+  <ul>
+    <template for:each={modules} for:item="c">
+      <li key={c.category.id} class="slds-m-bottom_small">
+        <template if:true={c.category.label}>
+          <h1
+            class="slds-m-top_small slds-m-bottom_xx-small"
+            style="font-size: 1rem; font-weight: bold"
+          >
+            {c.category.label}
+          </h1>
+        </template>
+        <ul>
+          <template for:each={c.modules} for:item="m">
+            <li key={m.value}>
+              <div class="slds-form-element slds-m-bottom_x-small">
+                <div class="slds-form-element__control">
+                  <div class="slds-checkbox">
+                    <input
+                      type="checkbox"
+                      name={m.value}
+                      id={m.value}
+                      value={m.value}
+                      checked={m.checked}
+                      onchange={onChangeCheckbox}
+                    />
+                    <label class="slds-checkbox__label" for={m.value}>
+                      <span class="slds-checkbox_faux"></span>
+                      <span class="slds-form-element__label"> {m.label} </span>
+                    </label>
                   </div>
                 </div>
-                <template if:true={m.checked}>
-                  <template if:true={m.submodules}>
-                    <ul class="slds-p-left_medium slds-m-bottom_x-small">
-                      <template if:true={m.submoduleLabel}>
-                        <h1
-                          class="slds-m-bottom_xx-small"
-                          style="font-weight: bold"
-                        >
-                          {m.submoduleLabel}
-                        </h1>
-                      </template>
-                      <template for:each={m.submodules} for:item="sm">
-                        <li key={sm.id}>
-                          <div class="slds-form-element">
-                            <div class="slds-form-element__control">
-                              <div class="slds-checkbox">
-                                <input
-                                  type="checkbox"
-                                  name={sm.id}
-                                  id={sm.id}
-                                  value={sm.id}
-                                  checked={sm.checked}
-                                  onchange={onChangeSubmoduleCheckbox}
-                                />
-                                <label class="slds-checkbox__label" for={sm.id}>
-                                  <span class="slds-checkbox_faux"></span>
-                                  <span class="slds-form-element__label">
-                                    {sm.label}
-                                  </span>
-                                </label>
-                              </div>
+              </div>
+              <template if:true={m.checked}>
+                <template if:true={m.submodules}>
+                  <ul class="slds-p-left_medium slds-m-bottom_x-small">
+                    <template if:true={m.submoduleLabel}>
+                      <h1
+                        class="slds-m-bottom_xx-small"
+                        style="font-weight: bold"
+                      >
+                        {m.submoduleLabel}
+                      </h1>
+                    </template>
+                    <template for:each={m.submodules} for:item="sm">
+                      <li key={sm.id}>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input
+                                type="checkbox"
+                                name={sm.id}
+                                id={sm.id}
+                                value={sm.id}
+                                checked={sm.checked}
+                                onchange={onChangeSubmoduleCheckbox}
+                              />
+                              <label class="slds-checkbox__label" for={sm.id}>
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">
+                                  {sm.label}
+                                </span>
+                              </label>
                             </div>
                           </div>
-                        </li>
-                      </template>
-                    </ul>
-                  </template>
+                        </div>
+                      </li>
+                    </template>
+                  </ul>
                 </template>
-              </li>
-            </template>
-          </ul>
-        </li>
-      </template>
-    </ul>
-  </div>
+              </template>
+            </li>
+          </template>
+        </ul>
+      </li>
+    </template>
+  </ul>
 </template>

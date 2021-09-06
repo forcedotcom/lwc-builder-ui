@@ -11,11 +11,12 @@ export default class FormModuleImports extends FormContent {
   @api
   modules;
 
-  connectedCallback() {}
-
   onChangeCheckbox(e) {
     const { name, checked } = e.currentTarget;
     const changed = this.modules.map((c) => {
+      if (c.value === name) {
+        return { ...c, checked };
+      }
       const changedModules = c.modules.map((m) => {
         if (m.value !== name) {
           return m;

@@ -21,6 +21,7 @@ import {
   TYPE_LIFECYCLE_HOOKS,
   TYPE_SOBJECTS
 } from '../constants/formEvents';
+import { LIFECYCLE_HOOKS } from '../constants/lifecycleHooks';
 export default class Form extends LightningElement {
   @track
   basics = DEFAULT_BASICS;
@@ -33,7 +34,7 @@ export default class Form extends LightningElement {
   @track
   properties = [];
   @track
-  lifecycleHooks = [];
+  lifecycleHooks = [...LIFECYCLE_HOOKS];
   @track
   experienceCloudSettings = [];
   @track
