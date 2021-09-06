@@ -8,10 +8,6 @@ const CATEGORY_NONE = {
   label: '',
   id: 'none'
 };
-const CATEGORY_UI = {
-  label: 'UI',
-  id: 'ui'
-};
 const CATEGORY_EXPERIENCE_CLOUD = {
   label: 'Experience Cloud',
   id: 'exp'
@@ -38,192 +34,245 @@ const CATEGORY_SPECIAL = {
   id: 'special'
 };
 
+/* MODULES */
+export const MODULE_TOAST = {
+  label: 'Toast Notifications',
+  value: 'toast',
+  help: 'A toast notification pops up to alert users of a success, error, or warning',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/lwc/use_toast'
+};
+export const MODULE_PAGEREF_APP = {
+  label: 'App Type',
+  value: 'standard__app',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_LIGHTNING_COMPONENT = {
+  label: 'Lightning Component Type',
+  value: 'standard__component',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_KNOWLEDGE_ARTICLE = {
+  label: 'Knowledge Article Page Type',
+  value: 'standard__knowledgeArticlePage',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_COMM_LOGIN = {
+  label: 'Experience Cloud Site Login Page Type',
+  value: 'comm__loginPage',
+  help: '',
+  url: ''
+};
+export const MODULE_NAVIGATION_MIXIN_NAVIGATE = {
+  label: 'NavigationMixin.Navigate',
+  value: 'NavigationMixin_Navigate',
+  help: '',
+  url: '',
+  submoduleLabel: 'PageReference Types',
+  submodules: [
+    {
+      ...MODULE_PAGEREF_APP,
+      id: `NavigationMixin_Navigate-${MODULE_PAGEREF_APP.value}`
+    },
+    {
+      ...MODULE_PAGEREF_LIGHTNING_COMPONENT,
+      id: `NavigationMixin_Navigate-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`
+    },
+    {
+      ...MODULE_PAGEREF_KNOWLEDGE_ARTICLE,
+      id: `NavigationMixin_Navigate-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`
+    },
+    {
+      ...MODULE_PAGEREF_COMM_LOGIN,
+      id: `NavigationMixin_Navigate-${MODULE_PAGEREF_COMM_LOGIN.value}`
+    }
+  ]
+};
+export const MODULE_NAVIGATION_MIXIN_GENERATE_URL = {
+  label: 'NavigationMixin.GenerateUrl',
+  value: 'NavigationMixin_GenerateUrl',
+  help: '',
+  url: '',
+  submoduleLabel: 'PageReference Types',
+  submodules: [
+    {
+      ...MODULE_PAGEREF_APP,
+      id: `NavigationMixin_GenerateUrl-${MODULE_PAGEREF_APP.value}`
+    },
+    {
+      ...MODULE_PAGEREF_LIGHTNING_COMPONENT,
+      id: `NavigationMixin_GenerateUrl-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`
+    },
+    {
+      ...MODULE_PAGEREF_KNOWLEDGE_ARTICLE,
+      id: `NavigationMixin_GenerateUrl-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`
+    },
+    {
+      ...MODULE_PAGEREF_COMM_LOGIN,
+      id: `NavigationMixin_GenerateUrl-${MODULE_PAGEREF_COMM_LOGIN.value}`
+    }
+  ]
+};
+export const MODULE_UI_RECORD_API = {
+  label: 'UI Record API',
+  value: 'uiRecordApi',
+  help: '',
+  url: ''
+};
+export const MODULE_LABEL = {
+  label: 'Label',
+  value: 'label',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_labels'
+};
+export const MODULE_FORM_FACTOR = {
+  label: 'Form Factor',
+  value: 'formFactor',
+  help: 'The form factor of the hardware the browser is running on',
+  url: ''
+};
+export const MODULE_REGION_WIDTH = {
+  label: 'Flexipage Region Width',
+  value: 'flexipageRegionWidth',
+  help: 'width-aware',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/use_width_aware'
+};
+export const MODULE_RECORD_ID = {
+  // need to add in metadata in lightningCommunity__Default target
+  label: 'Record Id',
+  value: 'recordId',
+  help: 'Make the component aware of its record context',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.use_record_context'
+};
+export const MODULE_OBJECT_API_NAME = {
+  label: 'sObject API Name',
+  value: 'objectApiName',
+  help: 'Make a component aware of its object context',
+  url: ''
+};
+
+export const MODULE_USER_PERMISSION = {
+  label: 'User Permission',
+  value: 'userPermission',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_get_permissions'
+};
+
+export const MODULE_USER_ID = {
+  label: 'User ID',
+  value: 'userId',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.get_current_user'
+};
+export const MODULE_USER_IS_GUEST = {
+  label: 'User Is Guest User',
+  value: 'userIsGuest',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.get_current_user'
+};
+
+export const MODULE_EXP_SITE_ID = {
+  label: 'Experience Cloud Site ID',
+  value: 'experienceCloudSiteId',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_community_info'
+};
+export const MODULE_EXP_SITE_BASE_PATH = {
+  label: 'Experience Cloud Site Base Path',
+  value: 'experienceCloudSiteBasePath',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_community_info'
+};
+export const MODULE_STATIC_RESOURCES = {
+  label: 'Static Resources',
+  value: 'staticResources',
+  help: '',
+  url: ''
+};
+export const MODULE_CONTENT_ASSET_FILES = {
+  label: 'Content Asset Files',
+  value: 'contentAssetFiles',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_content_assets'
+};
+
+export const MODULE_I18N_LANG = {
+  label: 'Language',
+  value: 'i18n_lang',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_DIR = {
+  label: 'Text Direction',
+  value: 'i18n_dir',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_LOCALE = {
+  label: 'Locale',
+  value: 'i18n_locale',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_CURRENCY = {
+  label: 'Currency',
+  value: 'i18n_currency',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+
+export const MODULE_BARCODE_SCANNER = {
+  label: 'Barcode Scanner',
+  value: 'barcodeScanner',
+  help: '',
+  url: ''
+};
+
 export const MODULE_IMPORTS = [
   {
     category: CATEGORY_NONE,
     modules: [
-      {
-        label: 'Toast Notifications',
-        value: 'toast',
-        help: 'A toast notification pops up to alert users of a success, error, or warning',
-        url: '',
-        checked: false
-      },
-      {
-        label: 'Page Reference',
-        value: 'pageReference',
-        help: '',
-        url: '',
-        checked: false
-      },
-      {
-        label: 'NavigationMixin',
-        value: 'NavigationMixin',
-        help: '',
-        url: '',
-        checked: false
-      },
-      {
-        label: 'UI Record API',
-        value: 'uiRecordApi',
-        help: '',
-        url: '',
-        checked: false
-      },
-      {
-        label: 'Label',
-        value: 'label',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_labels',
-        checked: false
-      }
+      MODULE_TOAST,
+      MODULE_NAVIGATION_MIXIN_NAVIGATE,
+      MODULE_NAVIGATION_MIXIN_GENERATE_URL,
+      MODULE_UI_RECORD_API,
+      MODULE_LABEL
     ]
   },
   {
     category: CATEGORY_CONTEXT,
     modules: [
-      {
-        label: 'Form Factor',
-        value: 'formFactor',
-        help: 'The form factor of the hardware the browser is running on',
-        url: '',
-        checked: false
-      },
-      {
-        label: 'Flexipage Region Width',
-        value: 'flexipageRegionWidth',
-        help: 'width-aware',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/use_width_aware',
-        checked: false
-      },
-      {
-        // need to add in metadata in lightningCommunity__Default target
-        label: 'Record Id',
-        value: 'recordId',
-        help: 'Make the component aware of its record context',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.use_record_context',
-        checked: false
-      },
-      {
-        label: 'sObject API Name',
-        value: 'objectApiName',
-        help: 'Make a component aware of its object context',
-        url: '',
-        checked: false
-      }
+      MODULE_FORM_FACTOR,
+      MODULE_REGION_WIDTH,
+      MODULE_RECORD_ID,
+      MODULE_OBJECT_API_NAME
     ]
   },
   {
     category: CATEGORY_USER,
-    modules: [
-      {
-        label: 'User Permission',
-        value: 'userPermission',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_get_permissions',
-        checked: false
-      },
-      {
-        label: 'Current User ID',
-        value: 'userId',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.get_current_user',
-        checked: false
-      },
-      {
-        label: 'Current User Is Guest User',
-        value: 'userIsGuest',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.get_current_user',
-        checked: false
-      }
-    ]
-  },
-  {
-    category: CATEGORY_UI,
-    modules: []
+    modules: [MODULE_USER_PERMISSION, MODULE_USER_ID, MODULE_USER_IS_GUEST]
   },
   {
     category: CATEGORY_EXPERIENCE_CLOUD,
-    modules: [
-      {
-        label: 'Experience Cloud ID',
-        value: 'experienceCloudId',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_community_info',
-        checked: false
-      },
-      {
-        label: 'Experience Cloud Base Path',
-        value: 'experienceCloudBasePath',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_community_info',
-        checked: false
-      }
-    ]
+    modules: [MODULE_EXP_SITE_ID, MODULE_EXP_SITE_BASE_PATH]
   },
   {
     category: CATEGORY_FILE,
-    modules: [
-      {
-        label: 'Static Resources',
-        value: 'staticResources',
-        help: '',
-        url: '',
-        checked: false
-      },
-      {
-        label: 'Content Asset Files',
-        value: 'contentAssetFiles',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_content_assets',
-        checked: false
-      }
-    ]
+    modules: [MODULE_STATIC_RESOURCES, MODULE_CONTENT_ASSET_FILES]
   },
   {
     category: CATEGORY_I18N,
     modules: [
-      {
-        label: 'Language',
-        value: 'i18n_lang',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n',
-        checked: false
-      },
-      {
-        label: 'Text Direction',
-        value: 'i18n_dir',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n',
-        checked: false
-      },
-      {
-        label: 'Locale',
-        value: 'i18n_locale',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n',
-        checked: false
-      },
-      {
-        label: 'Currency',
-        value: 'i18n_currency',
-        help: '',
-        url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n',
-        checked: false
-      }
+      MODULE_I18N_LANG,
+      MODULE_I18N_DIR,
+      MODULE_I18N_LOCALE,
+      MODULE_I18N_CURRENCY
     ]
   },
   {
     category: CATEGORY_SPECIAL,
-    modules: [
-      {
-        label: 'Barcode Scanner',
-        value: 'barcodeScanner',
-        help: '',
-        url: '',
-        checked: false
-      }
-    ]
+    modules: [MODULE_BARCODE_SCANNER]
   }
 ];

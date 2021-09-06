@@ -27,4 +27,26 @@ export default class FormModuleImports extends FormContent {
     console.log(changed);
     this.updateForm(TYPE_MODULES, changed);
   }
+
+  onChangeSubmoduleCheckbox(e) {
+    const { name, checked } = e.currentTarget;
+    console.log(e.currentTarget.id);
+    const changed = this.modules.map((c) => {
+      const changedModules = c.modules.map((m) => {
+        if (!m.submodules) {
+          return m;
+        }
+        const changedSubs = m.submodules.map((sm) => {
+          if (sm.id !== name) {
+            return sm;
+          }
+          return { ...sm, checked };
+        });
+        return { ...m, submodules: changedSubs };
+      });
+      return { ...c, modules: changedModules };
+    });
+    console.log(changed);
+    this.updateForm(TYPE_MODULES, changed);
+  }
 }

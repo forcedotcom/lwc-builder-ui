@@ -69,6 +69,7 @@ describe('my-build-js', () => {
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: false }
       }),
+      modules: [],
       componentName: 'MyLWC'
     };
 
@@ -76,7 +77,7 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
     )} extends LightningElement {\n`;
@@ -98,6 +99,7 @@ describe('my-build-js', () => {
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: false }
       }),
+      modules: [],
       componentName: 'MyLWC'
     };
 
@@ -105,7 +107,7 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
     )} extends LightningElement {\n`;
@@ -135,6 +137,7 @@ describe('my-build-js', () => {
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: false }
       }),
+      modules: [],
       componentName: 'MyLWC'
     };
 
@@ -142,8 +145,8 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
-    expectedJs += `import BaseChatMessage from 'lightningsnapin/baseChatMessage';\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
+    expectedJs += `import BaseChatMessage from 'lightningsnapin/baseChatMessage';\n\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
     )} extends LightningElement {\n`;
@@ -165,6 +168,7 @@ describe('my-build-js', () => {
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: false }
       }),
+      modules: [],
       componentName: 'MyLWC'
     };
 
@@ -172,8 +176,8 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
-    expectedJs += `import { assignHandler, maximize } from 'lightningsnapin/minimized';\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
+    expectedJs += `import { assignHandler, maximize } from 'lightningsnapin/minimized';\n\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
     )} extends LightningElement {\n`;
@@ -195,6 +199,7 @@ describe('my-build-js', () => {
         lightningSnapin__PreChat: { enabled: true },
         lightningSnapin__ChatHeader: { enabled: false }
       }),
+      modules: [],
       componentName: 'MyLWC'
     };
 
@@ -202,8 +207,8 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
-    expectedJs += `import BasePrechat from 'lightningsnapin/basePrechat';\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
+    expectedJs += `import BasePrechat from 'lightningsnapin/basePrechat';\n\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
     )} extends LightningElement {\n`;
@@ -224,6 +229,7 @@ describe('my-build-js', () => {
         lightningSnapin__PreChat: { enabled: false },
         lightningSnapin__ChatHeader: { enabled: true }
       }),
+      modules: [],
       componentName: 'MyLWC'
     };
 
@@ -231,8 +237,8 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
-    expectedJs += `import BaseChatHeader from 'lightningsnapin/baseChatHeader';\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
+    expectedJs += `import BaseChatHeader from 'lightningsnapin/baseChatHeader';\n\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
     )} extends LightningElement {\n`;

@@ -5,9 +5,18 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { pascalCase } from 'change-case';
+import {
+  MODULE_NAVIGATION_MIXIN_GENERATE_URL,
+  MODULE_NAVIGATION_MIXIN_NAVIGATE,
+  MODULE_PAGEREF_APP,
+  MODULE_PAGEREF_COMM_LOGIN,
+  MODULE_PAGEREF_KNOWLEDGE_ARTICLE,
+  MODULE_PAGEREF_LIGHTNING_COMPONENT
+} from '../constants/modules';
+import { buildImportsForJs } from './buildModuleImports';
 
 export const buildJs = (contents) => {
-  const { properties, targets, componentName } = contents;
+  const { properties, targets, componentName, modules: rawModules } = contents;
   const propNames = properties.map((p) => p.name);
 
   // https://developer.salesforce.com/docs/component-library/documentation/en/lwc/use_config_for_app_builder_email_app_pane
@@ -21,6 +30,16 @@ export const buildJs = (contents) => {
     'source',
     'subject'
   ];
+
+  // convert modules in handy form
+  const modules = rawModules.reduce((ms, c) => {
+    const mo = {};
+    c.modules.forEach((m) => {
+      mo[m.value] = m;
+    });
+    return { ...ms, ...mo };
+  }, {});
+  console.log('modules', modules);
 
   const recordRelatedProps = ['recordId', 'objectApiName'];
 
@@ -46,7 +65,7 @@ export const buildJs = (contents) => {
   const hasProperties = apis && apis.length > 0;
   const pascal = pascalCase(componentName);
   let js = '';
-  js += `import { LightningElement ${
+  js += `import { LightningElement${
     hasProperties ? ', api' : ''
   } } from "lwc";\n`;
   if (targets.lightningSnapin__ChatMessage.enabled) {
@@ -66,6 +85,12 @@ export const buildJs = (contents) => {
     js += `import BaseChatHeader from 'lightningsnapin/baseChatHeader';\n`;
   }
 
+  const imports = buildImportsForJs(modules);
+  if (imports && imports.length > 0) {
+    js += imports.join('\n');
+    js += '\n';
+  }
+
   if (
     targets.lightning__RecordAction.enabled &&
     !targets.lightning__RecordAction.headlessAction
@@ -73,7 +98,16 @@ export const buildJs = (contents) => {
     js += `import { CloseActionScreenEvent } from 'lightning/actions';\n`;
   }
 
-  js += `export default class ${pascal} extends LightningElement {\n`;
+  js += '\n';
+  if (
+    modules[MODULE_NAVIGATION_MIXIN_NAVIGATE.value]?.checked ||
+    modules[MODULE_NAVIGATION_MIXIN_GENERATE_URL.value]?.checked
+  ) {
+    js += `export default class ${pascal} extends NavigationMixin(LightningElement) {\n`;
+  } else {
+    js += `export default class ${pascal} extends LightningElement {\n`;
+  }
+
   js += apis
     .map((p) => {
       return p ? `\t@api\n\t${p};\n` : null;
@@ -85,6 +119,56 @@ export const buildJs = (contents) => {
       js += `\t@api\n\tinvoke() {\n\t\tconsole.log('headless quick action called');\n\t}\n`;
     } else {
       js += `\tcloseModal() {\n\t\tthis.dispatchEvent(new CloseActionScreenEvent());\n\t}\n`;
+    }
+  }
+
+  if (modules[MODULE_NAVIGATION_MIXIN_NAVIGATE.value]?.checked) {
+    const navigateSubmodules =
+      modules[MODULE_NAVIGATION_MIXIN_NAVIGATE.value]?.submodules
+        .filter((s) => s.checked)
+        .map((s) => {
+          switch (s.id) {
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_APP.value}`:
+              return `\tnavToApp() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__app',\n\t\t\tattributes: {\n\t\t\t\tappTarget: '[appId or appDeveloperName]',\n\t\t\t\tpageRef: {\n\t\t\t\t\t// PageReference\n\t\t\t\t}\n\t\t\t}\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`:
+              return `\tnavToComponent() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__component',\n\t\t\tattributes: {\n\t\t\t\tcomponentName: '[namespace__componentName]'\n\t\t\t}\n\t\t\tstate: {\n\t\t\t\t[namespace__key]: '[value]'\n\t\t\t}\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`:
+              return `\tnavToKnowledgeArticle() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__knowledgeArticlePage',\n\t\t\tattributes: {\n\t\t\t\tarticleType: '[API Name of the knowledge article record]',\n\t\t\t\turlName: '[urlName field value of KnowledgeArticleVersion]'\n\t\t\t}\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_COMM_LOGIN.value}`:
+              return `\tnavToExpSiteLogin() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'comm__loginPage',\n\t\t\tattributes: {\n\t\t\t\tactionName: '[login | logout]'\n\t\t\t}\n\t\t});\n\t}\n`;
+            default:
+              return null;
+          }
+        })
+        .filter((s) => !!s) ?? [];
+    if (navigateSubmodules && navigateSubmodules.length > 0) {
+      js += navigateSubmodules.join('\n');
+      js += '\n';
+    }
+  }
+
+  if (modules[MODULE_NAVIGATION_MIXIN_GENERATE_URL.value]?.checked) {
+    const generateUrlSubmodules =
+      modules[MODULE_NAVIGATION_MIXIN_GENERATE_URL.value]?.submodules
+        .filter((s) => s.checked)
+        .map((s) => {
+          switch (s.id) {
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_APP.value}`:
+              return `\tgenerateUrlToApp() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__app',\n\t\t\tattributes: {\n\t\t\t\tappTarget: '[appId or appDeveloperName]',\n\t\t\t\tpageRef: {\n\t\t\t\t\t// PageReference\n\t\t\t\t}\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`:
+              return `\tgenerateUrlToComponent() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__component',\n\t\t\tattributes: {\n\t\t\t\tcomponentName: '[namespace__componentName]'\n\t\t\t}\n\t\t\tstate: {\n\t\t\t\t[namespace__key]: '[value]'\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`:
+              return `\tgenerateUrlToKnowledgeArticle() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__knowledgeArticlePage',\n\t\t\tattributes: {\n\t\t\t\tarticleType: '[API Name of the knowledge article record]',\n\t\t\t\turlName: '[urlName field value of KnowledgeArticleVersion]'\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_COMM_LOGIN.value}`:
+              return `\tgenerateUrlToExpSiteLogin() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'comm__loginPage',\n\t\t\tattributes: {\n\t\t\t\tactionName: '[login|logout]'\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            default:
+              return null;
+          }
+        })
+        .filter((s) => !!s) ?? [];
+    if (generateUrlSubmodules && generateUrlSubmodules.length > 0) {
+      js += generateUrlSubmodules.join('\n');
+      js += '\n';
     }
   }
 
