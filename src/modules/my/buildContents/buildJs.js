@@ -74,6 +74,8 @@ export const buildJs = (contents) => {
   js += `import { LightningElement${
     hasProperties ? ', api' : ''
   } } from "lwc";\n`;
+
+  // Target Specific Imports
   if (targets.lightningSnapin__ChatMessage.enabled) {
     // https://developer.salesforce.com/docs/component-library/bundle/lightningsnapin-base-chat-message/documentation
     js += `import BaseChatMessage from 'lightningsnapin/baseChatMessage';\n`;
@@ -91,12 +93,14 @@ export const buildJs = (contents) => {
     js += `import BaseChatHeader from 'lightningsnapin/baseChatHeader';\n`;
   }
 
+  // Module Imports
   const imports = buildImportsForJs(modules);
   if (imports && imports.length > 0) {
     js += imports.join('\n');
     js += '\n';
   }
 
+  // Screen RecordAction Close Event
   if (
     targets.lightning__RecordAction.enabled &&
     !targets.lightning__RecordAction.headlessAction
@@ -105,6 +109,8 @@ export const buildJs = (contents) => {
   }
 
   js += '\n';
+
+  // LightningElement (+ NavigationMixin)
   if (
     modules[MODULE_NAVIGATION_MIXIN_NAVIGATE.value]?.checked ||
     modules[MODULE_NAVIGATION_MIXIN_GENERATE_URL.value]?.checked
@@ -114,12 +120,17 @@ export const buildJs = (contents) => {
     js += `export default class ${pascal} extends LightningElement {\n`;
   }
 
+  // @api variables
   js += apis
     .map((p) => {
       return p ? `\t@api\n\t${p};\n` : null;
     })
     .join('');
 
+  // TODO: @api getter/setter
+  // TODO: @wire
+
+  // LIFECYCLE HOOKS
   if (lifecycleHooks && lifecycleHooks.length > 0) {
     js += lifecycleHooks
       .filter((h) => !!h.checked)
@@ -146,6 +157,7 @@ export const buildJs = (contents) => {
       .join('\n');
   }
 
+  // RECORD ACTION
   if (targets.lightning__RecordAction.enabled) {
     if (targets.lightning__RecordAction.headlessAction) {
       js += `\t@api\n\tinvoke() {\n\t\tconsole.log('headless quick action called');\n\t}\n`;
@@ -154,6 +166,7 @@ export const buildJs = (contents) => {
     }
   }
 
+  // NavigationMixin.Navigate
   if (modules[MODULE_NAVIGATION_MIXIN_NAVIGATE.value]?.checked) {
     const navigateSubmodules =
       modules[MODULE_NAVIGATION_MIXIN_NAVIGATE.value]?.submodules
@@ -179,6 +192,7 @@ export const buildJs = (contents) => {
     }
   }
 
+  // NavigationMixin.GenerateUrl
   if (modules[MODULE_NAVIGATION_MIXIN_GENERATE_URL.value]?.checked) {
     const generateUrlSubmodules =
       modules[MODULE_NAVIGATION_MIXIN_GENERATE_URL.value]?.submodules
@@ -203,6 +217,8 @@ export const buildJs = (contents) => {
       js += '\n';
     }
   }
+
+  // Toast Notifications
 
   js += `}`;
 
