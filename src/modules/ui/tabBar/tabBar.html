@@ -1,0 +1,71 @@
+<!--
+  Copyright (c) 2019, salesforce.com, inc.
+  All rights reserved.
+  SPDX-License-Identifier: MIT
+  For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/MIT
+ -->
+
+<template>
+  <ul
+    class={computedListClass}
+    role="tablist"
+    aria-orientation={computedAriaOrientation}
+    onkeydown={handleKeyDown}
+  >
+    <template for:each={_allTabs} for:item="tab">
+      <template if:true={tab.visible}>
+        <li
+          data-tab
+          key={tab.value}
+          class={tab.class}
+          onclick={handleTabClick}
+          title={tab.title}
+          role="presentation"
+          data-label={tab.label}
+          data-tab-value={tab.value}
+        >
+          <a
+            class={tab.linkClass}
+            data-tab-value={tab.value}
+            data-label={tab.label}
+            role="tab"
+            href="javascript:void(0)"
+            onblur={handleBlur}
+            onfocus={handleFocus}
+            tabindex={tab.tabIndex}
+            aria-selected={tab.ariaSelected}
+          >
+            {tab.label}
+          </a>
+        </li>
+      </template>
+    </template>
+    <template if:true={overflowSupported}>
+      <li
+        data-overflow
+        class={computedOverflowClass}
+        style={computedOverflowVisibility}
+      >
+        <ui-button-menu
+          variant="bare"
+          alternative-text={i18n.moreAlternativeText}
+          title={i18n.moreTitle}
+          onselect={handleOverflowSelect}
+          icon-name="utility:chevrondown"
+          label={i18n.more}
+          menu-alignment="right"
+        >
+          <template for:each={_allTabs} for:item="tab">
+            <template if:false={tab.visible}>
+              <ui-menu-item
+                key={tab.value}
+                label={tab.label}
+                value={tab.value}
+              ></ui-menu-item>
+            </template>
+          </template>
+        </ui-button-menu>
+      </li>
+    </template>
+  </ul>
+</template>

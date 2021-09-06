@@ -1,0 +1,76 @@
+<!--
+  Copyright (c) 2019, salesforce.com, inc.
+  All rights reserved.
+  SPDX-License-Identifier: MIT
+  For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/MIT
+ -->
+
+<template>
+  <button
+    class={computedButtonClass}
+    disabled={disabled}
+    aria-expanded={computedAriaExpanded}
+    title={computedTitle}
+    accesskey={computedAccessKey}
+    value={value}
+    aria-haspopup="true"
+    onclick={handleButtonClick}
+    onkeydown={handleButtonKeyDown}
+    onblur={handleBlur}
+    onfocus={handleFocus}
+    type="button"
+    onmousedown={handleButtonMouseDown}
+  >
+    <abbr
+      if:true={isDraft}
+      class="slds-indicator_unsaved slds-p-right_xx-small"
+      title={draftAlternativeText}
+      >*</abbr
+    >
+    {label}
+
+    <template if:true={computedShowDownIcon}>
+      <span class="slds-icon_container slds-icon-utility-down" title="">
+        <svg
+          class="slds-icon slds-icon-text-default slds-icon_x-small"
+          aria-hidden="true"
+        >
+          <use
+            xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"
+          ></use>
+        </svg>
+        <span class="slds-assistive-text"></span>
+      </span>
+    </template>
+  </button>
+  <template if:true={_dropdownOpened}>
+    <div
+      class={computedDropdownClass}
+      onmousedown={handleDropdownMouseDown}
+      onmouseup={handleDropdownMouseUp}
+      onmouseleave={handleDropdownMouseLeave}
+      onscroll={handleDropdownScroll}
+    >
+      <template if:true={isLoading}>
+        <ui-spinner
+          size="small"
+          alternative-text={computedLoadingStateAlternativeText}
+        ></ui-spinner>
+      </template>
+      <template if:false={isLoading}>
+        <div
+          class="slds-dropdown__list slds-dropdown_length-with-icon-10"
+          role="menu"
+          onprivateselect={handleMenuItemPrivateSelect}
+          onprivateblur={handlePrivateBlur}
+          onprivatefocus={handlePrivateFocus}
+          onmouseover={handleMouseOverOnMenuItem}
+          onmouseout={allowBlur}
+          onkeydown={handleKeyOnMenuItem}
+        >
+          <slot></slot>
+        </div>
+      </template>
+    </div>
+  </template>
+</template>

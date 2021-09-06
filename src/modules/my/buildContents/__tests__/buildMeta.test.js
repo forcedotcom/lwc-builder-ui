@@ -6,8 +6,7 @@
  */
 
 import { buildMeta } from '../buildMeta';
-
-const LATEST_API_VERSION = '52.0';
+import { LATEST_API_VERSION } from '../../constants';
 
 describe('my-build-meta', () => {
   afterEach(() => {
@@ -20,12 +19,12 @@ describe('my-build-meta', () => {
   it('returns correct meta when masterLabel specified', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       masterLabel: 'Mylabel',
       targets: {},
       properties: [],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -45,12 +44,12 @@ describe('my-build-meta', () => {
   it('returns correct meta when description specified', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       description: 'My desc',
       targets: {},
       properties: [],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -70,7 +69,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for home pages', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -79,7 +78,7 @@ describe('my-build-meta', () => {
         }
       },
       properties: [],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -101,7 +100,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for app pages', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__AppPage: {
@@ -110,7 +109,7 @@ describe('my-build-meta', () => {
         }
       },
       properties: [],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -132,7 +131,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for community pages', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightningCommunity__Page: {
@@ -141,7 +140,7 @@ describe('my-build-meta', () => {
         }
       },
       properties: [],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -163,7 +162,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for record pages', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__RecordPage: {
@@ -172,7 +171,7 @@ describe('my-build-meta', () => {
         }
       },
       properties: [],
-      objects: [{ name: 'Account' }]
+      sobjects: [{ name: 'Account' }]
     };
 
     // WHEN
@@ -201,7 +200,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for small form factor', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__RecordPage: {
@@ -211,7 +210,7 @@ describe('my-build-meta', () => {
         }
       },
       properties: [],
-      objects: [{ name: 'Account' }]
+      sobjects: [{ name: 'Account' }]
     };
 
     // WHEN
@@ -243,7 +242,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for large form factor', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__RecordPage: {
@@ -253,7 +252,7 @@ describe('my-build-meta', () => {
         }
       },
       properties: [],
-      objects: [{ name: 'Account' }]
+      sobjects: [{ name: 'Account' }]
     };
 
     // WHEN
@@ -285,7 +284,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when apex property indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -301,7 +300,7 @@ describe('my-build-meta', () => {
           selectedTargets: ['lightning__HomePage']
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -328,7 +327,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when sobject property indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -344,7 +343,7 @@ describe('my-build-meta', () => {
           selectedTargets: ['lightning__HomePage']
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -371,7 +370,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with datasource indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -387,7 +386,7 @@ describe('my-build-meta', () => {
           datasource: 'MyDatasource'
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -414,7 +413,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when default property indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -430,7 +429,7 @@ describe('my-build-meta', () => {
           default: true
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -457,7 +456,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with description indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -473,7 +472,7 @@ describe('my-build-meta', () => {
           description: 'MyDesc'
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -500,7 +499,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with min / max indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -517,7 +516,7 @@ describe('my-build-meta', () => {
           max: 100
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -544,7 +543,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with label indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -560,7 +559,7 @@ describe('my-build-meta', () => {
           label: 'MyLabel'
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -587,7 +586,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with placeholder indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -603,7 +602,7 @@ describe('my-build-meta', () => {
           placeholder: 'MyPlaceholder'
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -630,7 +629,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when required property indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -646,7 +645,7 @@ describe('my-build-meta', () => {
           required: true
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -673,7 +672,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when lightning__FlowScreen input only prop', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__FlowScreen: {
@@ -689,7 +688,7 @@ describe('my-build-meta', () => {
           flowInput: true
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -716,7 +715,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when lightning__FlowScreen output only prop', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__FlowScreen: {
@@ -732,7 +731,7 @@ describe('my-build-meta', () => {
           flowOutput: true
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -759,7 +758,7 @@ describe('my-build-meta', () => {
   it('some property attributes ignored when lightning__FlowScreen', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__FlowScreen: {
@@ -778,7 +777,7 @@ describe('my-build-meta', () => {
           placeholder: 'MyPlaceholder'
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -823,7 +822,7 @@ describe('my-build-meta', () => {
           required: true
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -865,7 +864,7 @@ describe('my-build-meta', () => {
           type: 'String'
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -896,7 +895,7 @@ describe('my-build-meta', () => {
         }
       },
       properties: [],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -926,7 +925,7 @@ describe('my-build-meta', () => {
         }
       },
       properties: [],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -962,7 +961,7 @@ describe('my-build-meta', () => {
         }
       },
       properties: [],
-      objects: []
+      sobjects: []
     };
 
     // WHEN
@@ -1007,7 +1006,7 @@ describe('my-build-meta', () => {
           ]
         }
       ],
-      objects: []
+      sobjects: []
     };
 
     // WHEN

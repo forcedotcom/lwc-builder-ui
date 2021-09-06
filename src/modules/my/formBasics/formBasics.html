@@ -1,0 +1,260 @@
+<template>
+  <main>
+    <div class="form-wrapper">
+      <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label" for="component-name">
+          <abbr class="slds-required" title="required">* </abbr>
+          <span>Component Name</span>
+        </label>
+        <div class="slds-form-element__control">
+          <input
+            id="component-name"
+            type="text"
+            value={basics.componentName}
+            placeholder="sampleCompName1_23"
+            name="componentName"
+            onchange={onChangeInput}
+            required=""
+            class="slds-input"
+          />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label" for="api-version">
+          <abbr class="slds-required" title="required">* </abbr>
+          <span>API Version</span>
+        </label>
+        <div class="slds-form-element__control">
+          <div class="slds-select_container">
+            <select
+              class="slds-select"
+              id="api-version"
+              required=""
+              value={basics.apiVersion}
+              name="apiVersion"
+              onchange={onChangeSelect}
+            >
+              <option value="52.0">52.0 (Summer '21)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="slds-form-element slds-m-bottom_small">
+        <div class="slds-form-element__control">
+          <div class="slds-checkbox">
+            <input
+              type="checkbox"
+              name="isExposed"
+              id="is-exposed"
+              value={basics.isExposed}
+              checked={basics.isExposed}
+              onchange={onChangeCheckbox}
+            />
+            <label class="slds-checkbox__label" for="is-exposed">
+              <span class="slds-checkbox_faux"></span>
+              <span class="slds-form-element__label">Exposed</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label" for="master-label">
+          <span>Master Label</span>
+        </label>
+        <div class="slds-form-element__control">
+          <input
+            id="master-label"
+            type="text"
+            value={basics.masterLabel}
+            placeholder="Sample Comp Name 1 23"
+            name="masterLabel"
+            onchange={onChangeInput}
+            class="slds-input"
+          />
+        </div>
+      </div>
+      <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label" for="description">
+          <span>Description</span>
+        </label>
+        <div class="slds-form-element__control">
+          <input
+            id="description"
+            type="text"
+            value={basics.description}
+            name="description"
+            onchange={onChangeInput}
+            class="slds-input"
+          />
+        </div>
+      </div>
+
+      <div class="slds-p-bottom_x-small">
+        <label class="slds-form-element__label slds-m-bottom_x-small">
+          <span>
+            <span>Files </span>
+            <i>[.js and .js-meta.xml are required]</i></span
+          >
+        </label>
+
+        <div
+          class="slds-grid slds-gutters slds-wrap slds-grid_vertical-flex-start"
+        >
+          <div
+            class="
+              slds-col
+              slds-size_1-of-1
+              slds-medium-size_6-of-12
+              slds-large-size_3-of-12
+              slds-m-bottom_x-small
+            "
+          >
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <div class="slds-checkbox">
+                  <input
+                    type="checkbox"
+                    name="withHtml"
+                    id="with-html"
+                    value={basics.withHtml}
+                    checked={basics.withHtml}
+                    onchange={onChangeCheckbox}
+                  />
+                  <label class="slds-checkbox__label" for="with-html">
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-form-element__label"> HTML File </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="
+              slds-col
+              slds-size_1-of-1
+              slds-medium-size_6-of-12
+              slds-large-size_3-of-12
+              slds-m-bottom_x-small
+            "
+          >
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <div class="slds-checkbox">
+                  <input
+                    type="checkbox"
+                    name="withCss"
+                    id="with-css"
+                    value={basics.withCss}
+                    checked={basics.withCss}
+                    onchange={onChangeCheckbox}
+                  />
+                  <label class="slds-checkbox__label" for="with-css">
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-form-element__label"> CSS File </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="
+              slds-col
+              slds-size_1-of-1
+              slds-medium-size_6-of-12
+              slds-large-size_3-of-12
+              slds-m-bottom_x-small
+            "
+          >
+            <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+              <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                  <div class="slds-checkbox">
+                    <input
+                      type="checkbox"
+                      name="withSvg"
+                      id="with-svg"
+                      value={basics.withSvg}
+                      checked={basics.withSvg}
+                      onchange={onChangeCheckbox}
+                    />
+                    <label class="slds-checkbox__label" for="with-svg">
+                      <span class="slds-checkbox_faux"></span>
+                      <span class="slds-form-element__label"> SVG File </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <template if:true={basics.withSvg}>
+                <my-svg-uploader
+                  file-name={basics.svgFileName}
+                  file-content={basics.svgFileContent}
+                  onuploadsvg={handleSvgUpload}
+                ></my-svg-uploader>
+              </template>
+            </div>
+          </div>
+          <div
+            class="
+              slds-col
+              slds-size_1-of-1
+              slds-medium-size_6-of-12
+              slds-large-size_3-of-12
+              slds-m-bottom_x-small
+            "
+          >
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <div class="slds-checkbox">
+                  <input
+                    type="checkbox"
+                    name="withTest"
+                    id="with-test"
+                    value={basics.withTest}
+                    checked={basics.withTest}
+                    onchange={onChangeCheckbox}
+                  />
+                  <label class="slds-checkbox__label" for="with-test">
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-form-element__label"> Test File </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slds-p-bottom_small target-section">
+        <label class="slds-form-element__label">
+          <span>Where to use the Component?</span>
+        </label>
+
+        <div class="slds-grid slds-gutters slds-wrap">
+          <template for:each={targetsArr} for:item="target">
+            <div
+              key={target.value}
+              class="
+                slds-col
+                slds-size_1-of-1
+                slds-medium-size_1-of-2
+                slds-large-size_1-of-2
+              "
+            >
+              <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                  <my-target-definition
+                    target={target}
+                    onchangetarget={onChangeTargetValue}
+                  ></my-target-definition>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </main>
+</template>

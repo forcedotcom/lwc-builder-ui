@@ -35,7 +35,7 @@ describe('my-app', () => {
     // WHEN
     const form = element.shadowRoot.querySelector('my-form');
     form.dispatchEvent(
-      new CustomEvent('updatecontent', {
+      new CustomEvent('update', {
         detail: { componentName: 'MyNewCmp' }
       })
     );
@@ -61,7 +61,7 @@ describe('my-app', () => {
 
     // WHEN
     const form = element.shadowRoot.querySelector('my-form');
-    form.dispatchEvent(new CustomEvent('updatecontent', { detail: {} }));
+    form.dispatchEvent(new CustomEvent('update', { detail: {} }));
 
     // THEN
     // Return a promise to wait for any asynchronous DOM updates. Jest
@@ -84,7 +84,7 @@ describe('my-app', () => {
     document.body.appendChild(element);
     const form = element.shadowRoot.querySelector('my-form');
     form.dispatchEvent(
-      new CustomEvent('updatecontent', {
+      new CustomEvent('update', {
         detail: { componentName: 'MyNewCmp' }
       })
     );

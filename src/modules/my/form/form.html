@@ -1,405 +1,86 @@
 <template>
   <article class="slds-card">
     <div class="slds-card__body slds-card__body_inner">
-      <header class="slds-m-vertical_medium">
-        <div class="header-row">
-          <h1 class="slds-text-heading_large">LWC Builder</h1>
-          <a
-            href="https://github.com/developerforce/lwc-builder"
-            target="_blank"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-              ></path>
-            </svg>
-          </a>
-        </div>
-        <h2>Configure and build Lightning Web Component files</h2>
-      </header>
-      <main>
-        <div class="form-wrapper">
-          <div class="slds-form-element slds-m-bottom_small">
-            <label class="slds-form-element__label" for="component-name">
-              <abbr class="slds-required" title="required">* </abbr>
-              <span>Component Name</span>
-            </label>
-            <div class="slds-form-element__control">
-              <input
-                id="component-name"
-                type="text"
-                value={inputs.componentName}
-                placeholder="sampleCompName1_23"
-                name="componentName"
-                onchange={onChangeInput}
-                required=""
-                class="slds-input"
-              />
-            </div>
-          </div>
-          <div class="slds-form-element slds-m-bottom_small">
-            <label class="slds-form-element__label" for="api-version">
-              <abbr class="slds-required" title="required">* </abbr>
-              <span>API Version</span>
-            </label>
-            <div class="slds-form-element__control">
-              <div class="slds-select_container">
-                <select
-                  class="slds-select"
-                  id="api-version"
-                  required=""
-                  value={inputs.apiVersion}
-                  name="apiVersion"
-                  onchange={onChangeSelect}
-                >
-                  <option value="52.0">52.0 (Summer '21)</option>
-                </select>
-              </div>
-            </div>
-          </div>
+      <ui-tabset>
+        <template if:true={tabs.BASICS.isVisible}>
+          <ui-tab label={tabs.BASICS.label}>
+            <my-form-basics
+              tab={tabs.BASICS}
+              basics={basics}
+              targets={targets}
+              onupdate={onUpdate}
+            ></my-form-basics>
+          </ui-tab>
+        </template>
+        <template if:true={tabs.PROPERTIES.isVisible}>
+          <ui-tab label={tabs.PROPERTIES.label}>
+            <my-form-properties
+              tab={tabs.PROPERTIES}
+              properties={properties}
+              targets={targets}
+              onupdate={onUpdate}
+            ></my-form-properties>
+          </ui-tab>
+        </template>
+        <template if:true={tabs.MODULE_IMPORTS.isVisible}>
+          <ui-tab label={tabs.MODULE_IMPORTS.label}>
+            <my-form-module-imports
+              tab={tabs.MODULE_IMPORTS}
+              modules={modules}
+              onupdate={onUpdate}
+            ></my-form-module-imports>
+          </ui-tab>
+        </template>
 
-          <div class="slds-form-element slds-m-bottom_small">
-            <div class="slds-form-element__control">
-              <div class="slds-checkbox">
-                <input
-                  type="checkbox"
-                  name="isExposed"
-                  id="is-exposed"
-                  value={inputs.isExposed}
-                  checked={inputs.isExposed}
-                  onchange={onChangeCheckbox}
-                />
-                <label class="slds-checkbox__label" for="is-exposed">
-                  <span class="slds-checkbox_faux"></span>
-                  <span class="slds-form-element__label">Exposed</span>
-                </label>
-              </div>
-            </div>
-          </div>
+        <template if:true={tabs.STANDARD_COMPONENTS.isVisible}>
+          <ui-tab label={tabs.STANDARD_COMPONENTS.label}>
+            <my-form-standard-components
+              tab={tabs.STANDARD_COMPONENTS}
+              standard-components={standardComponents}
+              onupdate={onUpdate}
+            ></my-form-standard-components>
+          </ui-tab>
+        </template>
+        <template if:true={tabs.LIFECYCLE_HOOKS.isVisible}>
+          <ui-tab label={tabs.LIFECYCLE_HOOKS.label}>
+            <my-form-lifecycle-hooks
+              tab={tabs.LIFECYCLE_HOOKS}
+              lifecycle-hooks={lifecycleHooks}
+              onupdate={onUpdate}
+            ></my-form-lifecycle-hooks>
+          </ui-tab>
+        </template>
 
-          <div class="slds-form-element slds-m-bottom_small">
-            <label class="slds-form-element__label" for="master-label">
-              <span>Master Label</span>
-            </label>
-            <div class="slds-form-element__control">
-              <input
-                id="master-label"
-                type="text"
-                value={inputs.masterLabel}
-                placeholder="Sample Comp Name 1 23"
-                name="masterLabel"
-                onchange={onChangeInput}
-                class="slds-input"
-              />
-            </div>
-          </div>
-          <div class="slds-form-element slds-m-bottom_small">
-            <label class="slds-form-element__label" for="description">
-              <span>Description</span>
-            </label>
-            <div class="slds-form-element__control">
-              <input
-                id="description"
-                type="text"
-                value={inputs.description}
-                name="description"
-                onchange={onChangeInput}
-                class="slds-input"
-              />
-            </div>
-          </div>
+        <template if:true={tabs.EXPERIENCE_CLOUD.isVisible}>
+          <ui-tab label={tabs.EXPERIENCE_CLOUD.label}>
+            <my-form-experience-cloud
+              tab={tabs.EXPERIENCE_CLOUD}
+              experience-cloud-settings={experienceCloudSettings}
+              onupdate={onUpdate}
+            ></my-form-experience-cloud>
+          </ui-tab>
+        </template>
 
-          <div class="slds-p-bottom_x-small">
-            <label class="slds-form-element__label slds-m-bottom_x-small">
-              <span>
-                <span>Files </span>
-                <i>[.js and .js-meta.xml are required]</i></span
-              >
-            </label>
+        <template if:true={tabs.CUSTOM_PROPERTY_EDITOR.isVisible}>
+          <ui-tab label={tabs.CUSTOM_PROPERTY_EDITOR.label}>
+            <my-form-flow-custom-property-editor
+              tab={tabs.CUSTOM_PROPERTY_EDITOR}
+              custom-propery-editor={customPropertyEditor}
+              onupdate={onUpdate}
+            ></my-form-flow-custom-property-editor>
+          </ui-tab>
+        </template>
 
-            <div
-              class="
-                slds-grid slds-gutters slds-wrap
-                slds-grid_vertical-flex-start
-              "
-            >
-              <div
-                class="
-                  slds-col
-                  slds-size_1-of-1
-                  slds-medium-size_6-of-12
-                  slds-large-size_3-of-12
-                  slds-m-bottom_x-small
-                "
-              >
-                <div class="slds-form-element">
-                  <div class="slds-form-element__control">
-                    <div class="slds-checkbox">
-                      <input
-                        type="checkbox"
-                        name="withHtml"
-                        id="with-html"
-                        value={inputs.withHtml}
-                        checked={inputs.withHtml}
-                        onchange={onChangeCheckbox}
-                      />
-                      <label class="slds-checkbox__label" for="with-html">
-                        <span class="slds-checkbox_faux"></span>
-                        <span class="slds-form-element__label">
-                          HTML File
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="
-                  slds-col
-                  slds-size_1-of-1
-                  slds-medium-size_6-of-12
-                  slds-large-size_3-of-12
-                  slds-m-bottom_x-small
-                "
-              >
-                <div class="slds-form-element">
-                  <div class="slds-form-element__control">
-                    <div class="slds-checkbox">
-                      <input
-                        type="checkbox"
-                        name="withCss"
-                        id="with-css"
-                        value={inputs.withCss}
-                        checked={inputs.withCss}
-                        onchange={onChangeCheckbox}
-                      />
-                      <label class="slds-checkbox__label" for="with-css">
-                        <span class="slds-checkbox_faux"></span>
-                        <span class="slds-form-element__label"> CSS File </span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="
-                  slds-col
-                  slds-size_1-of-1
-                  slds-medium-size_6-of-12
-                  slds-large-size_3-of-12
-                  slds-m-bottom_x-small
-                "
-              >
-                <div
-                  class="slds-grid slds-wrap slds-grid_vertical-align-center"
-                >
-                  <div class="slds-form-element">
-                    <div class="slds-form-element__control">
-                      <div class="slds-checkbox">
-                        <input
-                          type="checkbox"
-                          name="withSvg"
-                          id="with-svg"
-                          value={inputs.withSvg}
-                          checked={inputs.withSvg}
-                          onchange={onChangeCheckbox}
-                        />
-                        <label class="slds-checkbox__label" for="with-svg">
-                          <span class="slds-checkbox_faux"></span>
-                          <span class="slds-form-element__label">
-                            SVG File
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <template if:true={inputs.withSvg}>
-                    <my-svg-uploader
-                      file-name={inputs.svgFileName}
-                      file-content={inputs.svgFileContent}
-                      onuploadsvg={handleSvgUpload}
-                    ></my-svg-uploader>
-                  </template>
-                </div>
-              </div>
-              <div
-                class="
-                  slds-col
-                  slds-size_1-of-1
-                  slds-medium-size_6-of-12
-                  slds-large-size_3-of-12
-                  slds-m-bottom_x-small
-                "
-              >
-                <div class="slds-form-element">
-                  <div class="slds-form-element__control">
-                    <div class="slds-checkbox">
-                      <input
-                        type="checkbox"
-                        name="withTest"
-                        id="with-test"
-                        value={inputs.withTest}
-                        checked={inputs.withTest}
-                        onchange={onChangeCheckbox}
-                      />
-                      <label class="slds-checkbox__label" for="with-test">
-                        <span class="slds-checkbox_faux"></span>
-                        <span class="slds-form-element__label">
-                          Test File
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="slds-p-bottom_small target-section">
-            <label class="slds-form-element__label">
-              <span>Where to use the Component?</span>
-            </label>
-
-            <div class="slds-grid slds-gutters slds-wrap">
-              <template for:each={targetsArr} for:item="target">
-                <div
-                  key={target.value}
-                  class="
-                    slds-col
-                    slds-size_1-of-1
-                    slds-medium-size_1-of-2
-                    slds-large-size_1-of-2
-                  "
-                >
-                  <div class="slds-form-element">
-                    <div class="slds-form-element__control">
-                      <my-target-definition
-                        target={target}
-                        onchangetarget={onChangeTargetValue}
-                      ></my-target-definition>
-                    </div>
-                  </div>
-                </div>
-              </template>
-            </div>
-          </div>
-        </div>
-      </main>
+        <template if:true={tabs.SOBJECTS.isVisible}>
+          <ui-tab label={tabs.SOBJECTS.label}>
+            <my-form-sobjects
+              tab={tabs.SOBJECTS}
+              sobjects={sobjects}
+              onupdate={onUpdate}
+            ></my-form-sobjects>
+          </ui-tab>
+        </template>
+      </ui-tabset>
     </div>
   </article>
-
-  <template if:true={hasPropertyTarget}>
-    <article class="slds-card">
-      <div class="slds-card__body slds-card__body_inner">
-        <div>
-          <h4>Properties</h4>
-          <div>
-            <ul>
-              <template for:each={inputs.propertyIds} for:item="pId">
-                <li key={pId}>
-                  <my-property-definition
-                    pid={pId}
-                    targets={inputs.targets}
-                    onchangepropdef={onChangePropertyRow}
-                    ondeletepropdef={deletePropertyRow}
-                  ></my-property-definition>
-                </li>
-              </template>
-            </ul>
-          </div>
-          <div>
-            <button
-              name="addPropertyRow"
-              class="slds-button slds-button_neutral slds-button_stretch"
-              onclick={addPropertyRow}
-              type="button"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 52 52"
-                class="slds-button__icon slds-button__icon_left"
-                aria-hidden="true"
-              >
-                <path
-                  d="M30 29h16.5c.8 0 1.5-.7 1.5-1.5v-3c0-.8-.7-1.5-1.5-1.5H30c-.6 0-1-.4-1-1V5.5c0-.8-.7-1.5-1.5-1.5h-3c-.8 0-1.5.7-1.5 1.5V22c0 .6-.4 1-1 1H5.5c-.8 0-1.5.7-1.5 1.5v3c0 .8.7 1.5 1.5 1.5H22c.6 0 1 .4 1 1v16.5c0 .8.7 1.5 1.5 1.5h3c.8 0 1.5-.7 1.5-1.5V30c0-.6.4-1 1-1z"
-                ></path>
-              </svg>
-
-              <span>Add Property</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </article>
-    <template if:true={isRecordPageSelected}>
-      <article class="slds-card">
-        <div class="slds-card__body slds-card__body_inner">
-          <div>
-            <h4>sObject API Names (RecordPage only)</h4>
-            <ul>
-              <template for:each={inputs.objectIds} for:item="oId">
-                <li key={oId}>
-                  <my-sobject-definition
-                    oid={oId}
-                    onchangesobj={onChangeObjectRow}
-                    ondeletesobj={deleteObjectRow}
-                  ></my-sobject-definition>
-                </li>
-              </template>
-            </ul>
-            <div>
-              <button
-                name="addObjectRow"
-                class="slds-button slds-button_neutral slds-button_stretch"
-                onclick={addObjectRow}
-                type="button"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 52 52"
-                  class="slds-button__icon slds-button__icon_left"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M30 29h16.5c.8 0 1.5-.7 1.5-1.5v-3c0-.8-.7-1.5-1.5-1.5H30c-.6 0-1-.4-1-1V5.5c0-.8-.7-1.5-1.5-1.5h-3c-.8 0-1.5.7-1.5 1.5V22c0 .6-.4 1-1 1H5.5c-.8 0-1.5.7-1.5 1.5v3c0 .8.7 1.5 1.5 1.5H22c.6 0 1 .4 1 1v16.5c0 .8.7 1.5 1.5 1.5h3c.8 0 1.5-.7 1.5-1.5V30c0-.6.4-1 1-1z"
-                  ></path>
-                </svg>
-                <span>Add sObject</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </article>
-    </template>
-
-    <template if:true={isFlowOnly}>
-      <article class="slds-card">
-        <div class="slds-card__body slds-card__body_inner">
-          <div class="slds-form-element slds-m-bottom_small">
-            <label class="slds-form-element__label" for="configuration-editor">
-              <span>Custom Property Editor Name (Flow Builder)</span>
-              <!-- https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.use_flow_custom_property_editor -->
-            </label>
-            <div class="slds-form-element__control">
-              <input
-                id="configuration-editor"
-                type="text"
-                value={inputs.configurationEditor}
-                placeholder="c-my-config-editor-comp"
-                name="configurationEditor"
-                onchange={onChangeInput}
-                class="slds-input"
-              />
-            </div>
-          </div>
-        </div>
-      </article>
-    </template>
-  </template>
 </template>

@@ -37,7 +37,7 @@ const buildTargets = (option) => {
       large: false,
       headlessAction: false,
       properties: [],
-      objects: []
+      sobjects: []
     };
     if (option) {
       for (const v in option) {

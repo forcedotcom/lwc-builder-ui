@@ -8,7 +8,6 @@ import { pascalCase } from 'change-case';
 
 export const buildJs = (contents) => {
   const { properties, targets, componentName } = contents;
-
   const propNames = properties.map((p) => p.name);
 
   // https://developer.salesforce.com/docs/component-library/documentation/en/lwc/use_config_for_app_builder_email_app_pane

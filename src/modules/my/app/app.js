@@ -18,6 +18,7 @@ export default class App extends LightningElement {
   }
 
   onUpdateForm(event) {
+    console.log(event.detail);
     this.contents = event.detail;
   }
 

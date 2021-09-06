@@ -1,0 +1,38 @@
+<template>
+  <div class="form-wrapper">
+    <ul>
+      <template for:each={modules} for:item="c">
+        <li key={c.category.id} class="slds-m-bottom_small">
+          <template if:true={c.category.label}>
+            <h1>{c.category.label}</h1>
+          </template>
+          <ul>
+            <template for:each={c.modules} for:item="m">
+              <div
+                class="slds-form-element slds-m-bottom_xx-small"
+                key={m.value}
+              >
+                <div class="slds-form-element__control">
+                  <div class="slds-checkbox">
+                    <input
+                      type="checkbox"
+                      name={m.value}
+                      id={m.value}
+                      value={m.value}
+                      checked={m.checked}
+                      onchange={onChangeCheckbox}
+                    />
+                    <label class="slds-checkbox__label" for={m.value}>
+                      <span class="slds-checkbox_faux"></span>
+                      <span class="slds-form-element__label">{m.label}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </ul>
+        </li>
+      </template>
+    </ul>
+  </div>
+</template>

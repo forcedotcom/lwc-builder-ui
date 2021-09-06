@@ -1,0 +1,49 @@
+<!--
+  Copyright (c) 2019, salesforce.com, inc.
+  All rights reserved.
+  SPDX-License-Identifier: MIT
+  For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/MIT
+ -->
+
+<template>
+  <a
+    href={computedHref}
+    target={_target}
+    role={computedRole}
+    tabindex={computedTabIndex}
+    accesskey={computedAccessKey}
+    aria-checked={computedAriaChecked}
+    aria-disabled={computedAriaDisabled}
+    download={download}
+    onclick={handleClick}
+    onfocus={handleFocus}
+    onkeydown={handleKeyDown}
+    onblur={handleBlur}
+  >
+    <span class="slds-truncate">
+      <template if:true={isMenuItemCheckbox}>
+        <span class="slds-icon_container slds-icon-utility-check" title="">
+          <svg
+            class="slds-icon slds-icon-text-default slds-icon_x-small"
+            aria-hidden="true"
+          >
+            <use
+              xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check"
+            ></use>
+          </svg>
+          <span class="slds-assistive-text"></span>
+        </span>
+      </template>
+
+      <!-- draft marker -->
+      <abbr
+        if:true={isDraft}
+        class="slds-indicator_unsaved"
+        title={draftAlternativeText}
+        >*</abbr
+      >
+
+      {label}
+    </span>
+  </a>
+</template>

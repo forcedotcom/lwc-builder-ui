@@ -1,0 +1,23 @@
+<template>
+  <article class="slds-card">
+    <div class="slds-card__body slds-card__body_inner">
+      <div class="slds-form-element slds-m-bottom_small">
+        <label class="slds-form-element__label" for="custom-property-editor">
+          <span>Custom Property Editor Name (Flow Builder)</span>
+          <!-- https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.use_flow_custom_property_editor -->
+        </label>
+        <div class="slds-form-element__control">
+          <input
+            id="custom-property-editor"
+            type="text"
+            value={customPropertyEditor}
+            placeholder="c-my-config-editor-comp"
+            name="customPropertyEditor"
+            onchange={onChangeInput}
+            class="slds-input"
+          />
+        </div>
+      </div>
+    </div>
+  </article>
+</template>

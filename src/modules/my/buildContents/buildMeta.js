@@ -6,20 +6,24 @@
  */
 export const buildMeta = (contents) => {
   const {
+    customPropertyEditor,
     apiVersion,
     isExposed,
     masterLabel,
     description,
     targets,
     properties,
-    objects,
-    configurationEditor
+    sobjects
   } = contents;
 
-  const enabledTargetArray = Object.values(targets).filter((t) => t.enabled);
+  const enabledTargetArray = Object.values(targets)
+    .filter((t) => t.enabled)
+    .map((t) => {
+      return { ...t };
+    });
   enabledTargetArray.forEach((t) => {
     t.properties = [];
-    t.objects = [];
+    t.sobjects = [];
   });
 
   properties.forEach((p) => {
@@ -27,12 +31,12 @@ export const buildMeta = (contents) => {
       enabledTargetArray.find((t) => t.value === st).properties.push(p);
     });
   });
-  if (objects.length > 0) {
+  if (sobjects.length > 0) {
     const recordPage = enabledTargetArray.find(
       (t) => t.value === 'lightning__RecordPage'
     );
     if (recordPage) {
-      recordPage.objects = objects;
+      recordPage.sobjects = sobjects;
     }
   }
 
@@ -56,12 +60,12 @@ export const buildMeta = (contents) => {
     let targetConfigs = '';
     if (
       properties.length > 0 ||
-      objects.length > 0 ||
+      sobjects.length > 0 ||
       enabledTargetArray.find((t) => t.small || t.large) ||
       enabledTargetArray.find((t) => t.value === 'lightning__RecordAction') ||
       (enabledTargetArray.length === 1 &&
         enabledTargetArray[0].value === 'lightning__FlowScreen' &&
-        configurationEditor)
+        customPropertyEditor)
     ) {
       for (let t of enabledTargetArray) {
         // No targetConfig, property support
@@ -74,7 +78,7 @@ export const buildMeta = (contents) => {
         }
         if (
           t.properties.length === 0 &&
-          t.objects.length === 0 &&
+          t.sobjects.length === 0 &&
           !(
             (t.value === 'lightning__AppPage' ||
               t.value === 'lightning__HomePage' ||
@@ -85,7 +89,7 @@ export const buildMeta = (contents) => {
           !(
             enabledTargetArray.length === 1 &&
             enabledTargetArray[0].value === 'lightning__FlowScreen' &&
-            configurationEditor
+            customPropertyEditor
           )
         ) {
           continue;
@@ -95,9 +99,9 @@ export const buildMeta = (contents) => {
         if (
           enabledTargetArray.length === 1 &&
           t.value === 'lightning__FlowScreen' &&
-          configurationEditor
+          customPropertyEditor
         ) {
-          targetConfigs += `\t\t<targetConfig targets="${t.value}" configurationEditor="${configurationEditor}">\n`;
+          targetConfigs += `\t\t<targetConfig targets="${t.value}" configurationEditor="${customPropertyEditor}">\n`;
         } else {
           targetConfigs += `\t\t<targetConfig targets="${t.value}">\n`;
         }
@@ -197,9 +201,9 @@ export const buildMeta = (contents) => {
         }
 
         // Specific sObject targeting
-        if (t.value === 'lightning__RecordPage' && t.objects.length > 0) {
+        if (t.value === 'lightning__RecordPage' && t.sobjects.length > 0) {
           targetConfigs += `\t\t\t<objects>\n`;
-          targetConfigs += t.objects
+          targetConfigs += t.sobjects
             .map((o) => {
               return `\t\t\t\t<object>${o.name}</object>`;
             })

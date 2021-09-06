@@ -18,5 +18,13 @@ export const buildContents = (contents) => {
   const svg = buildSvg(contents);
   const meta = buildMeta(contents);
   const test = buildTest(contents);
-  return { ...contents, html, js, css, meta, svg, test };
+  return {
+    componentName: contents.componentName,
+    html,
+    js,
+    css,
+    meta,
+    svg,
+    test
+  };
 };

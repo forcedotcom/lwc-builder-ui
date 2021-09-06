@@ -6,56 +6,33 @@
  */
 import { LightningElement, api, track } from 'lwc';
 import { sentenceCase, camelCase } from 'change-case';
+import { DEFAULT_PROPERTY, CMS_FILTERS } from '../constants';
+import { NON_PROPERTY_TARGETS } from '../constants/target';
 
 export default class PropertyDefinition extends LightningElement {
   @api
   pid = '';
 
   @api
-  targets = [];
+  targets = {};
 
+  // TODO: change to api, manage in parent component
   @track
-  property = {
-    name: '',
-    targets: [],
-    selectedTargets: [],
-    type: '',
-    description: '',
-    label: '',
-    default: '',
-    apexClassName: '',
-    sObjectName: '',
-    min: '',
-    max: '',
-    placeholder: '',
-    required: false,
-    flowInput: true,
-    flowOutput: true,
-    datasource: '',
-    cmsFilters: []
-  };
+  property = { ...DEFAULT_PROPERTY };
 
-  filters = [
-    { id: 'cms_document', name: 'CMS Document', value: 'cms_document' },
-    { id: 'cms_image', name: 'CMS Image', value: 'cms_image' },
-    { id: 'cms_video', name: 'CMS Video', value: 'cms_video' },
-    { id: 'news', name: 'News', value: 'news' }
-  ];
+  filters = CMS_FILTERS;
 
   @track
   customFilters = [{ id: 1, value: '' }];
   nextCustomFilterId = 2;
 
-  nonPropertyTargets = [
-    'lightning__Tab',
-    'lightningSnapin__ChatMessage',
-    'lightningCommunity__Page',
-    'lightningSnapin__Minimized',
-    'lightningSnapin__PreChat',
-    'lightningSnapin__ChatHeader'
-  ];
+  nonPropertyTargets = NON_PROPERTY_TARGETS;
 
   get enabledTargets() {
+    console.log(this.targets);
+    if (!this.targets) {
+      return [];
+    }
     const enabled = Object.values(this.targets)
       .filter((t) => t.enabled)
       .filter((t) => !this.nonPropertyTargets.includes(t.value));
@@ -201,7 +178,7 @@ export default class PropertyDefinition extends LightningElement {
     const key = e.target.attributes.name.value;
     this.property[key] = e.target.checked;
 
-    // fix for "You can’t make an output only property required.""
+    // TODO: fix for "You can’t make an output only property required.""
     if (
       this.supportsFlow &&
       key === 'required' &&
