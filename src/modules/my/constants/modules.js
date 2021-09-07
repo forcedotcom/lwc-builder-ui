@@ -4,32 +4,32 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-const CATEGORY_NONE = {
+export const CATEGORY_NONE = {
   label: '',
   id: 'none'
 };
-const CATEGORY_EXPERIENCE_CLOUD = {
+export const CATEGORY_EXPERIENCE_CLOUD = {
   label: 'Experience Cloud',
   id: 'exp'
 };
-const CATEGORY_I18N = {
+export const CATEGORY_I18N = {
   label: 'Internationalization i18n',
   id: 'i18n'
 };
-const CATEGORY_USER = {
+export const CATEGORY_USER = {
   label: 'User',
   id: 'user'
 };
-const CATEGORY_CONTEXT = {
+export const CATEGORY_CONTEXT = {
   label: 'Context',
   id: 'context'
 };
-const CATEGORY_FILE = {
+export const CATEGORY_FILE = {
   label: 'File',
   id: 'file'
 };
 
-const CATEGORY_SPECIAL = {
+export const CATEGORY_SPECIAL = {
   label: 'Spécialité',
   id: 'special'
 };
@@ -41,6 +41,8 @@ export const MODULE_TOAST = {
   help: 'A toast notification pops up to alert users of a success, error, or warning',
   url: 'https://developer.salesforce.com/docs/component-library/documentation/lwc/use_toast'
 };
+
+/* PageReferences */
 export const MODULE_PAGEREF_APP = {
   label: 'App Type',
   value: 'standard__app',
@@ -134,28 +136,35 @@ export const MODULE_FORM_FACTOR = {
   url: ''
 };
 export const MODULE_REGION_WIDTH = {
-  label: 'Flexipage Region Width',
+  label: '@api flexipageRegionWidth',
   value: 'flexipageRegionWidth',
-  help: 'width-aware',
+  help: 'Make the component aware of its region width',
   url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/use_width_aware'
 };
 export const MODULE_RECORD_ID = {
   // need to add in metadata in lightningCommunity__Default target
-  label: 'Record Id',
+  label: '@api recordId',
   value: 'recordId',
   help: 'Make the component aware of its record context',
   url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.use_record_context'
 };
 export const MODULE_OBJECT_API_NAME = {
-  label: 'sObject API Name',
+  label: '@api objectApiName',
   value: 'objectApiName',
-  help: 'Make a component aware of its object context',
+  help: 'Make the component aware of its object context',
   url: ''
 };
 
 export const MODULE_USER_PERMISSION = {
   label: 'User Permission',
   value: 'userPermission',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_get_permissions'
+};
+
+export const MODULE_CUSTOM_PERMISSION = {
+  label: 'Custom Permission',
+  value: 'customPermission',
   help: '',
   url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_get_permissions'
 };
@@ -244,15 +253,20 @@ export const MODULE_IMPORTS = [
   {
     category: CATEGORY_CONTEXT,
     modules: [
-      MODULE_FORM_FACTOR,
-      MODULE_REGION_WIDTH,
       MODULE_RECORD_ID,
-      MODULE_OBJECT_API_NAME
+      MODULE_OBJECT_API_NAME,
+      MODULE_FORM_FACTOR,
+      MODULE_REGION_WIDTH
     ]
   },
   {
     category: CATEGORY_USER,
-    modules: [MODULE_USER_PERMISSION, MODULE_USER_ID, MODULE_USER_IS_GUEST]
+    modules: [
+      MODULE_USER_PERMISSION,
+      MODULE_CUSTOM_PERMISSION,
+      MODULE_USER_ID,
+      MODULE_USER_IS_GUEST
+    ]
   },
   {
     category: CATEGORY_EXPERIENCE_CLOUD,

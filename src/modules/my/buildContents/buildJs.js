@@ -8,10 +8,13 @@ import { pascalCase } from 'change-case';
 import {
   MODULE_NAVIGATION_MIXIN_GENERATE_URL,
   MODULE_NAVIGATION_MIXIN_NAVIGATE,
+  MODULE_OBJECT_API_NAME,
   MODULE_PAGEREF_APP,
   MODULE_PAGEREF_COMM_LOGIN,
   MODULE_PAGEREF_KNOWLEDGE_ARTICLE,
   MODULE_PAGEREF_LIGHTNING_COMPONENT,
+  MODULE_RECORD_ID,
+  MODULE_REGION_WIDTH,
   MODULE_TOAST
 } from '../constants/modules';
 import { buildImportsForJs } from './buildModuleImports';
@@ -46,9 +49,6 @@ export const buildJs = (contents) => {
     });
     return { ...ms, ...mo };
   }, {});
-  console.log('modules', modules);
-
-  const recordRelatedProps = ['recordId', 'objectApiName'];
 
   const apis = targets.lightning__Inbox.enabled
     ? [
@@ -56,15 +56,6 @@ export const buildJs = (contents) => {
         ...propNames,
         ...inboxProps.filter((ip) => {
           return !propNames.includes(ip);
-        })
-      ]
-    : targets.lightning__RecordPage.enabled ||
-      targets.lightning__RecordAction.enabled
-    ? [
-        // merge @api properties for Record related target.
-        ...propNames,
-        ...recordRelatedProps.filter((rrp) => {
-          return !propNames.includes(rrp);
         })
       ]
     : propNames;
@@ -131,6 +122,16 @@ export const buildJs = (contents) => {
   // TODO: @api getter/setter
   // TODO: @wire
 
+  if (modules[MODULE_RECORD_ID.value]?.checked) {
+    js += `\t@api recordId;\n`;
+  }
+  if (modules[MODULE_OBJECT_API_NAME.value]?.checked) {
+    js += `\t@api objectApiName;\n`;
+  }
+  if (modules[MODULE_REGION_WIDTH.value]?.checked) {
+    js += `\t@api flexipageRegionWidth;\n`;
+  }
+
   // LIFECYCLE HOOKS
   if (lifecycleHooks && lifecycleHooks.length > 0) {
     js += lifecycleHooks
@@ -178,7 +179,7 @@ export const buildJs = (contents) => {
             case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_APP.value}`:
               return `\tnavToApp() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__app',\n\t\t\tattributes: {\n\t\t\t\tappTarget: '[appId or appDeveloperName of app]',\n\t\t\t\tpageRef: {\n\t\t\t\t\t// PageReference\n\t\t\t\t}\n\t\t\t}\n\t\t});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`:
-              return `\tnavToComponent() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__component',\n\t\t\tattributes: {\n\t\t\t\tcomponentName: '[namespace__componentName]'\n\t\t\t}\n\t\t\tstate: {\n\t\t\t\t[namespace__key]: '[Value]'\n\t\t\t}\n\t\t});\n\t}\n`;
+              return `\tnavToComponent() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__component',\n\t\t\tattributes: {\n\t\t\t\tcomponentName: '[namespace__componentName]'\n\t\t\t}\n\t\t\tstate: {\n\t\t\t\t// [namespace__key]: '[Value]'\n\t\t\t}\n\t\t});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`:
               return `\tnavToKnowledgeArticle() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__knowledgeArticlePage',\n\t\t\tattributes: {\n\t\t\t\tarticleType: '[The API Name of the knowledge article record]',\n\t\t\t\turlName: '[The value of urlName field of KnowledgeArticleVersion]'\n\t\t\t}\n\t\t});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_COMM_LOGIN.value}`:
@@ -204,7 +205,7 @@ export const buildJs = (contents) => {
             case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_APP.value}`:
               return `\tgenerateUrlToApp() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__app',\n\t\t\tattributes: {\n\t\t\t\tappTarget: '[appId or appDeveloperName of app]',\n\t\t\t\tpageRef: {\n\t\t\t\t\t// PageReference\n\t\t\t\t}\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`:
-              return `\tgenerateUrlToComponent() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__component',\n\t\t\tattributes: {\n\t\t\t\tcomponentName: '[namespace__componentName]'\n\t\t\t}\n\t\t\tstate: {\n\t\t\t\t[namespace__key]: '[Value]'\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+              return `\tgenerateUrlToComponent() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__component',\n\t\t\tattributes: {\n\t\t\t\tcomponentName: '[namespace__componentName]'\n\t\t\t}\n\t\t\tstate: {\n\t\t\t\t// [namespace__key]: '[Value]'\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`:
               return `\tgenerateUrlToKnowledgeArticle() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__knowledgeArticlePage',\n\t\t\tattributes: {\n\t\t\t\tarticleType: '[The API Name of the knowledge article record]',\n\t\t\t\turlName: '[The value of urlName field of KnowledgeArticleVersion'\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_COMM_LOGIN.value}`:

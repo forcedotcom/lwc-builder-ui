@@ -29,7 +29,6 @@ export default class PropertyDefinition extends LightningElement {
   nonPropertyTargets = NON_PROPERTY_TARGETS;
 
   get enabledTargets() {
-    console.log(this.targets);
     if (!this.targets) {
       return [];
     }

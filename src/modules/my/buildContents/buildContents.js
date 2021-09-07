@@ -19,7 +19,7 @@ export const buildContents = (contents) => {
   const meta = buildMeta(contents);
   const test = buildTest(contents);
   return {
-    componentName: contents.componentName,
+    ...contents,
     html,
     js,
     css,

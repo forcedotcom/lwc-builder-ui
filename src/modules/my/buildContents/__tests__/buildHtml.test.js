@@ -23,8 +23,8 @@ describe('my-build-html', () => {
     const html = buildHtml(contents);
 
     // THEN
-    expect(html).toBe(`<template>
-    <h1>${contents.componentName}</h1>
-</template>`);
+    expect(html).toBe(
+      `<template>\n\t<h1>${contents.componentName}</h1>\n</template>\n`
+    );
   });
 });

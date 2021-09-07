@@ -29,7 +29,6 @@ export default class FormLifecycleHooks extends FormContent {
       }
       return h;
     });
-    console.log(changed);
     this.updateForm(TYPE_LIFECYCLE_HOOKS, changed);
   }
 }

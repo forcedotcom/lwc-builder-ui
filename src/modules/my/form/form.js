@@ -8,7 +8,11 @@ import { LightningElement, track } from 'lwc';
 import { buildContents } from 'my/buildContents';
 import { DEFAULT_BASICS } from '../constants';
 import { TABS } from '../constants/tab';
-import { MODULE_IMPORTS } from '../constants/modules';
+import {
+  MODULE_IMPORTS,
+  MODULE_RECORD_ID,
+  CATEGORY_CONTEXT
+} from '../constants/modules';
 import { TARGETS, NON_PROPERTY_TARGETS } from '../constants/target';
 import {
   TYPE_BASICS,
@@ -22,6 +26,7 @@ import {
   TYPE_SOBJECTS
 } from '../constants/formEvents';
 import { LIFECYCLE_HOOKS } from '../constants/lifecycleHooks';
+import { STANDARD_COMPONENTS } from '../constants/standardComponents';
 export default class Form extends LightningElement {
   @track
   basics = DEFAULT_BASICS;
@@ -30,7 +35,7 @@ export default class Form extends LightningElement {
   @track
   modules = [...MODULE_IMPORTS];
   @track
-  standardComponents = [];
+  standardComponents = [...STANDARD_COMPONENTS];
   @track
   properties = [];
   @track
@@ -79,6 +84,7 @@ export default class Form extends LightningElement {
         break;
       case TYPE_TARGETS:
         this.targets = { ...this.targets, ...value };
+        this.updateTargetRelatedValues(value);
         break;
       case TYPE_PROPERTIES:
         this.properties = value;
@@ -106,6 +112,23 @@ export default class Form extends LightningElement {
     }
     this.updateTabStatus();
     this.fireUpdateEvent();
+  }
+
+  updateTargetRelatedValues(changedValue) {
+    // Check on @recordId if the target is record related.
+    if (
+      changedValue[TARGETS.RecordPage.value]?.enabled ||
+      changedValue[TARGETS.RecordAction.value]?.enabled
+    ) {
+      const copiedModule = JSON.parse(JSON.stringify(this.modules));
+      const recordIdModule = copiedModule
+        .find((m) => m.category.id === CATEGORY_CONTEXT.id)
+        ?.modules.find((m) => m.value === MODULE_RECORD_ID.value);
+      if (recordIdModule) {
+        recordIdModule.checked = true;
+        this.modules = copiedModule;
+      }
+    }
   }
 
   fireUpdateEvent() {

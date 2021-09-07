@@ -1,3 +1,56 @@
 <template>
-  <div>Standard components</div>
+  <ul>
+    <template for:each={standardComponents} for:item="c">
+      <li key={c.value}>
+        <div class="slds-form-element slds-m-bottom_x-small">
+          <div class="slds-form-element__control">
+            <div class="slds-checkbox">
+              <input
+                type="checkbox"
+                name={c.value}
+                id={c.value}
+                value={c.value}
+                checked={c.checked}
+                onchange={onChangeCheckbox}
+              />
+              <label class="slds-checkbox__label" for={c.value}>
+                <span class="slds-checkbox_faux"></span>
+                <span class="slds-form-element__label"> {c.label} </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <template if:true={c.checked}>
+          <template if:true={c.options}>
+            <ul class="slds-p-left_medium slds-m-bottom_x-small">
+              <template for:each={c.options} for:item="o">
+                <li key={o.value}>
+                  <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                      <div class="slds-checkbox">
+                        <input
+                          type="checkbox"
+                          name={o.value}
+                          id={o.value}
+                          value={o.value}
+                          checked={o.checked}
+                          onchange={onChangeCheckbox}
+                        />
+                        <label class="slds-checkbox__label" for={o.value}>
+                          <span class="slds-checkbox_faux"></span>
+                          <span class="slds-form-element__label">
+                            {o.label}
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </template>
+        </template>
+      </li>
+    </template>
+  </ul>
 </template>

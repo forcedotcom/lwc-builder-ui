@@ -27,6 +27,11 @@
                     <label class="slds-checkbox__label" for={m.value}>
                       <span class="slds-checkbox_faux"></span>
                       <span class="slds-form-element__label"> {m.label} </span>
+                      <template if:true={m.help}>
+                        <span class="slds-m-left_x-small module-import-help">
+                          {m.help}
+                        </span>
+                      </template>
                     </label>
                   </div>
                 </div>

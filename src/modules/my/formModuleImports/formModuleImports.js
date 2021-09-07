@@ -25,13 +25,11 @@ export default class FormModuleImports extends FormContent {
       });
       return { ...c, modules: changedModules };
     });
-    console.log(changed);
     this.updateForm(TYPE_MODULES, changed);
   }
 
   onChangeSubmoduleCheckbox(e) {
     const { name, checked } = e.currentTarget;
-    console.log(e.currentTarget.id);
     const changed = this.modules.map((c) => {
       const changedModules = c.modules.map((m) => {
         if (!m.submodules) {
@@ -47,7 +45,6 @@ export default class FormModuleImports extends FormContent {
       });
       return { ...c, modules: changedModules };
     });
-    console.log(changed);
     this.updateForm(TYPE_MODULES, changed);
   }
 }

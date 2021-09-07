@@ -7,6 +7,7 @@
 import { DEFAULT_BASICS } from './index';
 import { LIFECYCLE_HOOKS } from './lifecycleHooks';
 import { MODULE_IMPORTS } from './modules';
+import { STANDARD_COMPONENTS } from './standardComponents';
 import { TARGETS, OBJ_TARGETS } from './target';
 
 export const EXPECTED_TARGETS = Object.values(TARGETS);
@@ -18,6 +19,6 @@ export const EXPECTED_INPUTS = {
   modules: MODULE_IMPORTS,
   customPropertyEditor: {},
   lifecycleHooks: LIFECYCLE_HOOKS,
-  standardComponents: [],
+  standardComponents: STANDARD_COMPONENTS,
   experienceCloudSettings: []
 };
