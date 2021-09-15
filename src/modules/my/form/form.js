@@ -148,6 +148,8 @@ export default class Form extends LightningElement {
       (oId) => oId !== targetId
     );
     this.inputs.objects = this.inputs.objects.filter((o) => o.id !== targetId);
+    // update content when the object is deleted from config
+    this.updateContent();
   };
 
   onChangePropertyRow = (e) => {

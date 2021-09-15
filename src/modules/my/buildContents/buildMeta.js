@@ -122,7 +122,7 @@ export const buildMeta = (contents) => {
               propAttributes += ` datasource="${p.datasource}"`;
             }
             if (
-              p.default !== undefined &&
+              p.default &&
               !(
                 t.value === 'lightning__FlowScreen' &&
                 p.flowInput ^ p.flowOutput &&
@@ -136,14 +136,14 @@ export const buildMeta = (contents) => {
             }
             if (
               p.type === 'Integer' &&
-              p.min !== undefined &&
+              (p.min || p.min === 0) &&
               t.value !== 'lightning__FlowScreen'
             ) {
               propAttributes += ` min="${p.min}"`;
             }
             if (
               p.type === 'Integer' &&
-              p.max &&
+              (p.max || p.max === 0) &&
               t.value !== 'lightning__FlowScreen'
             ) {
               propAttributes += ` max="${p.max}"`;
