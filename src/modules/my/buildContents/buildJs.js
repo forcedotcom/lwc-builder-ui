@@ -146,7 +146,7 @@ export const buildJs = (contents) => {
             return `\tdisconnectedCallback(){}\n`;
           case 'renderedCallback':
             if (h.options[0]?.checked) {
-              return `\thasRendered = false;\n\trenderedCallback(){\n\t\tif(!this.hasRendered) {\n\t\t\tthis.hasRendered = true;\n\t\t\tconsole.log('First render');\n\t\t}\n\t}\n`;
+              return `\tisFirstRender = false;\n\trenderedCallback(){\n\t\tif(!this.isFirstRender) {\n\t\t\tthis.isFirstRender = true;\n\t\t\tconsole.log('First render');\n\t\t}\n\t}\n`;
             }
             return `\trenderedCallback(){}\n`;
           case 'errorCallback':
