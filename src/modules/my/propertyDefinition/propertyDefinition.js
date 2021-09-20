@@ -170,6 +170,12 @@ export default class PropertyDefinition extends LightningElement {
   onChangeSelect = (e) => {
     const key = e.target.attributes.name.value;
     this.property[key] = e.target.value;
+    // reset default, min, and max values on type change
+    if (key === 'type') {
+      this.property.min = '';
+      this.property.max = '';
+      this.property.default = '';
+    }
     this.updateProperty();
   };
 
