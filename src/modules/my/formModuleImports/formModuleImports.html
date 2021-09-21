@@ -1,12 +1,9 @@
 <template>
   <ul>
     <template for:each={modules} for:item="c">
-      <li key={c.category.id} class="slds-m-bottom_small">
+      <li key={c.category.id} class="slds-m-bottom_medium">
         <template if:true={c.category.label}>
-          <h1
-            class="slds-m-top_small slds-m-bottom_xx-small"
-            style="font-size: 1rem; font-weight: bold"
-          >
+          <h1 class="slds-m-bottom_x-small category-title">
             {c.category.label}
           </h1>
         </template>
@@ -27,12 +24,26 @@
                     <label class="slds-checkbox__label" for={m.value}>
                       <span class="slds-checkbox_faux"></span>
                       <span class="slds-form-element__label"> {m.label} </span>
-                      <template if:true={m.help}>
-                        <span class="slds-m-left_x-small module-import-help">
-                          {m.help}
-                        </span>
-                      </template>
                     </label>
+                    <template if:true={m.url}>
+                      <span class="help-url">
+                        <a href={m.url} target="_blank">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 52 52"
+                          >
+                            <path
+                              d="M26 2C12.7 2 2 12.7 2 26s10.7 24 24 24 24-10.7 24-24S39.3 2 26 2zm0 12.1c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3zm5 21c0 .5-.4.9-1 .9h-8c-.5 0-1-.3-1-.9v-2c0-.5.4-1.1 1-1.1.5 0 1-.3 1-.9v-4c0-.5-.4-1.1-1-1.1-.5 0-1-.3-1-.9v-2c0-.5.4-1.1 1-1.1h6c.5 0 1 .5 1 1.1v8c0 .5.4.9 1 .9.5 0 1 .5 1 1.1v2z"
+                            ></path>
+                          </svg>
+                        </a>
+                      </span>
+                    </template>
+                    <template if:true={m.help}>
+                      <span class="slds-m-left_x-small module-import-help">
+                        {m.help}
+                      </span>
+                    </template>
                   </div>
                 </div>
               </div>
@@ -40,10 +51,7 @@
                 <template if:true={m.submodules}>
                   <ul class="slds-p-left_medium slds-m-bottom_x-small">
                     <template if:true={m.submoduleLabel}>
-                      <h1
-                        class="slds-m-bottom_xx-small"
-                        style="font-weight: bold"
-                      >
+                      <h1 class="slds-m-bottom_xx-small submodule-title">
                         {m.submoduleLabel}
                       </h1>
                     </template>

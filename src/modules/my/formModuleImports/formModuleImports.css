@@ -1,3 +1,15 @@
 .module-import-help {
   color: #888;
 }
+.category-title {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.submodule-title {
+  font-weight: bold;
+}
+.help-url {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}

@@ -4,8 +4,14 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
+
+/**
+ * Submodules : Multi select modules related to the parent module.
+ * Variants : Pick one.
+ */
+
 export const CATEGORY_NONE = {
-  label: '',
+  label: 'General',
   id: 'none'
 };
 export const CATEGORY_EXPERIENCE_CLOUD = {
@@ -23,6 +29,10 @@ export const CATEGORY_USER = {
 export const CATEGORY_CONTEXT = {
   label: 'Context',
   id: 'context'
+};
+export const CATEGORY_UI_RECORD_API = {
+  label: 'uiRecordApi',
+  id: 'uiRecordApi'
 };
 export const CATEGORY_FILE = {
   label: 'File',
@@ -117,12 +127,95 @@ export const MODULE_NAVIGATION_MIXIN_GENERATE_URL = {
     }
   ]
 };
-export const MODULE_UI_RECORD_API = {
-  label: 'UI Record API',
-  value: 'uiRecordApi',
+
+/* ===== uiRecordApi modules ===== */
+
+export const MODULE_UI_RECORD_API_CREATE_RECORD = {
+  label: 'createRecord',
+  value: 'createRecord',
   help: '',
-  url: ''
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_create_record'
 };
+export const MODULE_UI_RECORD_API_CREATE_RECORD_INPUT_FILTERED_BY_EDITED_FIELDS =
+  {
+    label: 'createRecordInputFilteredByEditedFields',
+    value: 'createRecordInputFilteredByEditedFields',
+    help: '',
+    url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_create_record_input_update'
+  };
+export const MODULE_UI_RECORD_API_DELETE_RECORD = {
+  label: 'deleteRecord',
+  value: 'deleteRecord',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_delete_record'
+};
+
+export const MODULE_UI_RECORD_API_GENERATE_RECORD_INPUT_FOR_CREATE = {
+  label: 'generateRecordInputForCreate',
+  value: 'generateRecordInputForCreate',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_generate_record_input_create'
+};
+export const MODULE_UI_RECORD_API_GENERATE_RECORD_INPUT_FOR_UPDATE = {
+  label: 'generateRecordInputForUpdate',
+  value: 'generateRecordInputForUpdate',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_generate_record_input_update'
+};
+export const MODULE_UI_RECORD_API_GET_FIELD_VALUE = {
+  label: 'getFieldValue',
+  value: 'getFieldValue',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_get_field_value'
+};
+
+export const MODULE_UI_RECORD_API_GET_FIELD_DISPLAY_VALUE = {
+  label: 'getFieldDisplayValue',
+  value: 'getFieldDisplayValue',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_get_field_display_value'
+};
+export const MODULE_UI_RECORD_API_GET_RECORD = {
+  label: 'getRecord',
+  value: 'getRecord',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_wire_adapters_record',
+  variantsLabel: 'Format',
+  variants: [
+    // Imperative
+    // Property
+  ]
+};
+export const MODULE_UI_RECORD_API_GET_RECORD_CREATE_DEFAULTS = {
+  label: 'getRecordCreateDefaults',
+  value: 'getRecordCreateDefaults',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_wire_adapters_create_record_values'
+};
+
+export const MODULE_UI_RECORD_API_GET_RECORD_NOTIFY_CHANGE = {
+  label: 'getRecordNotifyChange',
+  value: 'getRecordNotifyChange',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_get_record_notify'
+};
+
+export const MODULE_UI_RECORD_API_GET_RECORD_UI = {
+  label: 'getRecordUi',
+  value: 'getRecordUi',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_wire_adapters_record_ui'
+};
+
+export const MODULE_UI_RECORD_API_UPDATE_RECORD = {
+  label: 'updateRecord',
+  value: 'updateRecord',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_update_record'
+};
+
+/* ===== END uiRecordApi modules ===== */
+
 export const MODULE_LABEL = {
   label: 'Label',
   value: 'label',
@@ -246,7 +339,6 @@ export const MODULE_IMPORTS = [
       MODULE_TOAST,
       MODULE_NAVIGATION_MIXIN_NAVIGATE,
       MODULE_NAVIGATION_MIXIN_GENERATE_URL,
-      MODULE_UI_RECORD_API,
       MODULE_LABEL
     ]
   },
@@ -255,8 +347,25 @@ export const MODULE_IMPORTS = [
     modules: [
       MODULE_RECORD_ID,
       MODULE_OBJECT_API_NAME,
-      MODULE_FORM_FACTOR,
-      MODULE_REGION_WIDTH
+      MODULE_REGION_WIDTH,
+      MODULE_FORM_FACTOR
+    ]
+  },
+  {
+    category: CATEGORY_UI_RECORD_API,
+    modules: [
+      MODULE_UI_RECORD_API_CREATE_RECORD,
+      MODULE_UI_RECORD_API_CREATE_RECORD_INPUT_FILTERED_BY_EDITED_FIELDS,
+      MODULE_UI_RECORD_API_DELETE_RECORD,
+      MODULE_UI_RECORD_API_GENERATE_RECORD_INPUT_FOR_CREATE,
+      MODULE_UI_RECORD_API_GENERATE_RECORD_INPUT_FOR_UPDATE,
+      MODULE_UI_RECORD_API_GET_FIELD_VALUE,
+      MODULE_UI_RECORD_API_GET_FIELD_DISPLAY_VALUE,
+      MODULE_UI_RECORD_API_GET_RECORD,
+      MODULE_UI_RECORD_API_GET_RECORD_CREATE_DEFAULTS,
+      MODULE_UI_RECORD_API_GET_RECORD_NOTIFY_CHANGE,
+      MODULE_UI_RECORD_API_GET_RECORD_UI,
+      MODULE_UI_RECORD_API_UPDATE_RECORD
     ]
   },
   {
