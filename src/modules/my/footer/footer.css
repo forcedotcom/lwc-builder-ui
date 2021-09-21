@@ -18,3 +18,18 @@ footer {
   display: inline-flex;
   align-items: center;
 }
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .lwc-builder-footer {
+    color: white;
+  }
+  svg {
+    fill: #fff;
+  }
+  .lwc-builder-footer a {
+    color: #9bd1ff;
+  }
+  .lwc-builder-footer a:hover {
+    color: #c6e4ff;
+  }
+}

@@ -1,0 +1,12 @@
+@media (prefers-color-scheme: light) {
+  html {
+    background: linear-gradient(180deg, #fdfeff, #c8eaff);      
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  html {
+    background: linear-gradient(180deg, #004784, #333);
+  }
+}

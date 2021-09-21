@@ -6,3 +6,21 @@
 .header-row .slds-text-heading_large {
   flex: 1;
 }
+svg:hover {
+  transform: scale(1.1);
+}
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .lwc-builder-header {
+    color: white;
+  }
+  svg {
+    fill: #fff;
+  }
+  .lwc-builder-header a {
+    color: #9bd1ff;
+  }
+  .lwc-builder-header a:hover {
+    color: #c6e4ff;
+  }
+}
