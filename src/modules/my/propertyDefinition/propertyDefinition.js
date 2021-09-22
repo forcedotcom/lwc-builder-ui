@@ -18,9 +18,9 @@ export default class PropertyDefinition extends LightningElement {
 
   // TODO: change to api, manage in parent component
   @track
-  property = { ...DEFAULT_PROPERTY };
+  property = JSON.parse(JSON.stringify(DEFAULT_PROPERTY));
 
-  filters = CMS_FILTERS;
+  filters = JSON.parse(JSON.stringify(CMS_FILTERS));
 
   @track
   customFilters = [{ id: 1, value: '' }];

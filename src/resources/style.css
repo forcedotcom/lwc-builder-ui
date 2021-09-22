@@ -1,3 +1,7 @@
+.tab-content-title {
+  font-size: 1rem;
+  font-weight: bold;
+}
 @media (prefers-color-scheme: light) {
   html {
     background: linear-gradient(180deg, #fdfeff, #c8eaff);      

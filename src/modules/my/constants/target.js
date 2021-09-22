@@ -56,7 +56,7 @@ export const OBJ_TARGETS = () => {
   const targets = {};
   Object.values(TARGETS).forEach((t) => {
     targets[t.value] = {
-      ...DEFAULT_TARGET_VALUES,
+      ...JSON.parse(JSON.stringify(DEFAULT_TARGET_VALUES)),
       name: t.name,
       value: t.value
     };

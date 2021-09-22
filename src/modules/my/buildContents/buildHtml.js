@@ -21,8 +21,7 @@ export const buildHtml = (contents) => {
     targets?.lightning__RecordAction?.enabled &&
     !targets?.lightning__RecordAction?.headlessAction
   ) {
-    html += `<template>\n\t<lightning-quick-action-panel header="${componentName}">\n
-`;
+    html += `<template>\n\t<lightning-quick-action-panel header="${componentName}">\n\t\t<div>${componentName} Content</div>\n`;
   } else {
     html += `<template>\n\t<h1>${componentName}</h1>\n`;
   }
@@ -52,7 +51,7 @@ export const buildHtml = (contents) => {
     targets?.lightning__RecordAction?.enabled &&
     !targets?.lightning__RecordAction?.headlessAction
   ) {
-    html += `\n\t\t<div slot="footer">\n\t\t\t<lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>\n\t\t\t<lightning-button variant="brand" label="Action" class="slds-m-left_x-small"></lightning-button>\n\t\t</div>\n\t</lightning-quick-action-panel>\n</template>\n`;
+    html += `\t\t<div slot="footer">\n\t\t\t<lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>\n\t\t\t<lightning-button variant="brand" label="Action" class="slds-m-left_x-small"></lightning-button>\n\t\t</div>\n\t</lightning-quick-action-panel>\n</template>\n`;
   } else {
     html += `</template>\n`;
   }

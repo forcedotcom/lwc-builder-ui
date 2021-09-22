@@ -23,7 +23,10 @@ export default class FormProperties extends FormContent {
 
   addPropertyRow = () => {
     const id = `propertyId_${this.pDefCount++}`;
-    this.update([...this.properties, { ...DEFAULT_PROPERTY, id }]);
+    this.update([
+      ...this.properties,
+      { ...JSON.parse(JSON.stringify(DEFAULT_PROPERTY)), id }
+    ]);
   };
 
   deletePropertyRow = (e) => {
@@ -32,7 +35,9 @@ export default class FormProperties extends FormContent {
   };
 
   onChangePropertyRow = (e) => {
-    const properties = this.properties.filter((p) => p.id !== e.detail.id);
+    const properties = JSON.parse(
+      JSON.stringify(this.properties.filter((p) => p.id !== e.detail.id))
+    );
     properties.push(e.detail);
     this.update(properties);
   };

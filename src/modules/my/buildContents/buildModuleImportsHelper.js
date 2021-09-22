@@ -18,11 +18,13 @@ import {
   MODULE_EXP_SITE_ID,
   MODULE_EXP_SITE_BASE_PATH,
   MODULE_LABEL,
-  MODULE_BARCODE_SCANNER
+  MODULE_BARCODE_SCANNER,
+  MODULES_UI_RECORD_API,
+  MODULES_WIRE
 } from '../constants/modules';
 
 export const buildImportsForJs = (modules) => {
-  return Object.values(modules)
+  const imports = Object.values(modules)
     .filter((m) => m.checked)
     .map((m) => {
       switch (m.value) {
@@ -58,4 +60,25 @@ export const buildImportsForJs = (modules) => {
       }
     })
     .filter((m, index, self) => !!m && self.indexOf(m) === index);
+
+  // UI Record API
+  const uiRecordApi = Object.values(modules)
+    .filter(
+      (m) =>
+        m.checked && MODULES_UI_RECORD_API.find((ui) => ui.value === m.value)
+    )
+    .map((m) => m.value)
+    .join(', ');
+
+  if (uiRecordApi) {
+    imports.push(`import { ${uiRecordApi} } from 'lightning/uiRecordApi';`);
+  }
+
+  return imports;
+};
+
+export const checkWireModules = (modules) => {
+  return !!Object.values(modules)
+    .filter((m) => m.checked)
+    .find((m) => MODULES_WIRE.find((wm) => wm.value === m.value));
 };

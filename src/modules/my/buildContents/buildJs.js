@@ -15,9 +15,13 @@ import {
   MODULE_PAGEREF_LIGHTNING_COMPONENT,
   MODULE_RECORD_ID,
   MODULE_REGION_WIDTH,
-  MODULE_TOAST
+  MODULE_TOAST,
+  MODULE_UI_RECORD_API_GET_RECORD
 } from '../constants/modules';
-import { buildImportsForJs } from './buildModuleImports';
+import {
+  buildImportsForJs,
+  checkWireModules
+} from './buildModuleImportsHelper';
 
 export const buildJs = (contents) => {
   const {
@@ -61,10 +65,11 @@ export const buildJs = (contents) => {
     : propNames;
 
   const hasProperties = apis && apis.length > 0;
+  const hasWire = checkWireModules(modules);
   const pascal = pascalCase(componentName);
   let js = '';
-  js += `import { LightningElement${
-    hasProperties ? ', api' : ''
+  js += `import { LightningElement${hasProperties ? ', api' : ''}${
+    hasWire ? ', wire' : ''
   } } from "lwc";\n`;
 
   // Target Specific Imports
@@ -130,6 +135,32 @@ export const buildJs = (contents) => {
   }
   if (modules[MODULE_REGION_WIDTH.value]?.checked) {
     js += `\t@api flexipageRegionWidth;\n`;
+  }
+
+  /* ==== uiRecordApi @wire getRecord ==== */
+  if (modules[MODULE_UI_RECORD_API_GET_RECORD.value]?.checked) {
+    // property or function
+    const propOrFunc = modules[
+      MODULE_UI_RECORD_API_GET_RECORD.value
+    ].preferences.find((pf) => pf.id === 'getRecord_propertyOrFunction').value;
+    // param format
+    const fieldsOrLayoutType = modules[
+      MODULE_UI_RECORD_API_GET_RECORD.value
+    ].preferences.find((pf) => pf.id === 'getRecord_fieldsOrLayoutTypes').value;
+
+    js += `\t@wire(getRecord, { recordId: '${
+      modules[MODULE_RECORD_ID.value]?.checked ? '$recordId' : '{recordId}'
+    }', ${
+      fieldsOrLayoutType === 'getRecord_fieldsOrLayoutTypes_fields'
+        ? `fields: ['ObjectApiName.FieldName']`
+        : `layoutTypes: ['Full', 'Compact'], modes: ['Create', 'Edit', 'View']`
+    }, optionalFields: ['ObjectApiName.FieldName'] })\n`;
+
+    if (propOrFunc === 'getRecord_propertyOrFunction_property') {
+      js += `\trecord;`;
+    } else {
+      js += `\twiredRecord({ error, data }) {\n\t\tif (error) {\n\t\t\tconsole.error(error);\n\t\t} else if (data) {\n\t\t\tconsole.log(data);\n\t\t}\n\t}`;
+    }
   }
 
   // LIFECYCLE HOOKS

@@ -9,8 +9,8 @@
         </template>
         <ul>
           <template for:each={c.modules} for:item="m">
-            <li key={m.value}>
-              <div class="slds-form-element slds-m-bottom_x-small">
+            <li key={m.value} class="slds-m-bottom_small">
+              <div class="slds-form-element">
                 <div class="slds-form-element__control">
                   <div class="slds-checkbox">
                     <input
@@ -49,7 +49,15 @@
               </div>
               <template if:true={m.checked}>
                 <template if:true={m.submodules}>
-                  <ul class="slds-p-left_medium slds-m-bottom_x-small">
+                  <ul
+                    class="
+                      slds-box
+                      slds-m-left_large
+                      slds-m-top_x-small
+                      slds-m-bottom_small
+                      module-submodule-list
+                    "
+                  >
                     <template if:true={m.submoduleLabel}>
                       <h1 class="slds-m-bottom_xx-small submodule-title">
                         {m.submoduleLabel}
@@ -77,6 +85,61 @@
                             </div>
                           </div>
                         </div>
+                      </li>
+                    </template>
+                  </ul>
+                </template>
+
+                <template if:true={m.preferences}>
+                  <ul
+                    class="
+                      slds-box
+                      slds-m-left_large
+                      slds-m-top_x-small
+                      slds-m-bottom_small
+                      module-preference-list
+                    "
+                  >
+                    <template for:each={m.preferences} for:item="pf">
+                      <li
+                        key={pf.id}
+                        class="slds-m-bottom_x-small slds-m-right_medium"
+                      >
+                        <fieldset class="slds-form-element">
+                          <legend
+                            class="
+                              slds-form-element__legend slds-form-element__label
+                            "
+                          >
+                            {pf.label}
+                          </legend>
+                          <div class="slds-form-element__control">
+                            <div class="slds-radio_button-group">
+                              <template for:each={pf.options} for:item="o">
+                                <span
+                                  key={o.value}
+                                  class="slds-button slds-radio_button"
+                                >
+                                  <input
+                                    type="radio"
+                                    name={pf.id}
+                                    id={o.value}
+                                    value={o.value}
+                                    onchange={onChangePreference}
+                                  />
+                                  <label
+                                    class="slds-radio_button__label"
+                                    for={o.value}
+                                  >
+                                    <span class="slds-radio_faux"
+                                      >{o.label}</span
+                                    >
+                                  </label>
+                                </span>
+                              </template>
+                            </div>
+                          </div>
+                        </fieldset>
                       </li>
                     </template>
                   </ul>

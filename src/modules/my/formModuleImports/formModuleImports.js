@@ -28,6 +28,28 @@ export default class FormModuleImports extends FormContent {
     this.updateForm(TYPE_MODULES, changed);
   }
 
+  onChangePreference(e) {
+    const { name, value } = e.currentTarget;
+    console.log(name, value);
+
+    const changed = this.modules.map((c) => {
+      const changedModules = c.modules.map((m) => {
+        if (!m.preferences) {
+          return m;
+        }
+        const changedPreferences = m.preferences.map((pf) => {
+          if (pf.id !== name) {
+            return pf;
+          }
+          return { ...pf, value };
+        });
+        return { ...m, preferences: changedPreferences };
+      });
+      return { ...c, modules: changedModules };
+    });
+    this.updateForm(TYPE_MODULES, changed);
+  }
+
   onChangeSubmoduleCheckbox(e) {
     const { name, checked } = e.currentTarget;
     const changed = this.modules.map((c) => {

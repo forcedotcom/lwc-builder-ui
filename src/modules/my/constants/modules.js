@@ -7,7 +7,7 @@
 
 /**
  * Submodules : Multi select modules related to the parent module.
- * Variants : Pick one.
+ * Preferences : Pick one.
  */
 
 export const CATEGORY_NONE = {
@@ -44,7 +44,7 @@ export const CATEGORY_SPECIAL = {
   id: 'special'
 };
 
-/* MODULES */
+/* ===== MODULES ===== */
 export const MODULE_TOAST = {
   label: 'Toast Notifications',
   value: 'toast',
@@ -52,31 +52,32 @@ export const MODULE_TOAST = {
   url: 'https://developer.salesforce.com/docs/component-library/documentation/lwc/use_toast'
 };
 
-/* PageReferences */
+/* ===== PageReferences ===== */
 export const MODULE_PAGEREF_APP = {
-  label: 'App Type',
+  label: 'App',
   value: 'standard__app',
   help: '',
   url: ''
 };
 export const MODULE_PAGEREF_LIGHTNING_COMPONENT = {
-  label: 'Lightning Component Type',
+  label: 'Lightning Component',
   value: 'standard__component',
   help: '',
   url: ''
 };
 export const MODULE_PAGEREF_KNOWLEDGE_ARTICLE = {
-  label: 'Knowledge Article Page Type',
+  label: 'Knowledge Article Page',
   value: 'standard__knowledgeArticlePage',
   help: '',
   url: ''
 };
 export const MODULE_PAGEREF_COMM_LOGIN = {
-  label: 'Experience Cloud Site Login Page Type',
+  label: 'Experience Cloud Site Login Page',
   value: 'comm__loginPage',
   help: '',
   url: ''
 };
+/* ===== END PageReferences ===== */
 export const MODULE_NAVIGATION_MIXIN_NAVIGATE = {
   label: 'NavigationMixin.Navigate',
   value: 'NavigationMixin_Navigate',
@@ -180,10 +181,43 @@ export const MODULE_UI_RECORD_API_GET_RECORD = {
   value: 'getRecord',
   help: '',
   url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_wire_adapters_record',
-  variantsLabel: 'Format',
-  variants: [
-    // Imperative
-    // Property
+  preferences: [
+    {
+      label: '@wire',
+      id: 'getRecord_propertyOrFunction',
+      value: 'getRecord_propertyOrFunction_function',
+      defaultValue: 'getRecord_propertyOrFunction_function',
+      help: '',
+      url: '',
+      options: [
+        {
+          value: 'getRecord_propertyOrFunction_property',
+          label: 'Property'
+        },
+        {
+          value: 'getRecord_propertyOrFunction_function',
+          label: 'Function'
+        }
+      ]
+    },
+    {
+      label: '@wire params',
+      id: 'getRecord_fieldsOrLayoutTypes',
+      value: 'getRecord_fieldsOrLayoutTypes_fields',
+      defaultValue: 'getRecord_fieldsOrLayoutTypes_fields',
+      help: '',
+      url: '',
+      options: [
+        {
+          value: 'getRecord_fieldsOrLayoutTypes_fields',
+          label: 'fields'
+        },
+        {
+          value: 'getRecord_fieldsOrLayoutTypes_layoutTypes',
+          label: 'layoutTypes'
+        }
+      ]
+    }
   ]
 };
 export const MODULE_UI_RECORD_API_GET_RECORD_CREATE_DEFAULTS = {
@@ -263,7 +297,7 @@ export const MODULE_CUSTOM_PERMISSION = {
 };
 
 export const MODULE_USER_ID = {
-  label: 'User ID',
+  label: 'User Id',
   value: 'userId',
   help: '',
   url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.get_current_user'
@@ -276,7 +310,7 @@ export const MODULE_USER_IS_GUEST = {
 };
 
 export const MODULE_EXP_SITE_ID = {
-  label: 'Experience Cloud Site ID',
+  label: 'Experience Cloud Site Id',
   value: 'experienceCloudSiteId',
   help: '',
   url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_community_info'
@@ -332,6 +366,23 @@ export const MODULE_BARCODE_SCANNER = {
   url: ''
 };
 
+export const MODULES_UI_RECORD_API = [
+  MODULE_UI_RECORD_API_CREATE_RECORD,
+  // MODULE_UI_RECORD_API_CREATE_RECORD_INPUT_FILTERED_BY_EDITED_FIELDS,
+  MODULE_UI_RECORD_API_DELETE_RECORD,
+  // MODULE_UI_RECORD_API_GENERATE_RECORD_INPUT_FOR_CREATE,
+  // MODULE_UI_RECORD_API_GENERATE_RECORD_INPUT_FOR_UPDATE,
+  // MODULE_UI_RECORD_API_GET_FIELD_VALUE,
+  // MODULE_UI_RECORD_API_GET_FIELD_DISPLAY_VALUE,
+  MODULE_UI_RECORD_API_GET_RECORD,
+  // MODULE_UI_RECORD_API_GET_RECORD_CREATE_DEFAULTS,
+  // MODULE_UI_RECORD_API_GET_RECORD_NOTIFY_CHANGE,
+  // MODULE_UI_RECORD_API_GET_RECORD_UI,
+  MODULE_UI_RECORD_API_UPDATE_RECORD
+];
+
+export const MODULES_WIRE = [MODULE_UI_RECORD_API_GET_RECORD];
+
 export const MODULE_IMPORTS = [
   {
     category: CATEGORY_NONE,
@@ -353,20 +404,7 @@ export const MODULE_IMPORTS = [
   },
   {
     category: CATEGORY_UI_RECORD_API,
-    modules: [
-      MODULE_UI_RECORD_API_CREATE_RECORD,
-      MODULE_UI_RECORD_API_CREATE_RECORD_INPUT_FILTERED_BY_EDITED_FIELDS,
-      MODULE_UI_RECORD_API_DELETE_RECORD,
-      MODULE_UI_RECORD_API_GENERATE_RECORD_INPUT_FOR_CREATE,
-      MODULE_UI_RECORD_API_GENERATE_RECORD_INPUT_FOR_UPDATE,
-      MODULE_UI_RECORD_API_GET_FIELD_VALUE,
-      MODULE_UI_RECORD_API_GET_FIELD_DISPLAY_VALUE,
-      MODULE_UI_RECORD_API_GET_RECORD,
-      MODULE_UI_RECORD_API_GET_RECORD_CREATE_DEFAULTS,
-      MODULE_UI_RECORD_API_GET_RECORD_NOTIFY_CHANGE,
-      MODULE_UI_RECORD_API_GET_RECORD_UI,
-      MODULE_UI_RECORD_API_UPDATE_RECORD
-    ]
+    modules: MODULES_UI_RECORD_API
   },
   {
     category: CATEGORY_USER,
