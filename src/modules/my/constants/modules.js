@@ -77,6 +77,70 @@ export const MODULE_PAGEREF_COMM_LOGIN = {
   help: '',
   url: ''
 };
+export const MODULE_PAGEREF_CMS_PAGE = {
+  label: 'Managed Content Page (Salesforce CMS)',
+  value: 'standard__managedContentPage',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_EXP_NAMED_PAGE = {
+  label: 'Named Page Type (Experience Builder Sites)',
+  value: 'comm__namedPage',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_STD_NAMED_PAGE = {
+  label: 'Named Page Type (Standard)',
+  value: 'standard__namedPage',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_NAV_ITEM_PAGE = {
+  label: 'Navigation Item Page Type',
+  value: 'standard__navItemPage',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_OBJ_PAGE = {
+  label: 'Object Page Type',
+  value: 'standard__objectPage',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_RECORD_PAGE = {
+  label: 'Record Page Type',
+  value: 'standard__recordPage',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_RECORD_REL_PAGE = {
+  label: 'Record Relationship Page Type',
+  value: 'standard__recordRelationshipPage',
+  help: '',
+  url: ''
+};
+export const MODULE_PAGEREF_WEB_PAGE = {
+  label: 'Web Page Type',
+  value: 'standard__webPage',
+  help: '',
+  url: ''
+};
+
+export const MODULE_PAGEREFS = [
+  MODULE_PAGEREF_APP,
+  MODULE_PAGEREF_LIGHTNING_COMPONENT,
+  MODULE_PAGEREF_KNOWLEDGE_ARTICLE,
+  MODULE_PAGEREF_COMM_LOGIN,
+  MODULE_PAGEREF_CMS_PAGE,
+  MODULE_PAGEREF_EXP_NAMED_PAGE,
+  MODULE_PAGEREF_STD_NAMED_PAGE,
+  MODULE_PAGEREF_NAV_ITEM_PAGE,
+  MODULE_PAGEREF_OBJ_PAGE,
+  MODULE_PAGEREF_RECORD_PAGE,
+  MODULE_PAGEREF_RECORD_REL_PAGE,
+  MODULE_PAGEREF_WEB_PAGE
+];
+
 /* ===== END PageReferences ===== */
 export const MODULE_NAVIGATION_MIXIN_NAVIGATE = {
   label: 'NavigationMixin.Navigate',
@@ -84,24 +148,14 @@ export const MODULE_NAVIGATION_MIXIN_NAVIGATE = {
   help: '',
   url: '',
   submoduleLabel: 'PageReference Types',
-  submodules: [
-    {
-      ...MODULE_PAGEREF_APP,
-      id: `NavigationMixin_Navigate-${MODULE_PAGEREF_APP.value}`
-    },
-    {
-      ...MODULE_PAGEREF_LIGHTNING_COMPONENT,
-      id: `NavigationMixin_Navigate-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`
-    },
-    {
-      ...MODULE_PAGEREF_KNOWLEDGE_ARTICLE,
-      id: `NavigationMixin_Navigate-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`
-    },
-    {
-      ...MODULE_PAGEREF_COMM_LOGIN,
-      id: `NavigationMixin_Navigate-${MODULE_PAGEREF_COMM_LOGIN.value}`
-    }
-  ]
+  submoduleUrl:
+    'https://developer.salesforce.com/docs/component-library/documentation/lwc/reference_page_reference_type',
+  submodules: MODULE_PAGEREFS.map((m) => {
+    return {
+      ...m,
+      id: `NavigationMixin_Navigate-${m.value}`
+    };
+  })
 };
 export const MODULE_NAVIGATION_MIXIN_GENERATE_URL = {
   label: 'NavigationMixin.GenerateUrl',
@@ -109,24 +163,14 @@ export const MODULE_NAVIGATION_MIXIN_GENERATE_URL = {
   help: '',
   url: '',
   submoduleLabel: 'PageReference Types',
-  submodules: [
-    {
-      ...MODULE_PAGEREF_APP,
-      id: `NavigationMixin_GenerateUrl-${MODULE_PAGEREF_APP.value}`
-    },
-    {
-      ...MODULE_PAGEREF_LIGHTNING_COMPONENT,
-      id: `NavigationMixin_GenerateUrl-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`
-    },
-    {
-      ...MODULE_PAGEREF_KNOWLEDGE_ARTICLE,
-      id: `NavigationMixin_GenerateUrl-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`
-    },
-    {
-      ...MODULE_PAGEREF_COMM_LOGIN,
-      id: `NavigationMixin_GenerateUrl-${MODULE_PAGEREF_COMM_LOGIN.value}`
-    }
-  ]
+  submoduleUrl:
+    'https://developer.salesforce.com/docs/component-library/documentation/lwc/reference_page_reference_type',
+  submodules: MODULE_PAGEREFS.map((m) => {
+    return {
+      ...m,
+      id: `NavigationMixin_GenerateUrl-${m.value}`
+    };
+  })
 };
 
 /* ===== uiRecordApi modules ===== */
@@ -365,6 +409,19 @@ export const MODULE_BARCODE_SCANNER = {
   help: '',
   url: ''
 };
+/* ==== PAGE REFERENCE ATTRIBUTES ==== */
+export const PAGEREF_ATTR_APP_PAGE = `{\n\t\t\ttype: 'standard__app',\n\t\t\tattributes: {\n\t\t\t\tappTarget: '/* appId or appDeveloperName of app */',\n\t\t\t\tpageRef: { // Optional\n\t\t\t\t\t// PageReference\n\t\t\t\t}\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_LIGHTNING_COMPONENT_PAGE = `{\n\t\t\ttype: 'standard__component',\n\t\t\tattributes: {\n\t\t\t\tcomponentName: 'namespace__componentName'\n\t\t\t}\n\t\t\tstate: {\n\t\t\t\t// You can pass any key and value in the state object. \n\t\t\t\t// The key must include a namespace, and the value must be a string.\n\t\t\t\t// namespace__key: 'value'\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_KNOWLEDGE_ARTICLE_PAGE = `{\n\t\t\ttype: 'standard__knowledgeArticlePage',\n\t\t\tattributes: {\n\t\t\t\tarticleType: '/* The API Name of the knowledge article record */',\n\t\t\t\turlName: '/* The value of urlName field of KnowledgeArticleVersion */'\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_COMM_LOGIN_PAGE = `{\n\t\t\ttype: 'comm__loginPage',\n\t\t\tattributes: {\n\t\t\t\tactionName: '{ login | logout }'\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_CMS_PAGE = `{\n\t\t\ttype: 'standard__managedContentPage',\n\t\t\tattributes: {\n\t\t\t\tcontentTypeName: '{ news | cms_document | cms_image | cms_video | custom }',\n\t\t\t\tcontentKey: '/* The unique content key that identifies CMS content. */'\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_EXP_NAMED_PAGE = `{\n\t\t\ttype: 'comm__namedPage',\n\t\t\tattributes: {\n\t\t\t\tname: '{ Home | Account_Management | Contact_Support | Error | Login | My_Account | Top_Articles | Topic_Catalog | Custom_Page_Api_Name }'\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_STD_NAMED_PAGE = `{\n\t\t\ttype: 'standard__namedPage',\n\t\t\tattributes: {\n\t\t\t\tpageName: '{ home | chatter | today | dataAssessment | filePreview }',\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_NAV_ITEM_PAGE = `{\n\t\t\ttype: 'standard__navItemPage',\n\t\t\tattributes: {\n\t\t\t\tapiName: '/* customTabName */',\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_OBJ_PAGE = `{\n\t\t\ttype: 'standard__objectPage',\n\t\t\tattributes: {\n\t\t\t\tactionName: '{ home | list | new }',\n\t\t\t\tobjectApiName: '/* The API name of the standard or custom object */'\n\t\t\t},\n\t\t\tstate: {\n\t\t\t\t// filterName: 'Recent',\n\t\t\t\t// defaultFieldValues: 'FieldApiName=value,FieldApiName2=value2',\n\t\t\t\t// nooverride: '1'\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_RECORD_PAGE = `{\n\t\t\ttype: 'standard__recordPage',\n\t\t\tattributes: {\n\t\t\t\tactionName: '{ view | clone | edit }',\n\t\t\t\trecordId: '',\n\t\t\t\t// objectApiName: ''\n\t\t\t},\n\t\t\tstate: {\n\t\t\t\t// nooverride: '1'\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_RECORD_REL_PAGE = `{\n\t\t\ttype: 'standard__recordRelationshipPage',\n\t\t\tattributes: {\n\t\t\t\tactionName: 'view',\n\t\t\t\trecordId: '',\n\t\t\t\trelationshipApiName: '',\n\t\t\t\t// objectApiName: ''\n\t\t\t}\n\t\t}`;
+export const PAGEREF_ATTR_WEB_PAGE = `{\n\t\t\ttype: 'standard__webPage',\n\t\t\tattributes: {\n\t\t\t\turl: 'https://salesforce.com'\n\t\t\t}\n\t\t}`;
 
 export const MODULES_UI_RECORD_API = [
   MODULE_UI_RECORD_API_CREATE_RECORD,

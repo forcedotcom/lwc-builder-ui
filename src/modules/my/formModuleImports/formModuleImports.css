@@ -12,9 +12,16 @@
   display: inline-block;
   width: 16px;
   height: 16px;
+  vertical-align: text-bottom;
+}
+.help-url a,
+.help-url svg {
+  line-height: 16px;
+  height: 100%;
+  vertical-align: top;
 }
 .slds-form-element__legend.slds-form-element__label {
-  font-size: .8125rem;
+  font-size: 0.8125rem;
 }
 .module-preference-list {
 }

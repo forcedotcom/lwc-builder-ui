@@ -10,13 +10,33 @@ import {
   MODULE_NAVIGATION_MIXIN_NAVIGATE,
   MODULE_OBJECT_API_NAME,
   MODULE_PAGEREF_APP,
+  MODULE_PAGEREF_CMS_PAGE,
   MODULE_PAGEREF_COMM_LOGIN,
+  MODULE_PAGEREF_EXP_NAMED_PAGE,
   MODULE_PAGEREF_KNOWLEDGE_ARTICLE,
   MODULE_PAGEREF_LIGHTNING_COMPONENT,
+  MODULE_PAGEREF_NAV_ITEM_PAGE,
+  MODULE_PAGEREF_OBJ_PAGE,
+  MODULE_PAGEREF_RECORD_PAGE,
+  MODULE_PAGEREF_RECORD_REL_PAGE,
+  MODULE_PAGEREF_STD_NAMED_PAGE,
+  MODULE_PAGEREF_WEB_PAGE,
   MODULE_RECORD_ID,
   MODULE_REGION_WIDTH,
   MODULE_TOAST,
-  MODULE_UI_RECORD_API_GET_RECORD
+  MODULE_UI_RECORD_API_GET_RECORD,
+  PAGEREF_ATTR_APP_PAGE,
+  PAGEREF_ATTR_CMS_PAGE,
+  PAGEREF_ATTR_COMM_LOGIN_PAGE,
+  PAGEREF_ATTR_EXP_NAMED_PAGE,
+  PAGEREF_ATTR_KNOWLEDGE_ARTICLE_PAGE,
+  PAGEREF_ATTR_LIGHTNING_COMPONENT_PAGE,
+  PAGEREF_ATTR_NAV_ITEM_PAGE,
+  PAGEREF_ATTR_OBJ_PAGE,
+  PAGEREF_ATTR_RECORD_PAGE,
+  PAGEREF_ATTR_RECORD_REL_PAGE,
+  PAGEREF_ATTR_STD_NAMED_PAGE,
+  PAGEREF_ATTR_WEB_PAGE
 } from '../constants/modules';
 import {
   buildImportsForJs,
@@ -208,13 +228,29 @@ export const buildJs = (contents) => {
         .map((s) => {
           switch (s.id) {
             case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_APP.value}`:
-              return `\tnavToApp() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__app',\n\t\t\tattributes: {\n\t\t\t\tappTarget: '[appId or appDeveloperName of app]',\n\t\t\t\tpageRef: {\n\t\t\t\t\t// PageReference\n\t\t\t\t}\n\t\t\t}\n\t\t});\n\t}\n`;
+              return `\tnavToApp() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_APP_PAGE});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`:
-              return `\tnavToComponent() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__component',\n\t\t\tattributes: {\n\t\t\t\tcomponentName: '[namespace__componentName]'\n\t\t\t}\n\t\t\tstate: {\n\t\t\t\t// [namespace__key]: '[Value]'\n\t\t\t}\n\t\t});\n\t}\n`;
+              return `\tnavToLightningComponentPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_LIGHTNING_COMPONENT_PAGE});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`:
-              return `\tnavToKnowledgeArticle() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'standard__knowledgeArticlePage',\n\t\t\tattributes: {\n\t\t\t\tarticleType: '[The API Name of the knowledge article record]',\n\t\t\t\turlName: '[The value of urlName field of KnowledgeArticleVersion]'\n\t\t\t}\n\t\t});\n\t}\n`;
+              return `\tnavToKnowledgeArticle() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_KNOWLEDGE_ARTICLE_PAGE});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_COMM_LOGIN.value}`:
-              return `\tnavToExpSiteLogin() {\n\t\tthis[NavigationMixin.Navigate]({\n\t\t\ttype: 'comm__loginPage',\n\t\t\tattributes: {\n\t\t\t\tactionName: '[ login | logout ]'\n\t\t\t}\n\t\t});\n\t}\n`;
+              return `\tnavToExpSiteLoginPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_COMM_LOGIN_PAGE});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_CMS_PAGE.value}`:
+              return `\tnavToExpCmsPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_CMS_PAGE});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_EXP_NAMED_PAGE.value}`:
+              return `\tnavToExpNamedPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_EXP_NAMED_PAGE});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_STD_NAMED_PAGE.value}`:
+              return `\tnavToStdNamedPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_STD_NAMED_PAGE});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_NAV_ITEM_PAGE.value}`:
+              return `\tnavToNavItemPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_NAV_ITEM_PAGE});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_OBJ_PAGE.value}`:
+              return `\tnavToObjectPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_OBJ_PAGE});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_RECORD_PAGE.value}`:
+              return `\tnavToRecordPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_RECORD_PAGE});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_RECORD_REL_PAGE.value}`:
+              return `\tnavToRecordRelationshipPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_RECORD_REL_PAGE});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_NAVIGATE.value}-${MODULE_PAGEREF_WEB_PAGE.value}`:
+              return `\tnavToWebPage() {\n\t\tthis[NavigationMixin.Navigate](${PAGEREF_ATTR_WEB_PAGE});\n\t}\n`;
             default:
               return null;
           }
@@ -234,13 +270,29 @@ export const buildJs = (contents) => {
         .map((s) => {
           switch (s.id) {
             case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_APP.value}`:
-              return `\tgenerateUrlToApp() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__app',\n\t\t\tattributes: {\n\t\t\t\tappTarget: '[appId or appDeveloperName of app]',\n\t\t\t\tpageRef: {\n\t\t\t\t\t// PageReference\n\t\t\t\t}\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+              return `\tgenerateUrlToApp() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_APP_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_LIGHTNING_COMPONENT.value}`:
-              return `\tgenerateUrlToComponent() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__component',\n\t\t\tattributes: {\n\t\t\t\tcomponentName: '[namespace__componentName]'\n\t\t\t}\n\t\t\tstate: {\n\t\t\t\t// [namespace__key]: '[Value]'\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+              return `\tgenerateUrlToLightningComponentPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_LIGHTNING_COMPONENT_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_KNOWLEDGE_ARTICLE.value}`:
-              return `\tgenerateUrlToKnowledgeArticle() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'standard__knowledgeArticlePage',\n\t\t\tattributes: {\n\t\t\t\tarticleType: '[The API Name of the knowledge article record]',\n\t\t\t\turlName: '[The value of urlName field of KnowledgeArticleVersion'\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+              return `\tgenerateUrlToKnowledgeArticlePage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_KNOWLEDGE_ARTICLE_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
             case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_COMM_LOGIN.value}`:
-              return `\tgenerateUrlToExpSiteLogin() {\n\t\tthis[NavigationMixin.GenerateUrl]({\n\t\t\ttype: 'comm__loginPage',\n\t\t\tattributes: {\n\t\t\t\tactionName: '[ login | logout ]'\n\t\t\t}\n\t\t}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+              return `\tgenerateUrlToExpSiteLoginPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_COMM_LOGIN_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_CMS_PAGE.value}`:
+              return `\tgenerateUrlToExpCmsPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_CMS_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_EXP_NAMED_PAGE.value}`:
+              return `\tgenerateUrlToExpNamedPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_EXP_NAMED_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_STD_NAMED_PAGE.value}`:
+              return `\tgenerateUrlToStdNamedPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_STD_NAMED_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_NAV_ITEM_PAGE.value}`:
+              return `\tgenerateUrlToNavItemPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_NAV_ITEM_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_OBJ_PAGE.value}`:
+              return `\tgenerateUrlToObjPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_OBJ_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_RECORD_PAGE.value}`:
+              return `\tgenerateUrlToRecordPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_RECORD_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_RECORD_REL_PAGE.value}`:
+              return `\tgenerateUrlToRecordRelPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_RECORD_REL_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
+            case `${MODULE_NAVIGATION_MIXIN_GENERATE_URL.value}-${MODULE_PAGEREF_WEB_PAGE.value}`:
+              return `\tgenerateUrlToWebPage() {\n\t\tthis[NavigationMixin.GenerateUrl](${PAGEREF_ATTR_WEB_PAGE}).then(url => {\n\t\t\tconsole.log('Generated URL', url);\n\t\t});\n\t}\n`;
             default:
               return null;
           }
@@ -254,7 +306,7 @@ export const buildJs = (contents) => {
 
   // Toast Notifications
   if (modules[MODULE_TOAST.value]?.checked) {
-    js += `\tshowToastNotification() {\n\t\tthis.dispatchEvent(new ShowToastEvent({\n\t\t\ttitle: '[Title]',\n\t\t\tmessage: '[Message]',\n\t\t\tvariant: '[ info | success | warning | error ]',\n\t\t\tmode: '[ dismissable | pester | sticky ]'\n\t\t}));\n\t}\n`;
+    js += `\tshowToastNotification() {\n\t\tthis.dispatchEvent(new ShowToastEvent({\n\t\t\ttitle: 'Title',\n\t\t\tmessage: 'Message',\n\t\t\tvariant: '{ info | success | warning | error }',\n\t\t\tmode: '{ dismissable | pester | sticky }'\n\t\t}));\n\t}\n`;
   }
 
   js += `}`;
