@@ -6,6 +6,7 @@
  */
 import { pascalCase } from 'change-case';
 import {
+  MODULE_BARCODE_SCANNER,
   MODULE_NAVIGATION_MIXIN_GENERATE_URL,
   MODULE_NAVIGATION_MIXIN_NAVIGATE,
   MODULE_OBJECT_API_NAME,
@@ -307,6 +308,11 @@ export const buildJs = (contents) => {
   // Toast Notifications
   if (modules[MODULE_TOAST.value]?.checked) {
     js += `\tshowToastNotification() {\n\t\tthis.dispatchEvent(new ShowToastEvent({\n\t\t\ttitle: 'Title',\n\t\t\tmessage: 'Message',\n\t\t\tvariant: '{ info | success | warning | error }',\n\t\t\tmode: '{ dismissable | pester | sticky }'\n\t\t}));\n\t}\n`;
+  }
+
+  // Barcode Scanner
+  if (modules[MODULE_BARCODE_SCANNER.value]?.checked) {
+    js += `\tscanBarcode() {\n\t\tconst scanner = getBarcodeScanner();\n\t\tif(scanner?.isAvailable()) {\n\t\t\t// The list of barcodeTypes: https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_lightning_barcodescanner_constants\n\t\t\tconst scanningOptions = {\n\t\t\t\tbarcodeTypes: [scanner.barcodeTypes.QR]\n\t\t\t};\n\t\t\tscanner\n\t\t\t\t.beginCapture(scanningOptions)\n\t\t\t\t.then((barcode) => {\n\t\t\t\t\tconsole.log(barcode.type, barcode.value);\n\t\t\t\t})\n\t\t\t\t.catch((error) => {\n\t\t\t\t\tconsole.error(error);\n\t\t\t\t})\n\t\t\t\t.finally(() => {\n\t\t\t\t\tscanner.endCapture();\n\t\t\t\t});\n\t\t}\n\t}\n`;
   }
 
   js += `}`;
