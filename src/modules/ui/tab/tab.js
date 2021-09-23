@@ -43,6 +43,15 @@ export default class Tab extends LightningElement {
     }
   }
 
+  @api get active() {
+    return this._active;
+  }
+
+  set active(newValue) {
+    this._active = newValue;
+    this._dispatchDataChangeEventIfConnected();
+  }
+
   @api get value() {
     return this._value;
   }

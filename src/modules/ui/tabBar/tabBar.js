@@ -93,6 +93,7 @@ export default class TabBar extends LightningElement {
         ariaSelected: false,
         contentId: '',
         visible: true,
+        active: tab.active,
         iconName: tab.iconName,
         iconAlternativeText: tab.iconAlternativeText,
         endIconName: tab.endIconName,

@@ -2,84 +2,87 @@
   <article class="slds-card">
     <div class="slds-card__body slds-card__body_inner">
       <ui-tabset>
-        <template if:true={tabs.BASICS.isVisible}>
-          <ui-tab label={tabs.BASICS.label}>
-            <my-form-basics
-              tab={tabs.BASICS}
-              basics={basics}
-              targets={targets}
-              onupdate={onUpdate}
-            ></my-form-basics>
-          </ui-tab>
-        </template>
-        <template if:true={tabs.PROPERTIES.isVisible}>
-          <ui-tab label={tabs.PROPERTIES.label}>
-            <my-form-properties
-              tab={tabs.PROPERTIES}
-              properties={properties}
-              targets={targets}
-              onupdate={onUpdate}
-            ></my-form-properties>
-          </ui-tab>
-        </template>
-        <template if:true={tabs.MODULE_IMPORTS.isVisible}>
-          <ui-tab label={tabs.MODULE_IMPORTS.label}>
-            <my-form-module-imports
-              tab={tabs.MODULE_IMPORTS}
-              modules={modules}
-              onupdate={onUpdate}
-            ></my-form-module-imports>
-          </ui-tab>
-        </template>
+        <ui-tab label={tabs.BASICS.label} active={tabs.BASICS.isVisible}>
+          <my-form-basics
+            tab={tabs.BASICS}
+            basics={basics}
+            targets={targets}
+            onupdate={onUpdate}
+          ></my-form-basics>
+        </ui-tab>
+        <ui-tab
+          label={tabs.PROPERTIES.label}
+          active={tabs.PROPERTIES.isVisible}
+        >
+          <my-form-properties
+            tab={tabs.PROPERTIES}
+            properties={properties}
+            targets={targets}
+            onupdate={onUpdate}
+          ></my-form-properties>
+        </ui-tab>
+        <ui-tab
+          label={tabs.MODULE_IMPORTS.label}
+          active={tabs.MODULE_IMPORTS.isVisible}
+        >
+          <my-form-module-imports
+            tab={tabs.MODULE_IMPORTS}
+            modules={modules}
+            onupdate={onUpdate}
+          ></my-form-module-imports>
+        </ui-tab>
 
-        <template if:true={tabs.STANDARD_COMPONENTS.isVisible}>
-          <ui-tab label={tabs.STANDARD_COMPONENTS.label}>
-            <my-form-standard-components
-              tab={tabs.STANDARD_COMPONENTS}
-              standard-components={standardComponents}
-              onupdate={onUpdate}
-            ></my-form-standard-components>
-          </ui-tab>
-        </template>
-        <template if:true={tabs.LIFECYCLE_HOOKS.isVisible}>
-          <ui-tab label={tabs.LIFECYCLE_HOOKS.label}>
-            <my-form-lifecycle-hooks
-              tab={tabs.LIFECYCLE_HOOKS}
-              lifecycle-hooks={lifecycleHooks}
-              onupdate={onUpdate}
-            ></my-form-lifecycle-hooks>
-          </ui-tab>
-        </template>
+        <ui-tab
+          label={tabs.STANDARD_COMPONENTS.label}
+          active={tabs.STANDARD_COMPONENTS.isVisible}
+        >
+          <my-form-standard-components
+            tab={tabs.STANDARD_COMPONENTS}
+            standard-components={standardComponents}
+            onupdate={onUpdate}
+          ></my-form-standard-components>
+        </ui-tab>
 
-        <template if:true={tabs.EXPERIENCE_CLOUD.isVisible}>
-          <ui-tab label={tabs.EXPERIENCE_CLOUD.label}>
-            <my-form-experience-cloud
-              tab={tabs.EXPERIENCE_CLOUD}
-              experience-cloud-settings={experienceCloudSettings}
-              onupdate={onUpdate}
-            ></my-form-experience-cloud>
-          </ui-tab>
-        </template>
+        <ui-tab
+          label={tabs.LIFECYCLE_HOOKS.label}
+          active={tabs.LIFECYCLE_HOOKS.isVisible}
+        >
+          <my-form-lifecycle-hooks
+            tab={tabs.LIFECYCLE_HOOKS}
+            lifecycle-hooks={lifecycleHooks}
+            onupdate={onUpdate}
+          ></my-form-lifecycle-hooks>
+        </ui-tab>
 
-        <template if:true={tabs.CUSTOM_PROPERTY_EDITOR.isVisible}>
-          <ui-tab label={tabs.CUSTOM_PROPERTY_EDITOR.label}>
-            <my-form-flow-custom-property-editor
-              tab={tabs.CUSTOM_PROPERTY_EDITOR}
-              custom-propery-editor={customPropertyEditor}
-              onupdate={onUpdate}
-            ></my-form-flow-custom-property-editor>
-          </ui-tab>
-        </template>
+        <ui-tab
+          label={tabs.EXPERIENCE_CLOUD.label}
+          active={tabs.EXPERIENCE_CLOUD.isVisible}
+        >
+          <my-form-experience-cloud
+            tab={tabs.EXPERIENCE_CLOUD}
+            experience-cloud-settings={experienceCloudSettings}
+            onupdate={onUpdate}
+          ></my-form-experience-cloud>
+        </ui-tab>
 
-        <template if:true={tabs.SOBJECTS.isVisible}>
-          <ui-tab label={tabs.SOBJECTS.label}>
-            <my-form-sobjects
-              tab={tabs.SOBJECTS}
-              sobjects={sobjects}
-              onupdate={onUpdate}
-            ></my-form-sobjects>
-          </ui-tab>
-        </template>
+        <ui-tab
+          label={tabs.CUSTOM_PROPERTY_EDITOR.label}
+          active={tabs.CUSTOM_PROPERTY_EDITOR.isVisible}
+        >
+          <my-form-flow-custom-property-editor
+            tab={tabs.CUSTOM_PROPERTY_EDITOR}
+            custom-propery-editor={customPropertyEditor}
+            onupdate={onUpdate}
+          ></my-form-flow-custom-property-editor>
+        </ui-tab>
+
+        <ui-tab label={tabs.SOBJECTS.label} active={tabs.SOBJECTS.isVisible}>
+          <my-form-sobjects
+            tab={tabs.SOBJECTS}
+            sobjects={sobjects}
+            onupdate={onUpdate}
+          ></my-form-sobjects>
+        </ui-tab>
       </ui-tabset>
     </div>
   </article>

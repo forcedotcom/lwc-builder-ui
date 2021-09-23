@@ -116,6 +116,7 @@ export default class Tabset extends LightningElement {
     this._tabHeaders.splice(tabIndex, 0, {
       value: tabValue,
       label: tab.label,
+      active: tab.active,
       domId: tab.id,
       title: tab.title,
       iconName: tab.iconName,
@@ -192,6 +193,7 @@ export default class Tabset extends LightningElement {
       matchingTabHeader.label = changedTab.label;
       matchingTabHeader.value = newTabValue;
       matchingTabHeader.title = changedTab.title;
+      matchingTabHeader.active = changedTab.active;
       matchingTabHeader.iconName = changedTab.iconName;
       matchingTabHeader.iconAlternativeText = changedTab.iconAssistiveText;
       matchingTabHeader.endIconName = changedTab.endIconName;

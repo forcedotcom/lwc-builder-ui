@@ -18,6 +18,8 @@ export default class cMenuItem extends LightningElement {
 
   @api download;
 
+  @api active;
+
   @track _accesskey = null;
   @track _disabled = false;
   @track _tabindex = '-1';
@@ -148,6 +150,10 @@ export default class cMenuItem extends LightningElement {
     return this.isMenuItemCheckbox ? 'menuitemcheckbox' : 'menuitem';
   }
 
+  get computedClass() {
+    return this.active ? 'ui-menu-item-active' : 'ui-menu-item-inactive';
+  }
+
   handleBlur() {
     this.dispatchEvent(new CustomEvent('blur'));
 
@@ -170,7 +176,7 @@ export default class cMenuItem extends LightningElement {
   }
 
   handleClick(event) {
-    if (this.disabled) {
+    if (this.disabled || !this.active) {
       event.preventDefault();
 
       return;

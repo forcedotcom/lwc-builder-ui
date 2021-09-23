@@ -8,3 +8,16 @@
 :host {
   display: block;
 }
+
+.ui-menu-item-inactive {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+}
+.ui-menu-item-inactive:hover,
+.ui-menu-item-inactive:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.ui-menu-item-active:hover,
+.ui-menu-item-active:focus {
+  background-color: #1589ee13;
+}

@@ -14,30 +14,56 @@
   >
     <template for:each={_allTabs} for:item="tab">
       <template if:true={tab.visible}>
-        <li
-          data-tab
-          key={tab.value}
-          class={tab.class}
-          onclick={handleTabClick}
-          title={tab.title}
-          role="presentation"
-          data-label={tab.label}
-          data-tab-value={tab.value}
-        >
-          <a
-            class={tab.linkClass}
-            data-tab-value={tab.value}
+        <template if:true={tab.active}>
+          <li
+            data-tab
+            key={tab.value}
+            class={tab.class}
+            onclick={handleTabClick}
+            title={tab.title}
+            role="presentation"
             data-label={tab.label}
-            role="tab"
-            href="javascript:void(0)"
-            onblur={handleBlur}
-            onfocus={handleFocus}
-            tabindex={tab.tabIndex}
-            aria-selected={tab.ariaSelected}
+            data-tab-value={tab.value}
           >
-            {tab.label}
-          </a>
-        </li>
+            <a
+              class={tab.linkClass}
+              data-tab-value={tab.value}
+              data-label={tab.label}
+              role="tab"
+              href="javascript:void(0)"
+              onblur={handleBlur}
+              onfocus={handleFocus}
+              tabindex={tab.tabIndex}
+              aria-selected={tab.ariaSelected}
+            >
+              {tab.label}
+            </a>
+          </li>
+        </template>
+        <template if:false={tab.active}>
+          <li
+            data-tab
+            key={tab.value}
+            class={tab.class}
+            title={tab.title}
+            role="presentation"
+            data-label={tab.label}
+            data-tab-value={tab.value}
+            data-active="inactive"
+          >
+            <a
+              class={tab.linkClass}
+              data-tab-value={tab.value}
+              data-label={tab.label}
+              role="tab"
+              href="javascript:void(0)"
+              tabindex={tab.tabIndex}
+              aria-selected={tab.ariaSelected}
+            >
+              {tab.label}
+            </a>
+          </li>
+        </template>
       </template>
     </template>
     <template if:true={overflowSupported}>
@@ -61,6 +87,7 @@
                 key={tab.value}
                 label={tab.label}
                 value={tab.value}
+                active={tab.active}
               ></ui-menu-item>
             </template>
           </template>

@@ -1,0 +1,11 @@
+.slds-tabs_default__item[data-active='inactive'] {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+}
+.slds-tabs_default__item[data-active='inactive'] > a {
+  cursor: not-allowed;
+}
+
+.slds-tabs_default__item:hover[data-active='inactive']:after {
+  background-color: #aaa;
+}
