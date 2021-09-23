@@ -373,7 +373,7 @@ export const MODULE_STATIC_RESOURCES = {
   label: 'Static Resources',
   value: 'staticResources',
   help: '',
-  url: ''
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_resources'
 };
 export const MODULE_CONTENT_ASSET_FILES = {
   label: 'Content Asset Files',
@@ -400,10 +400,100 @@ export const MODULE_I18N_LOCALE = {
   help: '',
   url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
 };
-export const MODULE_I18N_CURRENCY = {
-  label: 'Currency',
+export const MODULE_I18N_CURRENCY_CODE = {
+  label: 'Currency code',
   value: 'i18n_currency',
+  help: 'e.g.: CAD',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_FIRST_DAY_OF_WEEK = {
+  label: 'First day of the week',
+  value: 'i18n_fdow',
   help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_DATETIME_SHORT_DATE_FORMAT = {
+  label: 'Date format : Short',
+  value: 'i18n_date_short',
+  help: 'e.g.: MM/dd/yyyy',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_DATETIME_MEDIUM_DATE_FORMAT = {
+  label: 'Date format : Medium',
+  value: 'i18n_date_medium',
+  help: 'e.g.: MMM d, yyyy',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_DATETIME_LONG_DATE_FORMAT = {
+  label: 'Date format : Long',
+  value: 'i18n_date_long',
+  help: 'e.g.: MMMM d, yyyy',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_DATETIME_SHORT_DATETIME_FORMAT = {
+  label: 'DateTime format : Short',
+  value: 'i18n_datetime_short',
+  help: 'e.g.: MM/dd/yyyy h:mm a',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_DATETIME_MEDIUM_DATETIME_FORMAT = {
+  label: 'DateTime format : Medium',
+  value: 'i18n_datetime_medium',
+  help: 'e.g.: MMM d, yyyy hmm:ss a',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_DATETIME_SHORT_TIME_FORMAT = {
+  label: 'Time format : Short',
+  value: 'i18n_time_short',
+  help: 'e.g.: h:mm a',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_DATETIME_LONG_TIME_FORMAT = {
+  label: 'Time format : Long',
+  value: 'i18n_time_long',
+  help: 'e.g.: h:mmss a',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_CURRENCY_FORMAT = {
+  label: 'Currency format',
+  value: 'i18n_currency_format',
+  help: 'e.g.: #, ##0.00',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_CURRENCY_SYMBOL = {
+  label: 'Currency symbol',
+  value: 'i18n_currency_symbol',
+  help: 'e.g.: $',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_DECIMAL_SEPARATOR = {
+  label: 'Decimal separator',
+  value: 'i18n_decimal_separator',
+  help: 'e.g.: .',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_GROUPING_SEPARATOR = {
+  label: 'Grouping separator',
+  value: 'i18n_grouping_separator',
+  help: 'e.g.: ,',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_NUMBER_FORMAT = {
+  label: 'Number format',
+  value: 'i18n_number_format',
+  help: 'e.g.: #, ##0.###',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_PERCENT_FORMAT = {
+  label: 'Percent format',
+  value: 'i18n_percent_format',
+  help: 'e.g.: #, ###0%',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
+};
+export const MODULE_I18N_TIME_ZONE = {
+  label: 'Time zone',
+  value: 'i18n_time_zone',
+  help: 'e.g.: America/Los_Angeles',
   url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_i18n'
 };
 
@@ -491,7 +581,22 @@ export const MODULE_IMPORTS = [
       MODULE_I18N_LANG,
       MODULE_I18N_DIR,
       MODULE_I18N_LOCALE,
-      MODULE_I18N_CURRENCY
+      MODULE_I18N_CURRENCY_CODE,
+      MODULE_I18N_CURRENCY_FORMAT,
+      MODULE_I18N_CURRENCY_SYMBOL,
+      MODULE_I18N_TIME_ZONE,
+      MODULE_I18N_NUMBER_FORMAT,
+      MODULE_I18N_PERCENT_FORMAT,
+      MODULE_I18N_DECIMAL_SEPARATOR,
+      MODULE_I18N_GROUPING_SEPARATOR,
+      MODULE_I18N_FIRST_DAY_OF_WEEK,
+      MODULE_I18N_DATETIME_SHORT_DATE_FORMAT,
+      MODULE_I18N_DATETIME_MEDIUM_DATE_FORMAT,
+      MODULE_I18N_DATETIME_LONG_DATE_FORMAT,
+      MODULE_I18N_DATETIME_SHORT_DATETIME_FORMAT,
+      MODULE_I18N_DATETIME_MEDIUM_DATETIME_FORMAT,
+      MODULE_I18N_DATETIME_SHORT_TIME_FORMAT,
+      MODULE_I18N_DATETIME_LONG_TIME_FORMAT
     ]
   },
   {
