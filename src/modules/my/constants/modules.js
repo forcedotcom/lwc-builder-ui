@@ -146,7 +146,7 @@ export const MODULE_NAVIGATION_MIXIN_NAVIGATE = {
   label: 'NavigationMixin.Navigate',
   value: 'NavigationMixin_Navigate',
   help: '',
-  url: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/use_navigate_page_types',
   submoduleLabel: 'PageReference Types',
   submoduleUrl:
     'https://developer.salesforce.com/docs/component-library/documentation/lwc/reference_page_reference_type',
@@ -171,6 +171,12 @@ export const MODULE_NAVIGATION_MIXIN_GENERATE_URL = {
       id: `NavigationMixin_GenerateUrl-${m.value}`
     };
   })
+};
+export const MODULE_CURRENT_PAGE_REFERENCE = {
+  label: '@wire CurrentPageReference',
+  value: 'currentPageReference',
+  help: '',
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/use_navigate_default'
 };
 
 /* ===== uiRecordApi modules ===== */
@@ -447,6 +453,7 @@ export const MODULE_IMPORTS = [
       MODULE_TOAST,
       MODULE_NAVIGATION_MIXIN_NAVIGATE,
       MODULE_NAVIGATION_MIXIN_GENERATE_URL,
+      MODULE_CURRENT_PAGE_REFERENCE,
       MODULE_LABEL
     ]
   },

@@ -20,7 +20,8 @@ import {
   MODULE_LABEL,
   MODULE_BARCODE_SCANNER,
   MODULES_UI_RECORD_API,
-  MODULES_WIRE
+  MODULES_WIRE,
+  MODULE_CURRENT_PAGE_REFERENCE
 } from '../constants/modules';
 
 export const buildImportsForJs = (modules) => {
@@ -30,9 +31,6 @@ export const buildImportsForJs = (modules) => {
       switch (m.value) {
         case MODULE_TOAST.value:
           return `import { ShowToastEvent } from 'lightning/platformShowToastEvent';`;
-        case MODULE_NAVIGATION_MIXIN_NAVIGATE.value:
-        case MODULE_NAVIGATION_MIXIN_GENERATE_URL.value:
-          return `import { NavigationMixin } from 'lightning/navigation';`;
         case MODULE_FORM_FACTOR.value:
           return `import FORM_FACTOR from '@salesforce/client/formFactor';`;
         case MODULE_USER_ID.value:
@@ -60,6 +58,42 @@ export const buildImportsForJs = (modules) => {
       }
     })
     .filter((m, index, self) => !!m && self.indexOf(m) === index);
+
+  // lightning/navigate
+  const navs = Object.values(modules).filter(
+    (m) =>
+      m.checked &&
+      (m.value === MODULE_CURRENT_PAGE_REFERENCE.value ||
+        m.value === MODULE_NAVIGATION_MIXIN_NAVIGATE.value ||
+        m.value === MODULE_NAVIGATION_MIXIN_GENERATE_URL.value)
+  );
+  if (navs && navs.length > 0) {
+    const navMods = [
+      ...new Set(
+        navs.reduce((mods, m) => {
+          switch (m.value) {
+            case MODULE_NAVIGATION_MIXIN_NAVIGATE.value:
+            case MODULE_NAVIGATION_MIXIN_GENERATE_URL.value:
+              mods.push('NavigationMixin');
+              break;
+            case MODULE_CURRENT_PAGE_REFERENCE.value:
+              mods.push('CurrentPageReference');
+              break;
+            default:
+              break;
+          }
+          return mods;
+        }, [])
+      )
+    ];
+    imports.push(
+      `import { ${navMods.join(', ')} } from 'lightning/navigation';`
+    );
+    // https://developer.salesforce.com/docs/component-library/bundle/lightning-page-reference-utils/documentation
+    imports.push(
+      `import { encodeDefaultFieldValues, decodeDefaultFieldValues } from 'lightning/pageReferenceUtils';`
+    );
+  }
 
   // UI Record API
   const uiRecordApi = Object.values(modules)

@@ -22,13 +22,6 @@ export const STANDARD_COMPONENTS = [
     label: 'lightning-icon',
     help: '',
     url: 'https://developer.salesforce.com/docs/component-library/bundle/lightning:icon/example',
-    options: [
-      {
-        value: 'testOption',
-        label: 'Test Options',
-        help: '',
-        url: ''
-      }
-    ]
+    options: []
   }
 ];
