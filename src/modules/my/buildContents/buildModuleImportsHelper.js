@@ -51,7 +51,7 @@ export const buildImportsForJs = (modules) => {
         case MODULE_TOAST.value:
           return `import { ShowToastEvent } from 'lightning/platformShowToastEvent';`;
         case MODULE_FORM_FACTOR.value:
-          return `import FORM_FACTOR from '@salesforce/client/formFactor';`;
+          return `import FORM_FACTOR from '@salesforce/client/formFactor'; // Large | Medium | Small`;
         case MODULE_USER_ID.value:
           return `import USER_ID from '@salesforce/user/Id';`;
         case MODULE_USER_IS_GUEST.value:
