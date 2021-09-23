@@ -1,0 +1,20 @@
+<template>
+  <fieldset class="slds-form-element">
+    <legend class="slds-form-element__legend slds-form-element__label">
+      {preference.label}
+    </legend>
+    <div class="slds-form-element__control">
+      <div class="slds-radio_button-group">
+        <template for:each={preference.options} for:item="o">
+          <span key={o.value} class="slds-button slds-radio_button">
+            <my-form-module-import-preference-option
+              option={o}
+              preference={preference}
+              onchange={onChangePreference}
+            ></my-form-module-import-preference-option>
+          </span>
+        </template>
+      </div>
+    </div>
+  </fieldset>
+</template>

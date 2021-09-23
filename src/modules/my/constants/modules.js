@@ -236,7 +236,6 @@ export const MODULE_UI_RECORD_API_GET_RECORD = {
       label: '@wire',
       id: 'getRecord_propertyOrFunction',
       value: 'getRecord_propertyOrFunction_function',
-      defaultValue: 'getRecord_propertyOrFunction_function',
       help: '',
       url: '',
       options: [
@@ -254,7 +253,6 @@ export const MODULE_UI_RECORD_API_GET_RECORD = {
       label: '@wire params',
       id: 'getRecord_fieldsOrLayoutTypes',
       value: 'getRecord_fieldsOrLayoutTypes_fields',
-      defaultValue: 'getRecord_fieldsOrLayoutTypes_fields',
       help: '',
       url: '',
       options: [
@@ -310,7 +308,7 @@ export const MODULE_FORM_FACTOR = {
   label: 'Form Factor',
   value: 'formFactor',
   help: 'The form factor of the hardware the browser is running on',
-  url: ''
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/create_client_form_factor'
 };
 export const MODULE_REGION_WIDTH = {
   label: '@api flexipageRegionWidth',
@@ -329,7 +327,7 @@ export const MODULE_OBJECT_API_NAME = {
   label: '@api objectApiName',
   value: 'objectApiName',
   help: 'Make the component aware of its object context',
-  url: ''
+  url: 'https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.use_object_context'
 };
 
 export const MODULE_USER_PERMISSION = {

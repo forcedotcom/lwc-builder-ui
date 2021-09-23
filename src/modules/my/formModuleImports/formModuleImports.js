@@ -29,7 +29,7 @@ export default class FormModuleImports extends FormContent {
   }
 
   onChangePreference(e) {
-    const { name, value } = e.currentTarget;
+    const { name, value } = e.detail;
     console.log(name, value);
 
     const changed = this.modules.map((c) => {

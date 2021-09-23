@@ -1,0 +1,7 @@
+:host {
+  display: inline-block;
+}
+.slds-radio_button__label {
+  height: 100%;
+  display: inline-block;
+}

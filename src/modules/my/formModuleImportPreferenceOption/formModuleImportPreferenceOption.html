@@ -1,0 +1,24 @@
+<template>
+  <template if:true={isChecked}>
+    <input
+      type="radio"
+      name={preference.id}
+      id={option.value}
+      value={option.value}
+      checked="checked"
+      onchange={onChangePreference}
+    />
+  </template>
+  <template if:false={isChecked}>
+    <input
+      type="radio"
+      name={preference.id}
+      id={option.value}
+      value={option.value}
+      onchange={onChangePreference}
+    />
+  </template>
+  <label class="slds-radio_button__label" for={option.value}>
+    <span class="slds-radio_faux">{option.label}</span>
+  </label>
+</template>

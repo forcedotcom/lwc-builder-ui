@@ -121,41 +121,10 @@
                         key={pf.id}
                         class="slds-m-bottom_x-small slds-m-right_medium"
                       >
-                        <fieldset class="slds-form-element">
-                          <legend
-                            class="
-                              slds-form-element__legend slds-form-element__label
-                            "
-                          >
-                            {pf.label}
-                          </legend>
-                          <div class="slds-form-element__control">
-                            <div class="slds-radio_button-group">
-                              <template for:each={pf.options} for:item="o">
-                                <span
-                                  key={o.value}
-                                  class="slds-button slds-radio_button"
-                                >
-                                  <input
-                                    type="radio"
-                                    name={pf.id}
-                                    id={o.value}
-                                    value={o.value}
-                                    onchange={onChangePreference}
-                                  />
-                                  <label
-                                    class="slds-radio_button__label"
-                                    for={o.value}
-                                  >
-                                    <span class="slds-radio_faux"
-                                      >{o.label}</span
-                                    >
-                                  </label>
-                                </span>
-                              </template>
-                            </div>
-                          </div>
-                        </fieldset>
+                        <my-form-module-import-preference-item
+                          preference={pf}
+                          onchange={onChangePreference}
+                        ></my-form-module-import-preference-item>
                       </li>
                     </template>
                   </ul>
