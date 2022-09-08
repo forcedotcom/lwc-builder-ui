@@ -6,6 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+Salesforce Winter'23 v56.0 support.
+Salesforce Summer'22 v55.0 support.
 ## [0.1.22] - 2021-08-21
 
 Salesforce Summer'21 v52.0 support.
