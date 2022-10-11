@@ -47,12 +47,15 @@ export const buildJs = (contents) => {
   const hasProperties = apis && apis.length > 0;
   const pascal = pascalCase(componentName);
   let js = '';
-  js += `import { LightningElement ${
+  js += `import { LightningElement${
     hasProperties ? ', api' : ''
   } } from "lwc";\n`;
+
+  let classInheritance = 'LightningElement';
   if (targets.lightningSnapin__ChatMessage.enabled) {
     // https://developer.salesforce.com/docs/component-library/bundle/lightningsnapin-base-chat-message/documentation
     js += `import BaseChatMessage from 'lightningsnapin/baseChatMessage';\n`;
+    classInheritance = 'BaseChatMessage';
   }
   if (targets.lightningSnapin__Minimized.enabled) {
     // https://developer.salesforce.com/docs/component-library/bundle/lightningsnapin-minimized/documentation
@@ -61,10 +64,12 @@ export const buildJs = (contents) => {
   if (targets.lightningSnapin__PreChat.enabled) {
     // https://developer.salesforce.com/docs/component-library/bundle/lightningsnapin-base-prechat/documentation
     js += `import BasePrechat from 'lightningsnapin/basePrechat';\n`;
+    classInheritance = 'BasePrechat';
   }
   if (targets.lightningSnapin__ChatHeader.enabled) {
     // https://developer.salesforce.com/docs/component-library/bundle/lightningsnapin-base-chat-header/documentation
     js += `import BaseChatHeader from 'lightningsnapin/baseChatHeader';\n`;
+    classInheritance = 'BaseChatHeader';
   }
 
   if (
@@ -74,7 +79,7 @@ export const buildJs = (contents) => {
     js += `import { CloseActionScreenEvent } from 'lightning/actions';\n`;
   }
 
-  js += `export default class ${pascal} extends LightningElement {\n`;
+  js += `export default class ${pascal} extends ${classInheritance} {\n`;
   js += apis
     .map((p) => {
       return p ? `\t@api\n\t${p};\n` : null;
