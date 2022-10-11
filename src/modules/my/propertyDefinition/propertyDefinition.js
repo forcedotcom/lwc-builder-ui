@@ -178,6 +178,7 @@ export default class PropertyDefinition extends LightningElement {
   }
 
   get isDefaultEnabled() {
+    // TODO: consider Dimension and Measure type
     return this.property.type !== 'apex' && this.property.type !== 'sobject';
   }
 
