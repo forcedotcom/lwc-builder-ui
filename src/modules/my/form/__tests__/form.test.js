@@ -59,6 +59,7 @@ EXPECTED_TARGETS.forEach((t) => {
     small: false,
     large: false,
     headlessAction: false,
+    hasStep: false,
     properties: [],
     objects: []
   };
@@ -262,7 +263,8 @@ describe('my-form', () => {
         enabled: true,
         small: false,
         large: false,
-        headlessAction: false
+        headlessAction: false,
+        hasStep: false
       }
     });
     target.dispatchEvent(event);
@@ -483,7 +485,8 @@ describe('my-form', () => {
         enabled: true,
         small: true,
         large: false,
-        headlessAction: false
+        headlessAction: false,
+        hasStep: false
       }
     });
     target.dispatchEvent(event);
@@ -590,7 +593,8 @@ describe('my-form', () => {
         enabled: true,
         small: false,
         large: false,
-        headlessAction: false
+        headlessAction: false,
+        hasStep: false
       }
     });
     target.dispatchEvent(event);

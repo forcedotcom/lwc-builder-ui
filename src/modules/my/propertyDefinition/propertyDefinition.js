@@ -32,7 +32,8 @@ export default class PropertyDefinition extends LightningElement {
     flowInput: true,
     flowOutput: true,
     datasource: '',
-    cmsFilters: []
+    cmsFilters: [],
+    screenResponsive: false
   };
 
   filters = [
@@ -80,6 +81,24 @@ export default class PropertyDefinition extends LightningElement {
     return !!this.property.selectedTargets.find(
       (t) => t === 'lightning__FlowScreen'
     );
+  }
+
+  get isEmailOnly() {
+    return (
+      this.property.selectedTargets.length === 1 &&
+      this.property.selectedTargets[0] === 'lightningStatic__Email'
+    );
+  }
+
+  get isAnalyticsOnly() {
+    return (
+      this.property.selectedTargets.length === 1 &&
+      this.property.selectedTargets[0] === 'analytics__Dashboard'
+    );
+  }
+
+  get supportsScreenResponsive() {
+    return this.isCommunityDefaultOnly && this.isInteger;
   }
 
   get isApexClassType() {
@@ -153,6 +172,9 @@ export default class PropertyDefinition extends LightningElement {
   }
   get datasourceId() {
     return `datasource_${this.pid}`;
+  }
+  get screenResponsiveId() {
+    return `screenResponsive_${this.pid}`;
   }
 
   get isDefaultEnabled() {

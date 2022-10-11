@@ -36,6 +36,7 @@ const buildTargets = (option) => {
       small: false,
       large: false,
       headlessAction: false,
+      hasStep: false,
       properties: [],
       objects: []
     };

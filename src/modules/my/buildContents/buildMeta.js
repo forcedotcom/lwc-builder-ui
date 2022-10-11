@@ -57,7 +57,7 @@ export const buildMeta = (contents) => {
     if (
       properties.length > 0 ||
       objects.length > 0 ||
-      enabledTargetArray.find((t) => t.small || t.large) ||
+      enabledTargetArray.find((t) => t.small || t.large || t.hasStep) ||
       enabledTargetArray.find((t) => t.value === 'lightning__RecordAction') ||
       (enabledTargetArray.length === 1 &&
         enabledTargetArray[0].value === 'lightning__FlowScreen' &&
@@ -86,7 +86,8 @@ export const buildMeta = (contents) => {
             enabledTargetArray.length === 1 &&
             enabledTargetArray[0].value === 'lightning__FlowScreen' &&
             configurationEditor
-          )
+          ) &&
+          !(t.value === 'analytics__Dashboard' && t.hasStep === true)
         ) {
           continue;
         }
@@ -189,6 +190,16 @@ export const buildMeta = (contents) => {
                 .join(',')}"`;
             }
 
+            // LWR Screen Responsive
+            // https://developer.salesforce.com/docs/atlas.en-us.exp_cloud_lwr.meta/exp_cloud_lwr/get_started_responsive_properties.htm
+            if (
+              p.type === 'Integer' &&
+              t.value === 'lightningCommunity__Default' &&
+              p.screenResponsive
+            ) {
+              propAttributes += ` screenResponsive="true" exposedTo="css"`;
+            }
+
             return `\t\t\t<property${propAttributes} />`;
           })
           .join('\n');
@@ -230,6 +241,12 @@ export const buildMeta = (contents) => {
           }
           targetConfigs += `\t\t\t</supportedFormFactors>\n`;
         }
+
+        // CRM Analytics
+        if (t.value === 'analytics__Dashboard' && t.hasStep) {
+          targetConfigs += `\t\t\t<hasStep>true</hasStep>\n`;
+        }
+
         targetConfigs += `\t\t</targetConfig>\n`;
       }
     }

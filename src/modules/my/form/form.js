@@ -48,7 +48,12 @@ export default class Form extends LightningElement {
     { name: 'SnapinChatMessage', value: 'lightningSnapin__ChatMessage' },
     { name: 'SnapinMinimized', value: 'lightningSnapin__Minimized' },
     { name: 'SnapinPreChat', value: 'lightningSnapin__PreChat' },
-    { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' }
+    { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' },
+    {
+      name: 'Account Engagement (Pardot) Email',
+      value: 'lightningStatic__Email'
+    },
+    { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' }
   ];
   pDefCount = 0;
   oDefCount = 0;
@@ -62,6 +67,7 @@ export default class Form extends LightningElement {
         small: false,
         large: false,
         headlessAction: false,
+        hasStep: false,
         properties: [],
         objects: []
       };
@@ -97,13 +103,14 @@ export default class Form extends LightningElement {
     if (!e.detail) {
       return;
     }
-    const { target, enabled, small, large, headlessAction } = e.detail;
+    const { target, enabled, small, large, headlessAction, hasStep } = e.detail;
 
     this.inputs.targets[target.value].enabled = enabled;
     if (enabled) {
       this.inputs.targets[target.value].small = small;
       this.inputs.targets[target.value].large = large;
       this.inputs.targets[target.value].headlessAction = headlessAction;
+      this.inputs.targets[target.value].hasStep = hasStep;
     }
     this.updateContent();
   }

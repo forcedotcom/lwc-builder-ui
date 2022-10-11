@@ -102,5 +102,22 @@
         </span>
       </label>
     </template>
+
+    <template if:true={isHasStepSupported}>
+      <input
+        type="checkbox"
+        onchange={onChangeHasStepCheckbox}
+        id={hasStepFormId}
+        value={enableHasStep}
+        checked={enableHasStep}
+        disabled={disabledCheck}
+      />
+      <label class="slds-checkbox__label" for={hasStepFormId}>
+        <span class="slds-checkbox_faux"></span>
+        <span class="slds-form-element__label">
+          <span>Has Step</span>
+        </span>
+      </label>
+    </template>
   </div>
 </template>

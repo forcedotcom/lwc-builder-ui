@@ -25,24 +25,30 @@ export const buildJs = (contents) => {
 
   const recordRelatedProps = ['recordId', 'objectApiName'];
 
-  const apis = targets.lightning__Inbox.enabled
-    ? [
-        // merge @api properties for Inbox target.
-        ...propNames,
-        ...inboxProps.filter((ip) => {
-          return !propNames.includes(ip);
-        })
-      ]
-    : targets.lightning__RecordPage.enabled ||
+  const analyticsWithStepProps = [
+    'results',
+    'metadata',
+    'selectMode',
+    'selection',
+    'setSelection'
+  ];
+  const analyticsProps = ['getState', 'setState', 'refresh'];
+
+  const apis = [
+    ...new Set([
+      ...propNames,
+      ...(targets.lightning__Inbox.enabled ? inboxProps : []),
+      ...(targets.lightning__RecordPage.enabled ||
       targets.lightning__RecordAction.enabled
-    ? [
-        // merge @api properties for Record related target.
-        ...propNames,
-        ...recordRelatedProps.filter((rrp) => {
-          return !propNames.includes(rrp);
-        })
-      ]
-    : propNames;
+        ? recordRelatedProps
+        : []),
+      ...(targets.analytics__Dashboard.enabled ? analyticsProps : []),
+      ...(targets.analytics__Dashboard.enabled &&
+      targets.analytics__Dashboard.hasStep
+        ? analyticsWithStepProps
+        : [])
+    ])
+  ];
 
   const hasProperties = apis && apis.length > 0;
   const pascal = pascalCase(componentName);
@@ -92,6 +98,11 @@ export const buildJs = (contents) => {
     } else {
       js += `\tcloseModal() {\n\t\tthis.dispatchEvent(new CloseActionScreenEvent());\n\t}\n`;
     }
+  }
+
+  // analytics callback
+  if (targets.analytics__Dashboard.enabled) {
+    js += `\tstateChangedCallback(prevState, newState) {\n\t}\n`;
   }
 
   js += `}`;
