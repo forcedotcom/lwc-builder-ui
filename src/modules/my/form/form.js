@@ -140,6 +140,7 @@ export default class Form extends LightningElement {
     this.inputs.properties = this.inputs.properties.filter(
       (p) => p.id !== targetId
     );
+    this.updateContent();
   };
 
   addObjectRow = () => {
