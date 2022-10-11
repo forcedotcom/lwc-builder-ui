@@ -88,7 +88,7 @@ export const buildJs = (contents) => {
   js += `export default class ${pascal} extends ${classInheritance} {\n`;
   js += apis
     .map((p) => {
-      return p ? `\t@api\n\t${p};\n` : null;
+      return p ? `\t@api ${p};\n` : null;
     })
     .join('');
 
