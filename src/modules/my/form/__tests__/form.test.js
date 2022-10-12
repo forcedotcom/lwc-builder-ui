@@ -33,7 +33,7 @@ const EXPECTED_TARGETS = [
 
 const EXPECTED_INPUTS = {
   componentName: '',
-  apiVersion: '52.0',
+  apiVersion: '55.0',
   withHtml: true,
   withCss: true,
   withSvg: false,
