@@ -6,8 +6,17 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-Salesforce Winter'23 v56.0 support.
-Salesforce Summer'22 v55.0 support.
+## [0.1.25] - 2022-10-26
+
+- Add Salesforce Winter'23 v56.0 version.
+- Add Salesforce Summer'22 v55.0 version.
+- Add lightningStatic\_\_Email support
+- Add analytics\_\_Dashboard
+- Add Responsive property attribute for lightningCommunity\_\_Default
+- Fix bug property bug on target uncheck
+- Fix wrong base class names for snapins targets
+- Fix preview not updated after property removal
+- Change property name after @api from break line to a whitespace.
 
 ## [0.1.22] - 2021-08-21
 
