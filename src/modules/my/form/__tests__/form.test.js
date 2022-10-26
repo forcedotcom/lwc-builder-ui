@@ -28,7 +28,12 @@ const EXPECTED_TARGETS = [
   { name: 'SnapinChatMessage', value: 'lightningSnapin__ChatMessage' },
   { name: 'SnapinMinimized', value: 'lightningSnapin__Minimized' },
   { name: 'SnapinPreChat', value: 'lightningSnapin__PreChat' },
-  { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' }
+  { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' },
+  {
+    name: 'Account Engagement (Pardot) Email',
+    value: 'lightningStatic__Email'
+  },
+  { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' }
 ];
 
 const EXPECTED_INPUTS = {

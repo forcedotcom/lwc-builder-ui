@@ -25,7 +25,12 @@ const buildTargets = (option) => {
     { name: 'SnapinChatMessage', value: 'lightningSnapin__ChatMessage' },
     { name: 'SnapinMinimized', value: 'lightningSnapin__Minimized' },
     { name: 'SnapinPreChat', value: 'lightningSnapin__PreChat' },
-    { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' }
+    { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' },
+    {
+      name: 'Account Engagement (Pardot) Email',
+      value: 'lightningStatic__Email'
+    },
+    { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' }
   ];
   const targets = {};
   targetsArr.forEach((t) => {
@@ -77,12 +82,12 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
     )} extends LightningElement {\n`;
-    expectedJs += `\t@api\n\tmyProp1;\n`;
-    expectedJs += `\t@api\n\tmyProp2;\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
     expectedJs += `}`;
 
     expect(js).toBe(expectedJs);
@@ -106,20 +111,20 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
     )} extends LightningElement {\n`;
-    expectedJs += `\t@api\n\tmyProp1;\n`;
-    expectedJs += `\t@api\n\tmyProp2;\n`;
-    expectedJs += `\t@api\n\tdates;\n`;
-    expectedJs += `\t@api\n\temails;\n`;
-    expectedJs += `\t@api\n\tlocation;\n`;
-    expectedJs += `\t@api\n\tmessageBody;\n`;
-    expectedJs += `\t@api\n\tmode;\n`;
-    expectedJs += `\t@api\n\tpeople;\n`;
-    expectedJs += `\t@api\n\tsource;\n`;
-    expectedJs += `\t@api\n\tsubject;\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
+    expectedJs += `\t@api dates;\n`;
+    expectedJs += `\t@api emails;\n`;
+    expectedJs += `\t@api location;\n`;
+    expectedJs += `\t@api messageBody;\n`;
+    expectedJs += `\t@api mode;\n`;
+    expectedJs += `\t@api people;\n`;
+    expectedJs += `\t@api source;\n`;
+    expectedJs += `\t@api subject;\n`;
     expectedJs += `}`;
 
     expect(js).toBe(expectedJs);
@@ -143,13 +148,13 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
     expectedJs += `import BaseChatMessage from 'lightningsnapin/baseChatMessage';\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
-    )} extends LightningElement {\n`;
-    expectedJs += `\t@api\n\tmyProp1;\n`;
-    expectedJs += `\t@api\n\tmyProp2;\n`;
+    )} extends BaseChatMessage {\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
     expectedJs += `}`;
 
     expect(js).toBe(expectedJs);
@@ -173,13 +178,13 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
     expectedJs += `import { assignHandler, maximize } from 'lightningsnapin/minimized';\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
     )} extends LightningElement {\n`;
-    expectedJs += `\t@api\n\tmyProp1;\n`;
-    expectedJs += `\t@api\n\tmyProp2;\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
     expectedJs += `}`;
 
     expect(js).toBe(expectedJs);
@@ -203,13 +208,13 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
     expectedJs += `import BasePrechat from 'lightningsnapin/basePrechat';\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
-    )} extends LightningElement {\n`;
-    expectedJs += `\t@api\n\tmyProp1;\n`;
-    expectedJs += `\t@api\n\tmyProp2;\n`;
+    )} extends BasePrechat {\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
     expectedJs += `}`;
     expect(js).toBe(expectedJs);
   });
@@ -232,13 +237,72 @@ describe('my-build-js', () => {
     const js = buildJs(contents);
 
     // THEN
-    let expectedJs = `import { LightningElement , api } from "lwc";\n`;
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
     expectedJs += `import BaseChatHeader from 'lightningsnapin/baseChatHeader';\n`;
     expectedJs += `export default class ${pascalCase(
       contents.componentName
+    )} extends BaseChatHeader {\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
+    expectedJs += `}`;
+
+    expect(js).toBe(expectedJs);
+  });
+
+  it('returns correct js when lightningStatic__Email enabled', () => {
+    // GIVEN
+    const contents = {
+      properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
+      targets: buildTargets({
+        lightningStatic__Email: { enabled: true }
+      }),
+      componentName: 'MyLWC'
+    };
+
+    // WHEN
+    const js = buildJs(contents);
+
+    // THEN
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
+    expectedJs += `export default class ${pascalCase(
+      contents.componentName
     )} extends LightningElement {\n`;
-    expectedJs += `\t@api\n\tmyProp1;\n`;
-    expectedJs += `\t@api\n\tmyProp2;\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
+    expectedJs += `}`;
+
+    expect(js).toBe(expectedJs);
+  });
+
+  it('returns correct js when analytics__Dashboard enabled', () => {
+    // GIVEN
+    const contents = {
+      properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
+      targets: buildTargets({
+        analytics__Dashboard: { enabled: true, hasStep: true }
+      }),
+      componentName: 'MyLWC'
+    };
+
+    // WHEN
+    const js = buildJs(contents);
+
+    // THEN
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
+    expectedJs += `export default class ${pascalCase(
+      contents.componentName
+    )} extends LightningElement {\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
+    expectedJs += `\t@api getState;\n`;
+    expectedJs += `\t@api setState;\n`;
+    expectedJs += `\t@api refresh;\n`;
+    expectedJs += `\t@api results;\n`;
+    expectedJs += `\t@api metadata;\n`;
+    expectedJs += `\t@api selectMode;\n`;
+    expectedJs += `\t@api selection;\n`;
+    expectedJs += `\t@api setSelection;\n`;
+    expectedJs += `\tstateChangedCallback(prevState, newState) {\n\t}\n`;
     expectedJs += `}`;
 
     expect(js).toBe(expectedJs);

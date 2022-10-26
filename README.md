@@ -4,6 +4,7 @@ LWC Builder is a tool to build, preview and configure Lightning Web Component (L
 Configure your component settings with clicks, then press "Create" button to create component files.
 
 ## Installation
+
 Now available on VSCode Marketplace
 https://marketplace.visualstudio.com/items?itemName=ninoish.lwc-builder
 
