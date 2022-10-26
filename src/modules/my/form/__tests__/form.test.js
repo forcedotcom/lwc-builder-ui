@@ -28,7 +28,12 @@ const EXPECTED_TARGETS = [
   { name: 'SnapinChatMessage', value: 'lightningSnapin__ChatMessage' },
   { name: 'SnapinMinimized', value: 'lightningSnapin__Minimized' },
   { name: 'SnapinPreChat', value: 'lightningSnapin__PreChat' },
-  { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' }
+  { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' },
+  {
+    name: 'Account Engagement (Pardot) Email',
+    value: 'lightningStatic__Email'
+  },
+  { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' }
 ];
 
 const EXPECTED_INPUTS = {
@@ -59,6 +64,7 @@ EXPECTED_TARGETS.forEach((t) => {
     small: false,
     large: false,
     headlessAction: false,
+    hasStep: false,
     properties: [],
     objects: []
   };
@@ -262,7 +268,8 @@ describe('my-form', () => {
         enabled: true,
         small: false,
         large: false,
-        headlessAction: false
+        headlessAction: false,
+        hasStep: false
       }
     });
     target.dispatchEvent(event);
@@ -483,7 +490,8 @@ describe('my-form', () => {
         enabled: true,
         small: true,
         large: false,
-        headlessAction: false
+        headlessAction: false,
+        hasStep: false
       }
     });
     target.dispatchEvent(event);
@@ -590,7 +598,8 @@ describe('my-form', () => {
         enabled: true,
         small: false,
         large: false,
-        headlessAction: false
+        headlessAction: false,
+        hasStep: false
       }
     });
     target.dispatchEvent(event);

@@ -64,6 +64,15 @@
               <option value="Date">Date</option>
               <option value="DateTime">Datetime</option>
             </template>
+            <template if:true={isEmailOnly}>
+              <option value="Color">Color</option>
+              <option value="HorizontalAlignment">HorizontalAlignment</option>
+              <option value="VerticalAlignment">VerticalAlignment</option>
+            </template>
+            <template if:true={isAnalyticsOnly}>
+              <option value="Measure">Measure</option>
+              <option value="Dimension">Dimension</option>
+            </template>
           </select>
         </div>
       </div>
@@ -104,6 +113,29 @@
             class="slds-input"
             autocomplete="off"
           />
+        </div>
+      </div>
+    </template>
+
+    <template if:true={supportsScreenResponsive}>
+      <div class="slds-form-element slds-m-bottom_small">
+        <div class="slds-form-element__control">
+          <div class="slds-checkbox">
+            <input
+              type="checkbox"
+              name="screenResponsive"
+              id={screenResponsiveId}
+              value={property.screenResponsive}
+              checked={property.screenResponsive}
+              onchange={onChangeCheckbox}
+            />
+            <label class="slds-checkbox__label" for={screenResponsiveId}>
+              <span class="slds-checkbox_faux"></span>
+              <span class="slds-form-element__label"
+                >LWR Screen-Size Responsive</span
+              >
+            </label>
+          </div>
         </div>
       </div>
     </template>

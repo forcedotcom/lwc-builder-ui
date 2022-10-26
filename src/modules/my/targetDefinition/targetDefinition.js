@@ -15,6 +15,7 @@ export default class TargetDefinition extends LightningElement {
     this.enableSmall = this.isSmallFormFactorSupported;
     this.enableLarge = this.isFormFactorSupported;
     this.enableHeadless = false;
+    this.enableHasStep = false;
     this.enabled = false;
   }
 
@@ -29,6 +30,11 @@ export default class TargetDefinition extends LightningElement {
 
   onChangeActionTypeCheckbox = (e) => {
     this.enableHeadless = e.target.checked;
+    this.onChange();
+  };
+
+  onChangeHasStepCheckbox = (e) => {
+    this.enableHasStep = e.target.checked;
     this.onChange();
   };
 
@@ -57,7 +63,8 @@ export default class TargetDefinition extends LightningElement {
           enabled: this.enabled,
           small: this.enableSmall,
           large: this.enableLarge,
-          headlessAction: this.enableHeadless
+          headlessAction: this.enableHeadless,
+          hasStep: this.enableHasStep
         }
       })
     );
@@ -85,5 +92,14 @@ export default class TargetDefinition extends LightningElement {
 
   get actionTypeFormId() {
     return `${this.target.value}-action-type`;
+  }
+
+  /* CRM Analytics dashboard */
+  get isHasStepSupported() {
+    return this.target.value === 'analytics__Dashboard';
+  }
+
+  get hasStepFormId() {
+    return `${this.target.value}-has-step`;
   }
 }

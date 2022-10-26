@@ -48,7 +48,12 @@ export default class Form extends LightningElement {
     { name: 'SnapinChatMessage', value: 'lightningSnapin__ChatMessage' },
     { name: 'SnapinMinimized', value: 'lightningSnapin__Minimized' },
     { name: 'SnapinPreChat', value: 'lightningSnapin__PreChat' },
-    { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' }
+    { name: 'SnapinChatHeader', value: 'lightningSnapin__ChatHeader' },
+    {
+      name: 'Account Engagement (Pardot) Email',
+      value: 'lightningStatic__Email'
+    },
+    { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' }
   ];
   pDefCount = 0;
   oDefCount = 0;
@@ -62,6 +67,7 @@ export default class Form extends LightningElement {
         small: false,
         large: false,
         headlessAction: false,
+        hasStep: false,
         properties: [],
         objects: []
       };
@@ -97,14 +103,25 @@ export default class Form extends LightningElement {
     if (!e.detail) {
       return;
     }
-    const { target, enabled, small, large, headlessAction } = e.detail;
+    const { target, enabled, small, large, headlessAction, hasStep } = e.detail;
 
     this.inputs.targets[target.value].enabled = enabled;
     if (enabled) {
       this.inputs.targets[target.value].small = small;
       this.inputs.targets[target.value].large = large;
       this.inputs.targets[target.value].headlessAction = headlessAction;
+      this.inputs.targets[target.value].hasStep = hasStep;
     }
+    // remove check of properties which targets are disabled.
+    if (!enabled) {
+      this.inputs.properties.forEach((p) => {
+        const si = p.selectedTargets.findIndex((st) => st === target.value);
+        if (si >= 0) {
+          p.selectedTargets.splice(si, 1);
+        }
+      });
+    }
+
     this.updateContent();
   }
 
@@ -133,6 +150,7 @@ export default class Form extends LightningElement {
     this.inputs.properties = this.inputs.properties.filter(
       (p) => p.id !== targetId
     );
+    this.updateContent();
   };
 
   addObjectRow = () => {
