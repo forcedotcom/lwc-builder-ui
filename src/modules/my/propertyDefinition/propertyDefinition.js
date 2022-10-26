@@ -8,11 +8,9 @@ import { LightningElement, api, track } from 'lwc';
 import { sentenceCase, camelCase } from 'change-case';
 
 export default class PropertyDefinition extends LightningElement {
-  @api
-  pid = '';
+  @api pid = '';
 
-  @api
-  targets = [];
+  @api targets = [];
 
   @track
   property = {

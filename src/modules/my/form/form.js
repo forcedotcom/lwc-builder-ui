@@ -112,6 +112,16 @@ export default class Form extends LightningElement {
       this.inputs.targets[target.value].headlessAction = headlessAction;
       this.inputs.targets[target.value].hasStep = hasStep;
     }
+    // remove check of properties which targets are disabled.
+    if (!enabled) {
+      this.inputs.properties.forEach((p) => {
+        const si = p.selectedTargets.findIndex((st) => st === target.value);
+        if (si >= 0) {
+          p.selectedTargets.splice(si, 1);
+        }
+      });
+    }
+
     this.updateContent();
   }
 
