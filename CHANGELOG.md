@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.1.26] - 2023-3-10
+
+- Support Spring \'23 v57.0 api version
+
 ## [0.1.25] - 2022-10-26
 
 - Add Salesforce Winter'23 v56.0 version.

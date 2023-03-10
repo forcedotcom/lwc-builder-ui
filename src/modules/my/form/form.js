@@ -14,7 +14,7 @@ export default class Form extends LightningElement {
   @track
   inputs = {
     componentName: '',
-    apiVersion: '55.0', // TODO: fetch from SFDC API
+    apiVersion: '57.0',
     withHtml: true,
     withCss: true,
     withSvg: false,
@@ -53,7 +53,8 @@ export default class Form extends LightningElement {
       name: 'Account Engagement (Pardot) Email',
       value: 'lightningStatic__Email'
     },
-    { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' }
+    { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' },
+    { name: 'VoiceExtension', value: 'lightning__VoiceExtension' }
   ];
   pDefCount = 0;
   oDefCount = 0;

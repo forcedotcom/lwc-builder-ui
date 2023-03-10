@@ -30,7 +30,8 @@ const buildTargets = (option) => {
       name: 'Account Engagement (Pardot) Email',
       value: 'lightningStatic__Email'
     },
-    { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' }
+    { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' },
+    { name: 'VoiceExtension', value: 'lightning__VoiceExtension' }
   ];
   const targets = {};
   targetsArr.forEach((t) => {
@@ -274,6 +275,36 @@ describe('my-build-js', () => {
     expect(js).toBe(expectedJs);
   });
 
+  it('returns correct js when lightningStatic__Email enabled and having Alignment properties', () => {
+    // GIVEN
+    const contents = {
+      properties: [
+        { name: 'myProp1' },
+        { name: 'myProp2' },
+        { name: 'alignment', type: 'HorizontalAlignment', default: 'center' }
+      ],
+      targets: buildTargets({
+        lightningStatic__Email: { enabled: true }
+      }),
+      componentName: 'MyLWC'
+    };
+
+    // WHEN
+    const js = buildJs(contents);
+
+    // THEN
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
+    expectedJs += `export default class ${pascalCase(
+      contents.componentName
+    )} extends LightningElement {\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
+    expectedJs += `\t@api alignment;\n`;
+    expectedJs += `}`;
+
+    expect(js).toBe(expectedJs);
+  });
+
   it('returns correct js when analytics__Dashboard enabled', () => {
     // GIVEN
     const contents = {
@@ -302,7 +333,32 @@ describe('my-build-js', () => {
     expectedJs += `\t@api selectMode;\n`;
     expectedJs += `\t@api selection;\n`;
     expectedJs += `\t@api setSelection;\n`;
-    expectedJs += `\tstateChangedCallback(prevState, newState) {\n\t}\n`;
+    expectedJs += `\t@api\n\tstateChangedCallback(prevState, newState) {\n\t}\n`;
+    expectedJs += `}`;
+
+    expect(js).toBe(expectedJs);
+  });
+
+  it('returns correct js when lightning__VoiceExtension enabled', () => {
+    // GIVEN
+    const contents = {
+      properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
+      targets: buildTargets({
+        lightning__VoiceExtension: { enabled: true }
+      }),
+      componentName: 'MyLWC'
+    };
+
+    // WHEN
+    const js = buildJs(contents);
+
+    // THEN
+    let expectedJs = `import { LightningElement, api } from "lwc";\n`;
+    expectedJs += `export default class ${pascalCase(
+      contents.componentName
+    )} extends LightningElement {\n`;
+    expectedJs += `\t@api myProp1;\n`;
+    expectedJs += `\t@api myProp2;\n`;
     expectedJs += `}`;
 
     expect(js).toBe(expectedJs);

@@ -102,7 +102,7 @@ export const buildJs = (contents) => {
 
   // analytics callback
   if (targets.analytics__Dashboard.enabled) {
-    js += `\tstateChangedCallback(prevState, newState) {\n\t}\n`;
+    js += `\t@api\n\tstateChangedCallback(prevState, newState) {\n\t}\n`;
   }
 
   js += `}`;

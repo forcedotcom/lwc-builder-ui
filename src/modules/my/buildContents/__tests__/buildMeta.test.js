@@ -7,7 +7,7 @@
 
 import { buildMeta } from '../buildMeta';
 
-const LATEST_API_VERSION = '55.0';
+const LATEST_API_VERSION = '57.0';
 
 describe('my-build-meta', () => {
   afterEach(() => {
@@ -20,7 +20,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when masterLabel specified', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       masterLabel: 'Mylabel',
       targets: {},
@@ -45,7 +45,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when description specified', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       description: 'My desc',
       targets: {},
@@ -70,7 +70,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for home pages', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -101,7 +101,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for app pages', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__AppPage: {
@@ -132,7 +132,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for community pages', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightningCommunity__Page: {
@@ -163,7 +163,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for record pages', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__RecordPage: {
@@ -201,7 +201,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for small form factor', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__RecordPage: {
@@ -243,7 +243,7 @@ describe('my-build-meta', () => {
   it('returns correct meta for large form factor', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__RecordPage: {
@@ -285,7 +285,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when apex property indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -328,7 +328,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when sobject property indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -371,7 +371,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with datasource indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -414,7 +414,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when default property indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -457,7 +457,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with description indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -500,7 +500,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with min / max indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -544,7 +544,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with label indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -587,7 +587,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when property with placeholder indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -630,7 +630,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when required property indicated', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__HomePage: {
@@ -673,7 +673,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when lightning__FlowScreen input only prop', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__FlowScreen: {
@@ -716,7 +716,7 @@ describe('my-build-meta', () => {
   it('returns correct meta when lightning__FlowScreen output only prop', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__FlowScreen: {
@@ -759,7 +759,7 @@ describe('my-build-meta', () => {
   it('some property attributes ignored when lightning__FlowScreen', () => {
     // GIVEN
     const contents = {
-      apiVersion: '50.0',
+      apiVersion: LATEST_API_VERSION,
       isExposed: true,
       targets: {
         lightning__FlowScreen: {
@@ -1024,6 +1024,55 @@ describe('my-build-meta', () => {
     expectedMeta += `\t<targetConfigs>\n`;
     expectedMeta += `\t\t<targetConfig targets="lightningCommunity__Default">\n`;
     expectedMeta += `\t\t\t<property name="MyProp" type="ContentReference" filter="cms_document,news" />\n`;
+    expectedMeta += `\t\t</targetConfig>\n`;
+    expectedMeta += `\t</targetConfigs>\n`;
+    expectedMeta += `</LightningComponentBundle>`;
+    expect(meta).toBe(expectedMeta);
+  });
+
+  it('supports HorizontalAlignment Type filter props when aiming only lightningStatic__Email target', () => {
+    // GIVEN
+    const contents = {
+      apiVersion: LATEST_API_VERSION,
+      isExposed: true,
+      targets: {
+        lightningStatic__Email: {
+          enabled: true,
+          value: 'lightningStatic__Email'
+        }
+      },
+      properties: [
+        {
+          name: 'MyProp',
+          selectedTargets: ['lightningStatic__Email'],
+          type: 'HorizontalAlignment',
+          default: 'center'
+        },
+        {
+          name: 'MyProp2',
+          selectedTargets: ['lightningStatic__Email'],
+          type: 'VerticalAlignment',
+          default: 'top'
+        }
+      ],
+      objects: []
+    };
+
+    // WHEN
+    const meta = buildMeta(contents);
+
+    // THEN
+    let expectedMeta = ``;
+    expectedMeta += `<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">\n`;
+    expectedMeta += `\t<apiVersion>${contents.apiVersion}</apiVersion>\n`;
+    expectedMeta += `\t<isExposed>${contents.isExposed}</isExposed>\n`;
+    expectedMeta += `\t<targets>\n`;
+    expectedMeta += `\t\t<target>lightningStatic__Email</target>\n`;
+    expectedMeta += `\t</targets>\n`;
+    expectedMeta += `\t<targetConfigs>\n`;
+    expectedMeta += `\t\t<targetConfig targets="lightningStatic__Email">\n`;
+    expectedMeta += `\t\t\t<property name="MyProp" type="HorizontalAlignment" default="center" />\n`;
+    expectedMeta += `\t\t\t<property name="MyProp2" type="VerticalAlignment" default="top" />\n`;
     expectedMeta += `\t\t</targetConfig>\n`;
     expectedMeta += `\t</targetConfigs>\n`;
     expectedMeta += `</LightningComponentBundle>`;

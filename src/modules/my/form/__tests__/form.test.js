@@ -33,12 +33,13 @@ const EXPECTED_TARGETS = [
     name: 'Account Engagement (Pardot) Email',
     value: 'lightningStatic__Email'
   },
-  { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' }
+  { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' },
+  { name: 'VoiceExtension', value: 'lightning__VoiceExtension' }
 ];
 
 const EXPECTED_INPUTS = {
   componentName: '',
-  apiVersion: '55.0',
+  apiVersion: '57.0',
   withHtml: true,
   withCss: true,
   withSvg: false,
