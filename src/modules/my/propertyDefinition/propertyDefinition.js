@@ -118,6 +118,17 @@ export default class PropertyDefinition extends LightningElement {
     return this.property.type === 'Boolean';
   }
 
+  get isAlignment() {
+    return (
+      this.property.type === 'HorizontalAlignment' ||
+      this.property.type === 'VerticalAlignment'
+    );
+  }
+
+  get isHorizontalAlignment() {
+    return this.property.type === 'HorizontalAlignment';
+  }
+
   get isInteger() {
     return this.property.type === 'Integer';
   }

@@ -217,17 +217,49 @@
           </div>
         </template>
         <template if:false={isBoolean}>
-          <div class="slds-form-element__control">
-            <input
-              id={defaultId}
-              type={defaultType}
-              value={property.default}
-              name="default"
-              onchange={onChangeInput}
-              class="slds-input"
-              autocomplete="off"
-            />
-          </div>
+          <template if:true={isAlignment}>
+            <template if:true={isHorizontalAlignment}>
+              <select
+                class="slds-select"
+                name="default"
+                id={defaultId}
+                value={property.default}
+                onchange={onChangeSelect}
+              >
+                <option value=""></option>
+                <option value="right">right</option>
+                <option value="left">left</option>
+                <option value="center">center</option>
+              </select>
+            </template>
+            <template if:false={isHorizontalAlignment}>
+              <select
+                class="slds-select"
+                name="default"
+                id={defaultId}
+                value={property.default}
+                onchange={onChangeSelect}
+              >
+                <option value=""></option>
+                <option value="top">top</option>
+                <option value="middle">middle</option>
+                <option value="bottom">bottom</option>
+              </select>
+            </template>
+          </template>
+          <template if:false={isAlignment}>
+            <div class="slds-form-element__control">
+              <input
+                id={defaultId}
+                type={defaultType}
+                value={property.default}
+                name="default"
+                onchange={onChangeInput}
+                class="slds-input"
+                autocomplete="off"
+              />
+            </div>
+          </template>
         </template>
       </div>
     </template>
