@@ -31,7 +31,7 @@ const buildTargets = (option) => {
       value: 'lightningStatic__Email'
     },
     { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' },
-    { name: 'VoiceExtension', value: 'lightning_VoiceExtension' }
+    { name: 'VoiceExtension', value: 'lightning__VoiceExtension' }
   ];
   const targets = {};
   targetsArr.forEach((t) => {
@@ -339,12 +339,12 @@ describe('my-build-js', () => {
     expect(js).toBe(expectedJs);
   });
 
-  it('returns correct js when lightning_VoiceExtension enabled', () => {
+  it('returns correct js when lightning__VoiceExtension enabled', () => {
     // GIVEN
     const contents = {
       properties: [{ name: 'myProp1' }, { name: 'myProp2' }],
       targets: buildTargets({
-        lightning_VoiceExtension: { enabled: true }
+        lightning__VoiceExtension: { enabled: true }
       }),
       componentName: 'MyLWC'
     };

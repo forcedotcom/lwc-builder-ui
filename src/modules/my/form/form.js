@@ -54,7 +54,7 @@ export default class Form extends LightningElement {
       value: 'lightningStatic__Email'
     },
     { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' },
-    { name: 'VoiceExtension', value: 'lightning_VoiceExtension' }
+    { name: 'VoiceExtension', value: 'lightning__VoiceExtension' }
   ];
   pDefCount = 0;
   oDefCount = 0;

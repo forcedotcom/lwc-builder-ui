@@ -34,7 +34,7 @@ const EXPECTED_TARGETS = [
     value: 'lightningStatic__Email'
   },
   { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' },
-  { name: 'VoiceExtension', value: 'lightning_VoiceExtension' }
+  { name: 'VoiceExtension', value: 'lightning__VoiceExtension' }
 ];
 
 const EXPECTED_INPUTS = {
