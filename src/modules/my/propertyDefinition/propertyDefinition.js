@@ -5,8 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { LightningElement, api, track } from 'lwc';
-import { sentenceCase, camelCase } from 'change-case';
-
+import { sentenceCase } from 'sentence-case';
+import { camelCase } from 'camel-case';
 export default class PropertyDefinition extends LightningElement {
   @api pid = '';
 

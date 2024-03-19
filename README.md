@@ -19,7 +19,7 @@ This tool is built with [LWC](https://lwc.dev).
 # Contributing
 
 Anyone is welcome to contribute.
-Please follow [CONTRIBUTING.md](https://github.com/developerforce/lwc-builder/blob/main/CONTRIBUTING.md).
+Please follow [CONTRIBUTING.md](https://github.com/forcedotcom/lwc-builder/blob/main/CONTRIBUTING.md).
 
 # Disclaimer
 
@@ -28,4 +28,4 @@ It doesn't ensure code integrity. Please confirm the code before you deploy.
 
 # License
 
-The code is available under the [BSD 3-Clause license](https://github.com/developerforce/lwc-builder/blob/main/LICENSE).
+The code is available under the [BSD 3-Clause license](https://github.com/forcedotcom/lwc-builder/blob/main/LICENSE).

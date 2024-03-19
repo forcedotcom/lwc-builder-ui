@@ -6,7 +6,8 @@
  */
 
 import { buildJs } from '../buildJs';
-import { pascalCase } from 'change-case';
+
+import { pascalCase } from 'pascal-case';
 
 const buildTargets = (option) => {
   const targetsArr = [

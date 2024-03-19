@@ -8,8 +8,8 @@
 import { createElement } from 'lwc';
 import MyForm from 'my/form';
 import { buildContents } from 'my/buildContents';
-import { sentenceCase, camelCase } from 'change-case';
-
+import { sentenceCase } from 'sentence-case';
+import { camelCase } from 'camel-case';
 jest.mock('my/buildContents', () => ({ buildContents: jest.fn() }));
 
 const EXPECTED_TARGETS = [

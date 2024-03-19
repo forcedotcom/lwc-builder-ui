@@ -1,52 +1,55 @@
 {
   "name": "lwc-builder-ui",
   "description": "This package is a UI part of LWC Builder that enables you to configure Lightning Web Component (LWC) Bundle on VSCode",
-  "version": "0.1.30",
+  "version": "1.0.0",
   "author": "@ninoish",
-  "bugs": "https://github.com/developerforce/lwc-builder-ui/issues",
+  "bugs": "https://github.com/forcedotcom/lwc-builder-ui/issues",
   "main": "dist/",
   "dependencies": {
-    "change-case": "^4.1.2"
+    "camel-case": "^5.0.0",
+    "param-case": "^4.0.0",
+    "pascal-case": "^4.0.0",
+    "sentence-case": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@lwc/eslint-plugin-lwc": "^1.0.1",
-    "@lwc/jest-preset": "^11.0.1",
-    "@lwc/rollup-plugin": "^2.3.1",
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "@rollup/plugin-replace": "^3.0.0",
-    "@salesforce/eslint-config-lwc": "^2.1.1",
-    "@salesforce/eslint-plugin-lightning": "^0.1.1",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
+    "@lwc/eslint-plugin-lwc": "^1.7.2",
+    "@lwc/jest-preset": "^14.3.0",
+    "@lwc/rollup-plugin": "^6.3.2",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@salesforce-ux/design-system": "^2.23.2",
+    "@salesforce/eslint-config-lwc": "^3.5.3",
+    "@salesforce/eslint-plugin-lightning": "^1.0.0",
+    "cpx": "^1.5.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-header": "^3.1.1",
-    "eslint-plugin-import": "^2.24.1",
-    "eslint-plugin-inclusive-language": "^2.1.1",
-    "eslint-plugin-jest": "^24.4.0",
-    "eslint-plugin-jsdoc": "^36.0.7",
-    "eslint-plugin-prettier": "^4.0.0",
-    "fs-extra": "^10.0.0",
-    "husky": "^7.0.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-inclusive-language": "^2.2.1",
+    "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-jsdoc": "^48.2.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^7.0.4",
     "jest": "^26.6.3",
-    "lwc": "^2.3.1",
-    "prettier": "^2.3.2",
-    "rollup": "^2.56.2",
+    "lwc": "^5.3.0",
+    "prettier": "^3.2.5",
+    "rollup": "^4.0.2",
     "rollup-plugin-copy-glob": "^0.3.2",
     "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-serve": "^1.1.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-serve": "^1.1.1"
   },
   "engines": {
-    "node": ">=10.13.0",
-    "npm": ">=6.4.1"
+    "node": ">=18.18.0",
+    "npm": ">=9.8.1"
   },
-  "homepage": "https://github.com/developerforce/lwc-builder-ui",
+  "volta": {
+    "node": "18.18.0"
+  },
+  "homepage": "https://github.com/forcedotcom/lwc-builder-ui",
   "jest": {
     "preset": "@lwc/jest-preset",
     "moduleNameMapper": {
-      "^my/(.+)$": "<rootDir>/src/modules/my/$1/$1",
-      "^domain/(.+)$": "<rootDir>/src/modules/domain/$1/$1"
+      "^(my|domain)/(.+){{BODY}}": "<rootDir>/src/modules/$1/$2/$2"
     }
   },
   "keywords": [
@@ -59,9 +62,11 @@
     "Visual Studio Code"
   ],
   "license": "BSD-3-Clause",
-  "repository": "https://github.com/developerforce/lwc-builder-ui",
+  "repository": "https://github.com/forcedotcom/lwc-builder-ui",
   "scripts": {
-    "build": "rollup --config ./scripts/rollup.config.js --environment NODE_ENV:production",
+    "dev": "npm run watch",
+    "watch": "rollup --config ./scripts/rollup.config.js --watch",
+    "build": "node ./scripts/copy-slds.js && rollup --config ./scripts/rollup.config.js  --environment NODE_ENV:production",
     "build:development": "rollup --config ./scripts/rollup.config.js ",
     "prepublishOnly": "npm run build",
     "lint:verify": "eslint src --ext js",
@@ -72,7 +77,6 @@
     "test:unit": "jest",
     "test:unit:coverage": "jest --coverage",
     "test:unit:debug": "jest --debug",
-    "test:unit:watch": "jest --watch",
-    "watch": "rollup --config ./scripts/rollup.config.js --watch"
+    "test:unit:watch": "jest --watch"
   }
 }

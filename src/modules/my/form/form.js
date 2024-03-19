@@ -6,7 +6,8 @@
  */
 import { LightningElement, track } from 'lwc';
 import { buildContents } from 'my/buildContents';
-import { sentenceCase, camelCase } from 'change-case';
+import { sentenceCase } from 'sentence-case';
+import { camelCase } from 'camel-case';
 
 export default class Form extends LightningElement {
   componentName = '';

@@ -6,7 +6,9 @@
  */
 
 import { buildTest } from '../buildTest';
-import { pascalCase, camelCase, paramCase } from 'change-case';
+import { pascalCase } from 'pascal-case';
+import { camelCase } from 'camel-case';
+import { paramCase } from 'param-case';
 
 describe('my-build-contents', () => {
   afterEach(() => {

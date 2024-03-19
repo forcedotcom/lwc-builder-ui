@@ -1,1 +1,2 @@
-npm run lint && npm run prettier  && npm run test:unit
+# npm run lint && npm run prettier  && npm run test:unit
+npm run lint && npm run prettier

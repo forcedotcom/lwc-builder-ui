@@ -95,7 +95,7 @@ describe('my-app', () => {
       button.click();
 
       // THEN
-      expect(mockPostMessage).toBeCalledWith(
+      expect(mockPostMessage).toHaveBeenCalledWith(
         new LWCBuilderEvent('create_button_clicked', {
           componentName: 'MyNewCmp'
         })
