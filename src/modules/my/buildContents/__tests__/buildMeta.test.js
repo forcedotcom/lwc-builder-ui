@@ -7,7 +7,7 @@
 
 import { buildMeta } from '../buildMeta';
 
-const LATEST_API_VERSION = '59.0';
+const LATEST_API_VERSION = '61.0';
 
 describe('my-build-meta', () => {
   afterEach(() => {

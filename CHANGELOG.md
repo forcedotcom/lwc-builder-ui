@@ -4,7 +4,9 @@ All notable changes to the "lwc-builder-ui" package will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [1.0.0] - 2024-07-31
+
+- Support Summer \'24 v61.0 api version
 
 ## [0.1.29] - 2023-10-27
 
