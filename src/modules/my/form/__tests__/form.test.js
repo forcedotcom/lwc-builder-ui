@@ -34,12 +34,14 @@ const EXPECTED_TARGETS = [
     value: 'lightningStatic__Email'
   },
   { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' },
-  { name: 'VoiceExtension', value: 'lightning__VoiceExtension' }
+  { name: 'VoiceExtension', value: 'lightning__VoiceExtension' },
+  { name: 'EnablementProgram', value: 'lightning__EnablementProgram' },
+  { name: 'UrlAddressable', value: 'lightning__UrlAddressable' }
 ];
 
 const EXPECTED_INPUTS = {
   componentName: '',
-  apiVersion: '59.0',
+  apiVersion: '61.0',
   withHtml: true,
   withCss: true,
   withSvg: false,
