@@ -45,8 +45,7 @@
   "jest": {
     "preset": "@lwc/jest-preset",
     "moduleNameMapper": {
-      "^my/(.+)$": "<rootDir>/src/modules/my/$1/$1",
-      "^domain/(.+)$": "<rootDir>/src/modules/domain/$1/$1"
+      "^(my|domain)/(.+)$": "<rootDir>/src/modules/$1/$2/$2"
     }
   },
   "keywords": [
