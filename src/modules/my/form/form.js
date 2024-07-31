@@ -14,7 +14,7 @@ export default class Form extends LightningElement {
   @track
   inputs = {
     componentName: '',
-    apiVersion: '59.0',
+    apiVersion: '61.0',
     withHtml: true,
     withCss: true,
     withSvg: false,
@@ -54,7 +54,9 @@ export default class Form extends LightningElement {
       value: 'lightningStatic__Email'
     },
     { name: 'CRM Analytics dashboard', value: 'analytics__Dashboard' },
-    { name: 'VoiceExtension', value: 'lightning__VoiceExtension' }
+    { name: 'VoiceExtension', value: 'lightning__VoiceExtension' },
+    { name: 'EnablementProgram', value: 'lightning__EnablementProgram' },
+    { name: 'UrlAddressable', value: 'lightning__UrlAddressable' }
   ];
   pDefCount = 0;
   oDefCount = 0;
